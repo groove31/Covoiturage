@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/login.css" rel="stylesheet" media="screen">
 <script src="js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -19,13 +20,13 @@
         <p>Vous pouvez vous connecter.</p>
         <div>
             <label>Adresse email<span class="requis">*</span></label>
-            <input type="email" name="email" value="${form['email']}" required></input>
-            <span class="error">${erreurs['email']}</span>
+            <input type="email" name="email" value="${form['email']}"></input>
+            <!--  <span class="error">${erreurs['email']}</span> -->
             <br>
             
             <label>Mot de passe<span class="requis">*</span></label> 
-            <input type="password" name="pwd1" value="${form['pwd1']}" required></input>
-            <span class="error">${erreurs['pwd1']}</span>
+            <input type="password" name="pwd1" value="${form['pwd1']}"></input>
+            <!--  <span class="error">${erreurs['pwd1']}</span> -->
             <br>
             
             <input class="sansLabel" type="submit" name="submit" value="Connexion">
