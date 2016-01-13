@@ -1,0 +1,89 @@
+<!-- URL Exemple https://developers.google.com/maps/documentation/javascript/examples/directions-waypoints -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      #directions-panel {
+        margin-top: 20px;
+        background-color: #FFEE77;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="directions-panel"></div>
+    </div>
+    <script>
+
+// This example creates a 2-pixel-wide red polyline showing the path of William
+// Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+// Brisbane, Australia.
+
+function initMap() {
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    center: {lat: 43.541144, lng: 1.5008236},
+  });
+  directionsDisplay.setMap(map);
+  calculateAndDisplayRoute(directionsService, directionsDisplay);
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+  var waypts=[];
+  waypts.push({
+    location: {lat: 43.5405397, lng: 1.5123777},
+    stopover: true
+  });
+  waypts.push({
+    location: {lat: 43.521172, lng: 1.50104},
+    stopover: true
+  });
+
+  directionsService.route({
+ /*   origin:  {lat: 43.5405397, lng: 1.5123777},*/
+    origin: "276 Avenue la Méridienne, 31670 Labège, France",
+    destination: {lat: 43.521172, lng: 1.50104},
+    travelMode: google.maps.TravelMode.DRIVING,
+    waypoints:waypts,
+    optimizeWaypoints: true
+  }, function(response, status) {
+    if (status === google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+      var route = response.routes[0];
+      var summaryPanel = document.getElementById('directions-panel');
+      summaryPanel.innerHTML = '';
+      // For each route, display summary information.
+      for (var i = 0; i < route.legs.length; i++) {
+        var routeSegment = i + 1;
+        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+            '</b><br>';
+        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+      }
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+}
+
+
+
+    </script>
+    <script async defer
+        src="http://maps.googleapis.com/maps/api/js?language=fr&callback=initMap"></script>
+  </body>
+</html>
