@@ -1,6 +1,4 @@
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import org.junit.Test;
+package covoiturage.bl.tu;
 
 import covoiturage.bl.model.Connexion;
 
@@ -8,6 +6,9 @@ import covoiturage.bl.model.UserDB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ConnexionInsert {
 
