@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import covoiturage.bl.model.User;
+import covoiturage.bl.model.UserDB;
 
 /**
  * Servlet implementation class Register
@@ -36,7 +37,7 @@ public class Register extends HttpServlet {
 	public static final String FIELD_SEXE = "sexe";
 	
 	
-	User newUser = new User(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
+	UserDB newUser = new UserDB(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
 			FIELD_EMAIL, FIELD_ADRESSNUMBER, FIELD_ADRESSWAY,
 			FIELD_ADRESSCP, FIELD_ADRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
 			FIELD_PHONENUMBER,FIELD_SEXE );
