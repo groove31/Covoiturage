@@ -52,6 +52,7 @@
 	        
 	        <p class="info">${actionMessage}</p>
         </div>	        
+
     </fieldset>
     </div>
 </form>
