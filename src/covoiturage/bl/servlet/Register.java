@@ -1,6 +1,9 @@
 package covoiturage.bl.servlet;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import covoiturage.bl.model.Connexion;
 import covoiturage.bl.model.User;
 import covoiturage.bl.model.UserDB;
 
@@ -103,12 +107,13 @@ public class Register extends HttpServlet {
 				
 		if(errMsg==null){
 			 form.put(FIELD_EMAIL, email);
-			 actionMessage = "Succï¿½s de l'inscription";
+			 actionMessage = "Succès de l'inscription";
 			 request.setAttribute("errorStatus", false);
 		} else {
 			actionMessage = "Echec de l'inscription";
 			request.setAttribute("errorStatus", true);
 		}
+		
 		/*
 		HttpSession sessionScope = request.getSession();
 		Map<String, User> users = (HashMap<String, User>)sessionScope.getAttribute( "users");
@@ -116,12 +121,66 @@ public class Register extends HttpServlet {
 		sessionScope.setAttribute("users", users);
 		*/
 		
+		//On vérifie si le login existe déjà dans la base
+		boolean resultatExiste = false;
+		//		Map<String, String> erreurs = new HashMap<String,String>();
+		Connexion connexion = new Connexion("Covoiturage.db");
+		connexion.connect();
+
+		ResultSet resultSet = connexion.query("SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'");
+		// si resultSet est vide ou null, alors resultatExiste = false
+		// si resultSet n'est pas vide, alors resultatExite = true
+		
+		if (resultSet == null) {
+			resultatExiste = false;
+			connexion.close();
+			actionMessage = "Une erreur de BDD est survenue.";
+			request.setAttribute("actionMessage", actionMessage);
+			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+		} 
+		
+		try {
+			if (resultSet.next()) {
+				resultatExiste = true;
+				connexion.close();
+			}
+		} catch (SQLException e) {
+			resultatExiste = false;
+
+		}
+		if (resultatExiste) {
+			actionMessage = "Utilisateur déjà existant";
+			request.setAttribute("form", form);
+			request.setAttribute("erreurs", erreurs);
+			request.setAttribute("actionMessage", actionMessage);
+			request.setAttribute("newUser", newUser);
+			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+			
+		} else {
+			actionMessage = "Création de l'utilisateur";
+			request.setAttribute("actionMessage", actionMessage);
+			String sql = "INSERT INTO User " +
+					"(email, lastName, fisrtName, adressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe) " +
+					" VALUES ( '" + email.toLowerCase() + "', " +
+					" '" + lastName + "', " +
+					" '" + firstName + "', " +
+					" '" + adressNumber + "', " +
+					" '" + adressWay + "', " +
+					" '" + adressCP + "', " +
+					" '" + adressCity + "', " +
+					" '" + phoneNumber + "', " +
+					" '" + sexe + "'); ";
+			System.out.println("Test");
+			System.out.println(sql);
+			connexion.query(sql);
+					
+			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+		}
+		
+		
+		
 		//out.println("<HTML>\n<BODY>\n" + "<h1>Connexion OK</h1>" + "</BODY></HTML>");
-		request.setAttribute("form", form);
-		request.setAttribute("erreurs", erreurs);
-		request.setAttribute("actionMessage", actionMessage);
-		request.setAttribute("newUser", newUser);
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+		
 		
 		
 	}
