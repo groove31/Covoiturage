@@ -36,7 +36,7 @@ public class Register extends HttpServlet {
 	public static final String FIELD_SEXE = "sexe";
 	
 	
-	User newUser = new User(FIELD_LASTNAME,FIELD_FIRSTNAME, 
+	User newUser = new User(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
 			FIELD_EMAIL, FIELD_ADRESSNUMBER, FIELD_ADRESSWAY,
 			FIELD_ADRESSCP, FIELD_ADRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
 			FIELD_PHONENUMBER,FIELD_SEXE );
@@ -102,7 +102,7 @@ public class Register extends HttpServlet {
 				
 		if(errMsg==null){
 			 form.put(FIELD_EMAIL, email);
-			 actionMessage = "Succès de l'inscription";
+			 actionMessage = "Succï¿½s de l'inscription";
 			 request.setAttribute("errorStatus", false);
 		} else {
 			actionMessage = "Echec de l'inscription";
@@ -163,8 +163,8 @@ public class Register extends HttpServlet {
 
                 if (pass1.length() < 8) {
                     //logger.info(pass1 + " is length < 11");
-                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractères <br>");
-                    return ("Le mot de passe est trop court. Il doit contenir 8 caractères");
+                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractï¿½res <br>");
+                    return ("Le mot de passe est trop court. Il doit contenir 8 caractï¿½res");
                 }
 
                 if (!hasUppercase) {
@@ -187,13 +187,13 @@ public class Register extends HttpServlet {
 
             }else{
                 //logger.info(pass1 + " != " + pass2);
-                retVal.append("Mots de passe différents <br>");
-                return ("Mots de passe différents");
+                retVal.append("Mots de passe diffï¿½rents <br>");
+                return ("Mots de passe diffï¿½rents");
             }
         }else{
             //logger.info("Passwords = null");
-            retVal.append("Mots de passe non renseignés <br>");
-            return ("Mots de passe non renseignés");
+            retVal.append("Mots de passe non renseignï¿½s <br>");
+            return ("Mots de passe non renseignï¿½s");
         }
         
 
