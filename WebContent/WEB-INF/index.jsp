@@ -43,9 +43,30 @@
                 <input type="password" name="pwd2" id="pwd2" required="required" value="${form.pwd2}"/>
                 <span class="error">${erreurs.pwd2}</span>
                 <br>
-                <label for="userName">Nom d'utilisateur</label>
-                <input type="text" name="name" id="name" value="${form.name}"/>
-                <span class="error">${erreurs.name}</span>
+                <label for="lastName">Nom</label>
+                <input type="text" name="lastName" id="lastName" value="${form.lastName}"/>
+                <span class="error">${erreurs.lastName}</span>
+                <br>
+                <label for="firstName">Prénom</label>
+                <input type="text" name="firstName" id="firstName" value="${form.firstName}"/>
+                <br>
+                <label for="adressNumber">N° Rue</label>
+                <input type="text" name="adressNumber" id="adressNumber" value="${form.adressNumber}"/>
+                <br>
+                <label for="adressWay">Rue</label>
+                <input type="text" name="adressWay" id="adressWay" value="${form.adressWay}"/>
+                <br>
+                <label for="adressCp">CP</label>
+                <input type="text" name="adressCp" id="adressCp" value="${form.adressCp}"/>
+                <br>
+                <label for="adressCity">Ville</label>
+                <input type="text" name="adressCity" id="adressCity" value="${form.adressCity}"/>
+                <br>
+                <label for="phoneNumber">Téléphone</label>
+                <input type="text" name="phoneNumber" id="phoneNumber" value="${form.phoneNumber}"/>
+                <br>
+                <label for="sexe">Sexe</label>
+                <input type="text" name="sexe" id="sexe" value="${form.sexe}"/>
                 <br>
                 <input class="sansLabel" type=submit name="inscription" value="Inscription"/>
                 <br>
@@ -57,7 +78,7 @@
     <fieldset>
         <div>
             <p>Email : ${ newUser.email }</p>
-            <p>Nom : ${ newUser.name }</p>
+            <p>Nom : ${ newUser.lastName }</p>
         </div>
     </fieldset>
 </body>
