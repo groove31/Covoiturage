@@ -55,7 +55,7 @@ public class Connexion {
     }
     
 
-    public void addUser(User user) {
+    public void addUser(UserDB user) {
    	 try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
