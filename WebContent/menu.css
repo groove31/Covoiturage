@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+p {
+	font: normal 30pt Cursive, helvetica, sans-serif;
+	color: #f44336;
+    font-style: italic;
+}
+
+div {
+	font: normal 15pt verdana, helvetica, sans-serif;
+	color: #0080ff;
+	padding: 10px;
+}
+
+a:link, a:visited {
+    display: inline-block;
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center; 
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a:hover, a:active {
+    background-color: red;
