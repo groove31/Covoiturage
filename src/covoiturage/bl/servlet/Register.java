@@ -19,7 +19,7 @@ import covoiturage.bl.model.User;
 @WebServlet("/Register")
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/index.jsp";
+	public static String VIEW_PAGES_URL="/WEB-INF/register.jsp";
 	
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "pwd1";
