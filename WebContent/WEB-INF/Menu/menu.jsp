@@ -11,9 +11,9 @@
 </head>
 <body>
 <form name="menu" method="POST" action="Menu">
-	<fieldset>
+	
 	    <!-- http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_dropdown-menu&stacked=h -->
-            <div class="dropdown">
+            <!--  div class="dropdown">
                 <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Menu
                     <span class="caret"></span>
@@ -24,7 +24,20 @@
 				      <li><a href="#">S'identifier</a></li>
                 </ul>
             </div>
-	</fieldset>
+            -->
+            <div class="btn-group"> <a class="btn btn btn-info dropdown-toggle" data-toggle="dropdown" href="#"> Action <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li><a href="<c:url value="/Register"/>"><span class="glyphicon glyphicon-pencil"></span> S'inscrire</a></li>
+                    <li><a href="<c:url value="/Login"/>"><span class="glyphicon glyphicon-user"></span> Se connecter</a></li>
+
+                    <!--  <li class="divider"></li>
+                    <li><a href="#"><i class="icon-list-alt"></i> Autres témoignages</a></li>
+                    -->
+                </ul>
+            </div>
+
 </form>
 </body>
 </html>
+
+

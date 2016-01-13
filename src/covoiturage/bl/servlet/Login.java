@@ -35,7 +35,8 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		doGet(request, response);
+		//doGet(request, response);
+		getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
 	}
 
 }

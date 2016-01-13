@@ -14,61 +14,129 @@
 </head>
 <body>
 <c:import url="/WEB-INF/Menu/menu.jsp" />
-    <form action="Register" method="POST">
+    <form class="form-horizontal well col-lg-12" action="Register" method="POST">
         <div id="form" style="width: 900px;" class="col-sm-6">
             <fieldset>
-            <legend style="color: blue; font-weight: bold;">Inscription</legend>
+            <div class="form-group">
+                <legend style="color: blue; font-weight: bold;"><span class="glyphicon glyphicon-pencil"> Inscription</legend>
+            </div>
                 Vous pouvez vous inscrire via ce formulaire.
                 <br>
                 <br>
-                <label for="email">Adresse email<span class="requis"> *</span></label>
-                <input type="text" name="email" id="email" value="${form.email}"/>
-                <span class="error">${erreurs.email}</span>
-                <br>
-                <label for="pwd1">Mot de passe<span class="requis"> *</span></label>
-                <input type="password" name="pwd1" id="pwd1" required="required" value="${form.pwd1}"/>
-                <span class="error">${erreurs.pwd1}</span>
-                <br>
-                <label for="pwd2">Confirmation  du mot de passe<span class="requis"> *</span></label>
-                <input type="password" name="pwd2" id="pwd2" required="required" value="${form.pwd2}"/>
-                <span class="error">${erreurs.pwd2}</span>
-                <br>
-                <label for="lastName">Nom</label>
-                <input type="text" name="lastName" id="lastName" value="${form.lastName}"/>
-                <span class="error">${erreurs.lastName}</span>
-                <br>
-                <label for="firstName">Prénom</label>
-                <input type="text" name="firstName" id="firstName" value="${form.firstName}"/>
-                <br>
-                <label for="adressNumber">N° Rue</label>
-                <input type="text" name="adressNumber" id="adressNumber" value="${form.adressNumber}"/>
-                <br>
-                <label for="adressWay">Rue</label>
-                <input type="text" name="adressWay" id="adressWay" value="${form.adressWay}"/>
-                <br>
-                <label for="adressCp">CP</label>
-                <input type="text" name="adressCp" id="adressCp" value="${form.adressCp}"/>
-                <br>
-                <label for="adressCity">Ville</label>
-                <input type="text" name="adressCity" id="adressCity" value="${form.adressCity}"/>
-                <br>
-                <label for="phoneNumber">Téléphone</label>
-                <input type="text" name="phoneNumber" id="phoneNumber" value="${form.phoneNumber}"/>
-                <br>
-                <label for="sexe">Sexe</label>
-                <input type="text" name="sexe" id="sexe" value="${form.sexe}"/>
-                <br>
-                <input class="sansLabel" type=submit name="inscription" value="Inscription"/>
-                <br>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="email" class="col-sm-4 control-label">Adresse email<span class="requis"> *</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="email" id="email" value="${form.email}"/>
+                            </div>
+                            <span class="error">${erreurs.email}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="pwd1" class="col-sm-4 control-label">Mot de passe<span class="requis"> *</span></label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" name="pwd1" id="pwd1" required="required" value="${form.pwd1}"/>
+                            </div>
+                            <span class="error">${erreurs.pwd1}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="pwd2" class="col-sm-4 control-label">Confirmation  du mot de passe<span class="requis"> *</span></label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" name="pwd2" id="pwd2" required="required" value="${form.pwd2}"/>
+                            </div>
+                            <span class="error">${erreurs.pwd2}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="lastName" class="col-sm-4 control-label">Nom</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="lastName" id="lastName" value="${form.lastName}"/>
+                            </div>
+                            <span class="error">${erreurs.lastName}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="firstName" class="col-sm-4 control-label">Prénom</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="firstName" id="firstName" value="${form.firstName}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="adressNumber" class="col-sm-4 control-label">N° Rue / Rue</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="adressNumber" id="adressNumber" value="${form.adressNumber}"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="adressWay" id="adressWay" value="${form.adressWay}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="adressCp" class="col-sm-4 control-label">Code Postal / Ville</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="adressCp" id="adressCp" value="${form.adressCp}"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="adressCity" id="adressCity" value="${form.adressCity}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="phoneNumber" class="col-sm-4 control-label">Téléphone</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" value="${form.phoneNumber}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="sexe" class="col-sm-4 control-label">Sexe</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="sexe" id="sexe" value="${form.sexe}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit" name="inscription" value="Inscription">Inscription</button>
+                <button class="btn btn-default" type="reset" name="inscription" value="Annuler">Annuler</button>
                 <span class="info">${actionMessage}</span>
             </fieldset>
         </div>
     </form>
     <br>
+    <div class="col-sm-6">
     <fieldset>
         <div>
             <p>Email : ${ newUser.email }</p>
             <p>Nom : ${ newUser.lastName }</p>
         </div>
     </fieldset>
+    </div>
 </body>
