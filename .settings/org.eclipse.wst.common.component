@@ -2,6 +2,7 @@
     <wb-module deploy-name="Covoiturage">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/tu"/>
         <property name="context-root" value="Covoiturage"/>
         <property name="java-output-path" value="/Covoiturage/build/classes"/>
     </wb-module>
