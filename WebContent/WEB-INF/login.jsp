@@ -19,12 +19,12 @@
         <p>Vous pouvez vous connecter.</p>
         <div>
             <label>Adresse email<span class="requis">*</span></label>
-            <input type="text" name="email" value="${form['email']}"></input>
+            <input type="email" name="email" value="${form['email']}" required></input>
             <span class="error">${erreurs['email']}</span>
             <br>
             
             <label>Mot de passe<span class="requis">*</span></label> 
-            <input type="password" name="pwd1" value="${form['pwd1']}"></input>
+            <input type="password" name="pwd1" value="${form['pwd1']}" required></input>
             <span class="error">${erreurs['pwd1']}</span>
             <br>
             
