@@ -14,7 +14,7 @@
         <p><img src="img/covoiturage.jpg" /></p><br>
 		<div id="menu">		
 			<a href="<c:url value="/Login"/>">Conducteur</a>
-			<a href="<c:url value="/Users"/>">Passager</a>
+			<a href="<c:url value="/ListDriver"/>">Passager</a>
 		</div>
     </center>
 </body>
