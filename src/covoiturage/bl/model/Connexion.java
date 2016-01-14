@@ -35,7 +35,7 @@ public class Connexion {
     public void close() {
         try {
             connection.close();
-            statement.close();
+           // statement.close();
             System.out.println("Férmeture de " + DBPath + " avec succès");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,19 +58,22 @@ public class Connexion {
     public void addUser(UserDB user) {
    	 try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+                    .prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             preparedStatement.setLong(1, user.getID());
             preparedStatement.setString(2, user.getSexe());
             preparedStatement.setString(3, user.getLastName());
             preparedStatement.setString(4, user.getFirstName());
             preparedStatement.setString(5, user.getEmail());
-            preparedStatement.setString(6, user.getAdressNumber());
+            preparedStatement.setString(6, user.getAddressNumber());
             preparedStatement.setString(7, user.getAddressWay());
             preparedStatement.setString(8, user.getAddressCP());
             preparedStatement.setString(9, user.getAddressCity());
             preparedStatement.setString(10, user.getLongitude());
             preparedStatement.setString(11, user.getLatitude());
             preparedStatement.setString(12, user.getPhoneNumber());
+            preparedStatement.setString(13, user.getIsConducteur());
+            preparedStatement.setString(14, user.getIsSmoker());
+            preparedStatement.setString(15, user.getArea());
      
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

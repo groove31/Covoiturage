@@ -1,17 +1,15 @@
 package covoiturage.bl.model;
 
-
-
 import java.io.Serializable;
 
 public class UserDB implements Serializable {
-	public UserDB(int ID, String lastName, String firstName, String email, String adressNumber, String addressWay,
-			String addressCP, String addressCity, String longitude, String latitude, String phoneNumber, String sexe) {
+	public UserDB(int ID, String lastName, String firstName, String email, String addressNumber, String addressWay,
+			String addressCP, String addressCity, String longitude, String latitude, String phoneNumber, String sexe, String isConducteur, String isSmoker, String area ) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-		this.adressNumber = adressNumber;
+		this.addressNumber = addressNumber;
 		this.addressWay = addressWay;
 		this.addressCP = addressCP;
 		this.addressCity = addressCity;
@@ -20,6 +18,10 @@ public class UserDB implements Serializable {
 		this.phoneNumber = phoneNumber;
 		this.sexe = sexe;
 		this.ID = ID;
+		this.isConducteur = isConducteur;
+		this.isSmoker = isSmoker;
+		this.area = area;
+		
 	}
 	/**
 	 * 
@@ -28,7 +30,7 @@ public class UserDB implements Serializable {
 	private  String lastName="";
 	private  String firstName="";
 	private  String email="";
-	private  String adressNumber="";
+	private  String addressNumber="";
 	private  String addressWay="";
 	private  String addressCP="";
 	private  String addressCity="";
@@ -37,7 +39,29 @@ public class UserDB implements Serializable {
 	private  String phoneNumber;
 	private  String sexe;
 	private  int ID;
+	private  String isConducteur;
+	private  String isSmoker;
+	private  String area;
 	
+	
+	public String getIsConducteur() {
+		return isConducteur;
+	}
+	public void setConducteur(String isConducteur) {
+		this.isConducteur = isConducteur;
+	}
+	public String getIsSmoker() {
+		return isSmoker;
+	}
+	public void setSmoker(String isSmoker) {
+		this.isSmoker = isSmoker;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
 	public int getID() {
 		return ID;
 	}
@@ -68,11 +92,11 @@ public class UserDB implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAdressNumber() {
-		return adressNumber;
+	public String getAddressNumber() {
+		return addressNumber;
 	}
-	public void setAdressNumber(String adressNumber) {
-		this.adressNumber = adressNumber;
+	public void setAdressNumber(String addressNumber) {
+		this.addressNumber = addressNumber;
 	}
 	public String getAddressWay() {
 		return addressWay;

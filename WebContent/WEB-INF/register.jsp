@@ -124,6 +124,27 @@
                         </div>
                     </div>
                 </div>
+
+                 <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="isSmoker" class="col-sm-4 control-label">Fumeur</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="isSmoker" id="isSmoker" value="${form.isSmoker}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="area" class="col-sm-4 control-label">Rayon</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="area" id="area" value="${form.area}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <button class="btn btn-primary" type="submit" name="inscription" value="Inscription">Inscription</button>
                 <button class="btn btn-default" type="reset" name="inscription" value="Annuler">Annuler</button>
                 <span class="info">${actionMessage}</span>

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import covoiturage.bl.model.Connexion;
-import covoiturage.bl.model.User;
 import covoiturage.bl.model.UserDB;
 
 /**
@@ -33,18 +32,21 @@ public class Register extends HttpServlet {
 	public static final String FIELD_LASTNAME = "lastName";
 	public static final String FIELD_ADRESSNUMBER = "adressNumber";
 	public static final String FIELD_ADRESSWAY = "adressWay";
-	public static final String FIELD_ADRESSCP = "adressCP";
+	public static final String FIELD_ADRESSCP = "adressCp";
 	public static final String FIELD_ADRESSCITY = "adressCity";
 	public static final String FIELD_LONGITUDE = "longitude";
 	public static final String FIELD_LATITUDE = "latitude";
 	public static final String FIELD_PHONENUMBER = "phoneNumber";
 	public static final String FIELD_SEXE = "sexe";
+	public static final String FIELD_ISCONDUCTEUR = "isConducteur";
+	public static final String FIELD_ISSMOKER = "isSmoker";
+	public static final String FIELD_AREA = "area";
 	
 	
 	UserDB newUser = new UserDB(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
 			FIELD_EMAIL, FIELD_ADRESSNUMBER, FIELD_ADRESSWAY,
 			FIELD_ADRESSCP, FIELD_ADRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
-			FIELD_PHONENUMBER,FIELD_SEXE );
+			FIELD_PHONENUMBER,FIELD_SEXE, FIELD_ISCONDUCTEUR, FIELD_ISSMOKER, FIELD_AREA );
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -66,7 +68,7 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doGet(request, response);
+		
 		String email = request.getParameter(FIELD_EMAIL);
 		String pwd1 = request.getParameter(FIELD_PWD1);
 		String pwd2 = request.getParameter(FIELD_PWD2);
@@ -78,7 +80,10 @@ public class Register extends HttpServlet {
 		String adressCity = request.getParameter(FIELD_ADRESSCITY);
 		String phoneNumber = request.getParameter(FIELD_PHONENUMBER);
 		String sexe = request.getParameter(FIELD_SEXE);
-		
+	//	String isConducteur = request.getParameter(FIELD_ISCONDUCTEUR); en attente d'utilisation
+		String isConducteur = "cond";
+		String isSmoker = request.getParameter(FIELD_ISSMOKER);
+		String area = request.getParameter(FIELD_AREA);
 		
 		
 		newUser.setEmail(email);
@@ -87,8 +92,6 @@ public class Register extends HttpServlet {
 		String actionMessage = "";
 		Map<String, String> erreurs = new HashMap<String,String>();
 		Map<String, String> form = new HashMap<String, String>();
-		
-		//PrintWriter out = response.getWriter();
 		
 		errMsg = validateEmail(email);
 		if(errMsg!=null){
@@ -114,12 +117,6 @@ public class Register extends HttpServlet {
 			request.setAttribute("errorStatus", true);
 		}
 		
-		/*
-		HttpSession sessionScope = request.getSession();
-		Map<String, User> users = (HashMap<String, User>)sessionScope.getAttribute( "users");
-		users.put( newUser.getEmail(), newUser);
-		sessionScope.setAttribute("users", users);
-		*/
 		
 		//On vérifie si le login existe déjà dans la base
 		boolean resultatExiste = false;
@@ -160,7 +157,7 @@ public class Register extends HttpServlet {
 			actionMessage = "Création de l'utilisateur";
 			request.setAttribute("actionMessage", actionMessage);
 			String sql = "INSERT INTO User " +
-					"(email, lastName, fisrtName, adressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe) " +
+					"(email, lastName, fisrtName, addressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe, isConducteur, isSmoker,area) " +
 					" VALUES ( '" + email.toLowerCase() + "', " +
 					" '" + lastName + "', " +
 					" '" + firstName + "', " +
@@ -169,20 +166,19 @@ public class Register extends HttpServlet {
 					" '" + adressCP + "', " +
 					" '" + adressCity + "', " +
 					" '" + phoneNumber + "', " +
-					" '" + sexe + "'); ";
+					" '" + sexe +  "', " +
+					" '" + isConducteur + "', " +
+					" '" + isSmoker + "', " +
+					" '" + area + "');"; 
+
 			System.out.println("Test");
 			System.out.println(sql);
+			
 			connexion.query(sql);
-					
+			System.out.println("Insert passé");		
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 		}
-		
-		
-		
-		//out.println("<HTML>\n<BODY>\n" + "<h1>Connexion OK</h1>" + "</BODY></HTML>");
-		
-		
-		
+	
 	}
 	
 	private String validateEmail(String email ) {
