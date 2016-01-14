@@ -44,21 +44,21 @@ function initMap() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   var waypts=[];
   waypts.push({
-    location: {lat: 43.5405397, lng: 1.5123777},
+    location: "276 Avenue la Méridienne, 31670 Labège, France",
     stopover: true
   });
   waypts.push({
-    location: {lat: 43.521172, lng: 1.50104},
+    location: "48 rue des Fontanelles, 31320 CASTANET-TOLOSAN, France",
     stopover: true
   });
 
   directionsService.route({
  /*   origin:  {lat: 43.5405397, lng: 1.5123777},*/
     origin: "276 Avenue la Méridienne, 31670 Labège, France",
-    destination: {lat: 43.521172, lng: 1.50104},
+    destination: "48 rue des Fontanelles, 31320 CASTANET-TOLOSAN, France",
     travelMode: google.maps.TravelMode.DRIVING,
-    waypoints:waypts,
-    optimizeWaypoints: true
+    /* waypoints:waypts,
+    optimizeWaypoints: true */
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
