@@ -22,8 +22,9 @@
   </head>
   <body>
     <div id="map"></div>
-    <div id="directions-panel"></div>
-    </div>
+    <form method="post" action="/calcul_trip">
+    <div id="directions-panel" style="display : none;"></div>
+    </form>
     <script>
 
 // This example creates a 2-pixel-wide red polyline showing the path of William
@@ -44,7 +45,7 @@ function initMap() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   var waypts=[];
   waypts.push({
-    location: "276 Avenue la Méridienne, 31670 Labège, France",
+    location: {lat: 43.5405397, lng: 1.5123777},
     stopover: true
   });
   waypts.push({
@@ -62,7 +63,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
-      var route = response.routes[0];
+     /*  var route = response.routes[0];
       var summaryPanel = document.getElementById('directions-panel');
       summaryPanel.innerHTML = '';
       // For each route, display summary information.
@@ -73,7 +74,26 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
         summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
         summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+      } */
+      
+      /* récupére les points (latitude/longitude) des différentes "étapes" */
+      var tab = [];
+      var route = response.routes[0];
+      var legs = route.legs[0];
+  
+      tab[0] = legs.steps[0].start_location;
+      
+      var summaryPanel = document.getElementById('directions-panel');
+      
+      summaryPanel.innerHTML = '';
+      summaryPanel.innerHTML += tab[0]+ '<br>';
+      
+      for (var i = 0; i < legs.steps.length; i++) {
+    	tab[i+1]=legs.steps[i].end_location;
+    	summaryPanel.innerHTML += tab[i+1]+ '<br>';
       }
+      
+      
     } else {
       window.alert('Directions request failed due to ' + status);
     }
