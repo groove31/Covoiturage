@@ -33,7 +33,7 @@ public class Register extends HttpServlet {
 	public static final String FIELD_LASTNAME = "lastName";
 	public static final String FIELD_ADRESSNUMBER = "adressNumber";
 	public static final String FIELD_ADRESSWAY = "adressWay";
-	public static final String FIELD_ADRESSCP = "adressCP";
+	public static final String FIELD_ADRESSCP = "adressCp";
 	public static final String FIELD_ADRESSCITY = "adressCity";
 	public static final String FIELD_LONGITUDE = "longitude";
 	public static final String FIELD_LATITUDE = "latitude";
