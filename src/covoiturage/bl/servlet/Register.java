@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -60,6 +61,7 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("errorStatus", true);
+		
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	
 	}
@@ -107,9 +109,23 @@ public class Register extends HttpServlet {
 				}
 			}
 		}
-				
+		
+		//Reinit des valeurs a renvoyer à la vue en cas de problèmes
+		 form.put(FIELD_EMAIL, email);
+		 form.put(FIELD_LASTNAME, lastName);
+		 form.put(FIELD_FIRSTNAME, firstName);
+		 form.put(FIELD_ADRESSNUMBER, adressNumber);
+		 form.put(FIELD_ADRESSWAY, adressWay);
+		 form.put(FIELD_ADRESSCP, adressCP);
+		 form.put(FIELD_ADRESSCITY, adressCity);
+		 form.put(FIELD_PHONENUMBER, phoneNumber);
+		 form.put(FIELD_SEXE, sexe);
+		 form.put(FIELD_PWD1, pwd1);
+		 form.put(FIELD_ISSMOKER, isSmoker);
+		 form.put(FIELD_AREA, area);
+		 
 		if(errMsg==null){
-			 form.put(FIELD_EMAIL, email);
+
 			 actionMessage = "Succès de l'inscription";
 			 request.setAttribute("errorStatus", false);
 		} else {
@@ -157,8 +173,9 @@ public class Register extends HttpServlet {
 			actionMessage = "Création de l'utilisateur";
 			request.setAttribute("actionMessage", actionMessage);
 			String sql = "INSERT INTO User " +
-					"(email, lastName, fisrtName, addressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe, isConducteur, isSmoker,area) " +
+					"(email, lastName, fisrtName, addressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe, isConducteur, isSmoker, area, password) " +
 					" VALUES ( '" + email.toLowerCase() + "', " +
+					
 					" '" + lastName + "', " +
 					" '" + firstName + "', " +
 					" '" + adressNumber + "', " +
@@ -169,7 +186,8 @@ public class Register extends HttpServlet {
 					" '" + sexe +  "', " +
 					" '" + isConducteur + "', " +
 					" '" + isSmoker + "', " +
-					" '" + area + "');"; 
+					" '" + area + "', "+
+					" '" + pwd1 + "');"; 
 
 			System.out.println("Test");
 			System.out.println(sql);
@@ -219,8 +237,8 @@ public class Register extends HttpServlet {
 
                 if (pass1.length() < 8) {
                     //logger.info(pass1 + " is length < 11");
-                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractï¿½res <br>");
-                    return ("Le mot de passe est trop court. Il doit contenir 8 caractï¿½res");
+                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractères <br>");
+                    return ("Le mot de passe est trop court. Il doit contenir 8 caractères");
                 }
 
                 if (!hasUppercase) {
@@ -243,13 +261,13 @@ public class Register extends HttpServlet {
 
             }else{
                 //logger.info(pass1 + " != " + pass2);
-                retVal.append("Mots de passe diffï¿½rents <br>");
-                return ("Mots de passe diffï¿½rents");
+                retVal.append("Mots de passe différents <br>");
+                return ("Mots de passe différents");
             }
         }else{
             //logger.info("Passwords = null");
-            retVal.append("Mots de passe non renseignï¿½s <br>");
-            return ("Mots de passe non renseignï¿½s");
+            retVal.append("Mots de passe non renseignés <br>");
+            return ("Mots de passe non renseignés");
         }
         
 

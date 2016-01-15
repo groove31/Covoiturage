@@ -118,8 +118,8 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="sexe" class="col-sm-4 control-label">Sexe</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" name="sexe" id="sexe" value="${form.sexe}"/>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="sexe" id="sexe" value="${form.sexe}" placeholder="H ou F"/>
                             </div>
                         </div>
                     </div>

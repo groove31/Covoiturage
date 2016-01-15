@@ -1,25 +1,66 @@
 @CHARSET "ISO-8859-1";
 p {
-	font: normal 30pt Cursive, helvetica, sans-serif;
+	font: normal 26pt Cursive, helvetica, sans-serif;
 	color: #f44336;
     font-style: italic;
 }
-
-div {
-	font: normal 15pt verdana, helvetica, sans-serif;
-	color: #0080ff;
-	padding: 10px;
+label {
+    font: normal 14pt Arial, helvetica, sans-serif;
+    color: #f44336;
 }
-
-a:link, a:visited {
-    display: inline-block;
-    background-color: #f44336;
-    color: white;
-    padding: 14px 25px;
-    text-align: center; 
-    text-decoration: none;
+input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
     font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}
+input[type=button] {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
-a:hover, a:active {
-    background-color: red;
+#pied {
+    font: normal 10pt Arial, helvetica, sans-serif;
+    color: black;
+    padding: 10px;
+}
+
+ul {
+	font: normal 12pt Arial, helvetica, sans-serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f44336;
+}
+li {
+    float: right;
+    border-right: 1px solid #bbb;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 20px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: black;
+}
+#map_canvas {
+            height: 500px;
+            width: 800px;
+            margin:50px auto;

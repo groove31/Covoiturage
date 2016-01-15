@@ -5,25 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-
-<style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      #directions-panel {
-        margin-top: 20px;
-        background-color: #FFEE77;
-        padding: 10px;
-      }
-    </style>
 <title>Liste des conducteurs</title>
 </head>
 <body>
-
     <form class="form-horizontal well col-sm-12" method="POST">
         <div id="form" style="width: 900px;" class="col-sm-12">
             <fieldset>
@@ -31,7 +15,7 @@
                 <legend style="color: blue; font-weight: bold;"><span class="glyphicon glyphicon-pencil"> Liste des conducteurs</legend>
             </div>
                 
-            <table class="table table-striped no-userselection listTable">
+            <table class="table table-striped table-bordered no-userselection listTable">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -90,9 +74,6 @@
             </table>
             </fieldset>
         </div>
-    
-
-</form>
-
+    </form>
 </body>
 </html>
