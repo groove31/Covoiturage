@@ -33,36 +33,30 @@ function initMap() {
 		    center: {lat: 43.5409104, lng: 1.5103655}
 		  }
     );
+    
     var geocoder = new google.maps.Geocoder();
-    var trace = document.getElementById('trace');
     for (var i = 0; i < addressesString.length; i++) {
-    	geocoder.geocode( { 'address': address}, function(results, status)
-                {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                    	var marker = new google.maps.Marker({
-                            map: map,
-                            position: results[0].geometry.location,
-                    	    title: addressesString[i]
-                            
-                          });
-                        document.getElementById('lat').value = results[0].geometry.location.lat();
-                        document.getElementById('lng').value = results[0].geometry.location.lng();
-                    }
+    	geocoder.geocode( { 'address': addressesString[i]}, function(results, status) {
+    	    if (status == google.maps.GeocoderStatus.OK) {
+    	        var marker = new google.maps.Marker({
+    	            map: map,
+                    position: results[0].geometry.location,
+                    title: addressesString[i]
                 });
+                document.getElementById('lat').value = results[0].geometry.location.lat();
+                document.getElementById('lng').value = results[0].geometry.location.lng();
+            }
+        });
+    	
     }
 }
   
-function codeAddress(address,geocoder, resultsMap, trace) {
-    //var address = document.getElementById("address").value;
-    
-}
-	
+
 
     </script>
 </head>
 <body>
 	<div id="map"></div>
-    <div id="trace"></div>
     <div style="visibility: hidden;"><input id="lat" type="text" value=""></div>
     <div style="visibility: hidden;"><input id="lng" type="text" value=""></div>
 	<script
