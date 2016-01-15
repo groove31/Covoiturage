@@ -54,8 +54,8 @@
     
     <div id="menu" class="fixed">
  	    <ul>
-	        <li><a href="/login"/>Se connecter</a></li>
-	        <li><a href="/register"/>S'inscrire</a></li>
+	        <li><a href="Login"/>Se connecter</a></li>
+	        <li><a href="Register"/>S'inscrire</a></li>
 	    </ul>
     </div>
     
