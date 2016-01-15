@@ -118,8 +118,29 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="sexe" class="col-sm-4 control-label">Sexe</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="sexe" id="sexe" value="${form.sexe}" placeholder="H ou F"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="isSmoker" class="col-sm-4 control-label">Fumeur</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="sexe" id="sexe" value="${form.sexe}"/>
+                                <input type="text" class="form-control" name="isSmoker" id="isSmoker" value="${form.isSmoker}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="area" class="col-sm-4 control-label">Rayon</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="area" id="area" value="${form.area}"/>
                             </div>
                         </div>
                     </div>

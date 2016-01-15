@@ -25,7 +25,8 @@
                 <div class="form-group">
 		            <label for="Adresse email" class="col-sm-2 control-label">Adresse Email <span class='required'>* </span></label>
                     <div class="col-sm-6">
-		                  <input type="text" class="form-control" name="email" value="${form['email']}"></input>
+		                  <!--  input type="text" class="form-control" name="email" value="${form['email']}"></input> -->
+		                  <input type="text" class="form-control" name="email" value="${email}"></input>
 		              </div>
 		        </div>
             </div>

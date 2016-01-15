@@ -13,44 +13,34 @@ import javax.servlet.http.HttpServletResponse;
 import covoiturage.bl.model.Connexion;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class listDriver
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/ListDriver")
+public class ListDriver extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static String VIEW_PAGES_URL="/WEB-INF/login.jsp";
-	public static final String FIELD_EMAIL = "email";
-	public static final String FIELD_PWD1 = "pwd1";
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Login() {
-		super();
-	}
+	public static String VIEW_PAGES_URL="/WEB-INF/listDriver.jsp";
+	
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ListDriver() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter(FIELD_EMAIL);
-		String pwd1 = request.getParameter(FIELD_PWD1);
-		
+		//String email = request.getParameter(FIELD_EMAIL);
+		//String pwd1 = request.getParameter(FIELD_PWD1);
+		/*
 		String actionMessage = "";
 		boolean resultatExiste = false;
 		//		Map<String, String> erreurs = new HashMap<String,String>();
 		Connexion connexion = new Connexion("Covoiturage.db");
 		connexion.connect();
-		String sql = "SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'" +
-				" and password = '" + pwd1 + "'";
+		String sql = "SELECT * FROM User  ";
 		ResultSet resultSet = connexion.query(sql);
 		// si resultSet est vide ou null, alors resultatExiste = false
 		// si resultSet n'est pas vide, alors resultatExite = true
@@ -81,10 +71,20 @@ public class Login extends HttpServlet {
 		} else {
 			actionMessage = "Utilisateur ou mot de passe incorrect.";
 			request.setAttribute("actionMessage", actionMessage);
-			request.setAttribute(FIELD_EMAIL, email);
-			request.setAttribute(FIELD_PWD1, "");
+			//request.setAttribute(FIELD_EMAIL, email);
+			//request.setAttribute(FIELD_PWD1, "");
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-		}
+		}*/
+		
+		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

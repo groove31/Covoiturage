@@ -89,9 +89,11 @@
     </div>
 
     <center>
+
     <div id="pied">
         &copy; 2016 Les fous du volant
     </div>
+
     </center>
 
     </body>

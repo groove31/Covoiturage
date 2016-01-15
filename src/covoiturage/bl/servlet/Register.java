@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import covoiturage.bl.model.Connexion;
-import covoiturage.bl.model.User;
 import covoiturage.bl.model.UserDB;
 
 /**
@@ -39,12 +39,15 @@ public class Register extends HttpServlet {
 	public static final String FIELD_LATITUDE = "latitude";
 	public static final String FIELD_PHONENUMBER = "phoneNumber";
 	public static final String FIELD_SEXE = "sexe";
+	public static final String FIELD_ISCONDUCTEUR = "isConducteur";
+	public static final String FIELD_ISSMOKER = "isSmoker";
+	public static final String FIELD_AREA = "area";
 	
 	
 	UserDB newUser = new UserDB(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
 			FIELD_EMAIL, FIELD_ADRESSNUMBER, FIELD_ADRESSWAY,
 			FIELD_ADRESSCP, FIELD_ADRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
-			FIELD_PHONENUMBER,FIELD_SEXE );
+			FIELD_PHONENUMBER,FIELD_SEXE, FIELD_ISCONDUCTEUR, FIELD_ISSMOKER, FIELD_AREA );
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,6 +61,7 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("errorStatus", true);
+		
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	
 	}
@@ -66,7 +70,7 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doGet(request, response);
+		
 		String email = request.getParameter(FIELD_EMAIL);
 		String pwd1 = request.getParameter(FIELD_PWD1);
 		String pwd2 = request.getParameter(FIELD_PWD2);
@@ -78,7 +82,10 @@ public class Register extends HttpServlet {
 		String adressCity = request.getParameter(FIELD_ADRESSCITY);
 		String phoneNumber = request.getParameter(FIELD_PHONENUMBER);
 		String sexe = request.getParameter(FIELD_SEXE);
-		
+	//	String isConducteur = request.getParameter(FIELD_ISCONDUCTEUR); en attente d'utilisation
+		String isConducteur = "cond";
+		String isSmoker = request.getParameter(FIELD_ISSMOKER);
+		String area = request.getParameter(FIELD_AREA);
 		
 		
 		newUser.setEmail(email);
@@ -87,8 +94,6 @@ public class Register extends HttpServlet {
 		String actionMessage = "";
 		Map<String, String> erreurs = new HashMap<String,String>();
 		Map<String, String> form = new HashMap<String, String>();
-		
-		//PrintWriter out = response.getWriter();
 		
 		errMsg = validateEmail(email);
 		if(errMsg!=null){
@@ -104,9 +109,23 @@ public class Register extends HttpServlet {
 				}
 			}
 		}
-				
+		
+		//Reinit des valeurs a renvoyer à la vue en cas de problèmes
+		 form.put(FIELD_EMAIL, email);
+		 form.put(FIELD_LASTNAME, lastName);
+		 form.put(FIELD_FIRSTNAME, firstName);
+		 form.put(FIELD_ADRESSNUMBER, adressNumber);
+		 form.put(FIELD_ADRESSWAY, adressWay);
+		 form.put(FIELD_ADRESSCP, adressCP);
+		 form.put(FIELD_ADRESSCITY, adressCity);
+		 form.put(FIELD_PHONENUMBER, phoneNumber);
+		 form.put(FIELD_SEXE, sexe);
+		 form.put(FIELD_PWD1, pwd1);
+		 form.put(FIELD_ISSMOKER, isSmoker);
+		 form.put(FIELD_AREA, area);
+		 
 		if(errMsg==null){
-			 form.put(FIELD_EMAIL, email);
+
 			 actionMessage = "Succès de l'inscription";
 			 request.setAttribute("errorStatus", false);
 		} else {
@@ -114,12 +133,6 @@ public class Register extends HttpServlet {
 			request.setAttribute("errorStatus", true);
 		}
 		
-		/*
-		HttpSession sessionScope = request.getSession();
-		Map<String, User> users = (HashMap<String, User>)sessionScope.getAttribute( "users");
-		users.put( newUser.getEmail(), newUser);
-		sessionScope.setAttribute("users", users);
-		*/
 		
 		//On vérifie si le login existe déjà dans la base
 		boolean resultatExiste = false;
@@ -160,8 +173,9 @@ public class Register extends HttpServlet {
 			actionMessage = "Création de l'utilisateur";
 			request.setAttribute("actionMessage", actionMessage);
 			String sql = "INSERT INTO User " +
-					"(email, lastName, fisrtName, adressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe) " +
+					"(email, lastName, fisrtName, addressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe, isConducteur, isSmoker, area, password) " +
 					" VALUES ( '" + email.toLowerCase() + "', " +
+					
 					" '" + lastName + "', " +
 					" '" + firstName + "', " +
 					" '" + adressNumber + "', " +
@@ -169,20 +183,20 @@ public class Register extends HttpServlet {
 					" '" + adressCP + "', " +
 					" '" + adressCity + "', " +
 					" '" + phoneNumber + "', " +
-					" '" + sexe + "'); ";
+					" '" + sexe +  "', " +
+					" '" + isConducteur + "', " +
+					" '" + isSmoker + "', " +
+					" '" + area + "', "+
+					" '" + pwd1 + "');"; 
+
 			System.out.println("Test");
 			System.out.println(sql);
+			
 			connexion.query(sql);
-					
+			System.out.println("Insert passé");		
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 		}
-		
-		
-		
-		//out.println("<HTML>\n<BODY>\n" + "<h1>Connexion OK</h1>" + "</BODY></HTML>");
-		
-		
-		
+	
 	}
 	
 	private String validateEmail(String email ) {
@@ -223,8 +237,8 @@ public class Register extends HttpServlet {
 
                 if (pass1.length() < 8) {
                     //logger.info(pass1 + " is length < 11");
-                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractï¿½res <br>");
-                    return ("Le mot de passe est trop court. Il doit contenir 8 caractï¿½res");
+                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractères <br>");
+                    return ("Le mot de passe est trop court. Il doit contenir 8 caractères");
                 }
 
                 if (!hasUppercase) {
@@ -247,13 +261,13 @@ public class Register extends HttpServlet {
 
             }else{
                 //logger.info(pass1 + " != " + pass2);
-                retVal.append("Mots de passe diffï¿½rents <br>");
-                return ("Mots de passe diffï¿½rents");
+                retVal.append("Mots de passe différents <br>");
+                return ("Mots de passe différents");
             }
         }else{
             //logger.info("Passwords = null");
-            retVal.append("Mots de passe non renseignï¿½s <br>");
-            return ("Mots de passe non renseignï¿½s");
+            retVal.append("Mots de passe non renseignés <br>");
+            return ("Mots de passe non renseignés");
         }
         
 

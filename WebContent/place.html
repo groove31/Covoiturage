@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Place searches</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<style>
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#map {
+	height: 100%;
+}
+</style>
+
+<script>
+
+function initMap() {
+	var addressesString = ["Place François Mitterrand, 31750 Escalquens, France",
+	                       "48, rue des Fontanelles, 31320 Labege, France",
+	                       "29 Avenue de Toulouse, 31320 Castanet-Tolosan",
+	                       "8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France"
+	                       ];
+    var addressesLatLong = new Array();
+    var markers = new Array();
+    var address = [];
+    var map = new google.maps.Map(document.getElementById('map'), 
+		  {
+		    zoom: 8,
+		    center: {lat: 43.5409104, lng: 1.5103655}
+		  }
+    );
+    
+    var geocoder = new google.maps.Geocoder();
+    for (var i = 0; i < addressesString.length; i++) {
+    	geocoder.geocode( { 'address': addressesString[i]}, function(results, status) {
+    	    if (status == google.maps.GeocoderStatus.OK) {
+    	        var marker = new google.maps.Marker({
+    	            map: map,
+                    position: results[0].geometry.location,
+                    title: addressesString[i]
+                });
+                document.getElementById('lat').value = results[0].geometry.location.lat();
+                document.getElementById('lng').value = results[0].geometry.location.lng();
+            }
+        });
+    	
+    }
+}
+  
+
+
+    </script>
+</head>
+<body>
+	<div id="map"></div>
+    <div style="visibility: hidden;"><input id="lat" type="text" value=""></div>
+    <div style="visibility: hidden;"><input id="lng" type="text" value=""></div>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&callback=initMap"
+		async defer></script>
+</body>
+</html>
