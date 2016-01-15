@@ -21,7 +21,8 @@
     	                           "8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France"
     	                           ];
     	    
-    	    var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
+    	    //var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
+    	    var ADDRESSE_BL = document.getElementById('ADDRESSE_BL').value;
     	    var geocoder = new google.maps.Geocoder();
     	    var directionsDisplay;
     	    var directionsService = new google.maps.DirectionsService();
@@ -105,6 +106,9 @@
     <div id="pied">
         &copy; 2016 Les fous du volant
     </div>
+    
+    <div style="visibility: hidden"><input type="text" id="ADDRESSE_BL" value="${ADDRESSE_BL}"></div>
+    <div style="visibility: hidden"><input type="text" id="conducteurs" value="${conducteurs}"></div>
 
     </center>
 
