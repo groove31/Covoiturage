@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import covoiturage.bl.model.Connexion;
 
@@ -19,6 +20,7 @@ import covoiturage.bl.model.Connexion;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/login.jsp";
+	public static String VIEW_PAGES_URL_LIST="/WEB-INF/listDriver.jsp";
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "pwd1";
 
@@ -74,9 +76,11 @@ public class Login extends HttpServlet {
 		}
 		if (resultatExiste) {
 			actionMessage = "Utilisateur accepté.";
+			HttpSession session = request.getSession();
+			session.setAttribute("email", email);
 			request.setAttribute("actionMessage", actionMessage);
 			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-			getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
+			getServletContext().getRequestDispatcher(VIEW_PAGES_URL_LIST).forward(request, response);
 			
 		} else {
 			actionMessage = "Utilisateur ou mot de passe incorrect.";

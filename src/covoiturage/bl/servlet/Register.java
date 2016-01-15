@@ -60,6 +60,65 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String email = "";
+		
+		email = request.getParameter(FIELD_EMAIL);
+
+		if (email!=null) {
+			String actionMessage = "";
+			String lastName="";
+			
+			boolean resultatExiste = false;
+			//		Map<String, String> erreurs = new HashMap<String,String>();
+			Connexion connexion = new Connexion("Covoiturage.db");
+			connexion.connect();
+			String sql = "SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'" ;
+					
+			ResultSet resultSet = connexion.query(sql);
+			// si resultSet est vide ou null, alors resultatExiste = false
+			// si resultSet n'est pas vide, alors resultatExite = true
+			
+			if (resultSet == null) {
+				resultatExiste = false;
+				connexion.close();
+				actionMessage = "Une erreur de BDD est survenue.";
+				request.setAttribute("actionMessage", actionMessage);
+				this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+			} 
+			
+			try {
+				if (resultSet.next()) {
+					resultatExiste = true;
+					
+					lastName = resultSet.getString(FIELD_LASTNAME);
+					
+					connexion.close();
+				}
+			} catch (SQLException e) {
+				resultatExiste = false;
+	
+			}
+			if (resultatExiste) {
+				actionMessage = "Utilisateur accepté.";
+				request.setAttribute("actionMessage", actionMessage);
+				//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+				getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
+				
+			} else {
+				actionMessage = "Utilisateur ou mot de passe incorrect.";
+				request.setAttribute("actionMessage", actionMessage);
+				request.setAttribute(FIELD_EMAIL, email);
+				request.setAttribute(FIELD_PWD1, "");
+				this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+			}
+			
+			Map<String, String> form = new HashMap<String, String>();
+			
+			form.put(FIELD_EMAIL, email);
+			form.put(FIELD_LASTNAME, lastName);
+			request.setAttribute("form",  form);
+		}	
 		request.setAttribute("errorStatus", true);
 		
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
