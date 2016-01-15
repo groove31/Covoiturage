@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
     <link rel= "stylesheet" type = "text/css" href="css/menu.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Accueil</title>
@@ -12,15 +12,9 @@
     <script>
   
     function initialize() {
-    	 /*var addressesString = ["Place François Mitterrand, 31750 Escalquens, France",
-    	                           "48, rue des Fontanelles, 31320 Castanet-Tolosan, France",
-    	                           "29 Avenue de Toulouse, 31320 Castanet-Tolosan",
-    	                           "8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France"
-    	                           ];*/
-    	                        
-    	     var addressesString = document.getElementById('conducteurs').value;
+    	     var addressesString = ${conducteurs};
     	    //var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
-    	    var ADDRESSE_BL = document.getElementById('ADDRESSE_BL').value;
+    	    var ADDRESSE_BL = "${ADDRESSE_BL}";
     	    var geocoder = new google.maps.Geocoder();
     	    var directionsDisplay;
     	    var directionsService = new google.maps.DirectionsService();
@@ -105,8 +99,8 @@
         &copy; 2016 Les fous du volant
     </div>
     
-    <div style="visibility: hidden"><input type="text" id="ADDRESSE_BL" value="${ADDRESSE_BL}"></div>
-    <div style="visibility: hidden"><input type="text" id="conducteurs" value="${conducteurs}"></div>
+    <!--  <div style="visibility: hidden"><input type="text" id="ADDRESSE_BL" value="${ADDRESSE_BL}"></div> -->
+    <!--   <div style="visibility: hidden"><input type="text" id="conducteurs" value="${conducteurs}"></div> -->
 
     </center>
 

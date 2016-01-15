@@ -35,10 +35,10 @@ public class Index extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setAttribute("ADDRESSE_BL", ADDRESSE_BL);
 		
-		listeAdresses.add("Place François Mitterrand, 31750 Escalquens, France");
-		listeAdresses.add("48, rue des Fontanelles, 31320 Castanet-Tolosan, France");
-		listeAdresses.add("29 Avenue de Toulouse, 31320 Castanet-Tolosan");
-		listeAdresses.add("8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France");
+		listeAdresses.add("\"Place François Mitterrand, 31750 Escalquens, France\"");
+		listeAdresses.add("\"48, rue des Fontanelles, 31320 Castanet-Tolosan, France\"");
+		listeAdresses.add("\"29 Avenue de Toulouse, 31320 Castanet-Tolosan\"");
+		listeAdresses.add("\"8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France\"");
 		
 		request.setAttribute("conducteurs", listeAdresses);
 		
