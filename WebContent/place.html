@@ -20,21 +20,35 @@ html, body {
 
 function initMap() {
 	var addressesString = ["Place François Mitterrand, 31750 Escalquens, France",
-	                       "48, rue des Fontanelles, 31320 Labege, France",
+	                       "48, rue des Fontanelles, 31320 Castanet-Tolosan, France",
 	                       "29 Avenue de Toulouse, 31320 Castanet-Tolosan",
 	                       "8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France"
 	                       ];
+	
+	var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
     var addressesLatLong = new Array();
     var markers = new Array();
     var address = [];
-    var map = new google.maps.Map(document.getElementById('map'), 
-		  {
-		    zoom: 8,
-		    center: {lat: 43.5409104, lng: 1.5103655}
-		  }
-    );
-    
     var geocoder = new google.maps.Geocoder();
+    var map;
+    geocoder.geocode( { 'address': ADDRESSE_BL}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+        	map = new google.maps.Map(document.getElementById('map'), 
+        	          {
+        	            zoom: 10,
+        	            center: results[0].geometry.location
+        	          }
+        	    );
+        	var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location,
+                title: "Berger-Levrault",
+                icon : "http://www.berger-levrault.com/public/css/page/logo.png"
+            });
+        }
+    });
+    
+    
     for (var i = 0; i < addressesString.length; i++) {
     	geocoder.geocode( { 'address': addressesString[i]}, function(results, status) {
     	    if (status == google.maps.GeocoderStatus.OK) {
