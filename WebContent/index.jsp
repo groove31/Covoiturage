@@ -4,23 +4,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <link rel= "stylesheet" type = "text/css" href="css/menu.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Accueil</title>
     
     <script>
-   
-    
-    
-
+  
     function initialize() {
-    	 var addressesString = ["Place François Mitterrand, 31750 Escalquens, France",
+    	 /*var addressesString = ["Place François Mitterrand, 31750 Escalquens, France",
     	                           "48, rue des Fontanelles, 31320 Castanet-Tolosan, France",
     	                           "29 Avenue de Toulouse, 31320 Castanet-Tolosan",
     	                           "8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France"
-    	                           ];
-    	    
+    	                           ];*/
+    	                        
+    	     var addressesString = document.getElementById('conducteurs').value;
     	    //var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
     	    var ADDRESSE_BL = document.getElementById('ADDRESSE_BL').value;
     	    var geocoder = new google.maps.Geocoder();
@@ -83,7 +81,7 @@
         <form action="" method="get" name="direction" id="direction">
             <input type="text" name="origin" id="origin" placeholder="Adresse..." onchange="calcRoute();">
          
-            <SELECT name="rayon" size="1">
+            <SELECT class="liste_d" name="rayon" size="1">
                 <OPTION>1 
                 <OPTION>2
                 <OPTION>3

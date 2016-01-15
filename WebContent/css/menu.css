@@ -9,27 +9,36 @@ label {
     color: #f44336;
 }
 input[type=text] {
-    width: 100%;
+    width: 50%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-image: url('searchicon.png');
     background-position: 10px 10px; 
     background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
+    padding: 7px 20px 7px 20px;
 }
 input[type=button] {
+	font: normal 12pt Arial, helvetica, sans-serif;
     background-color: #f44336;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 7px 20px;
     text-decoration: none;
-    margin: 4px 2px;
     cursor: pointer;
 }
-
+.liste_d {
+    width: 6%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 6px 20px 6px 20px;
+}
 #pied {
     font: normal 10pt Arial, helvetica, sans-serif;
     color: black;
