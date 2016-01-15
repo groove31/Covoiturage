@@ -34,7 +34,7 @@ public class ListDriver extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String email = request.getParameter(FIELD_EMAIL);
 		//String pwd1 = request.getParameter(FIELD_PWD1);
-		
+		/*
 		String actionMessage = "";
 		boolean resultatExiste = false;
 		//		Map<String, String> erreurs = new HashMap<String,String>();
@@ -74,7 +74,8 @@ public class ListDriver extends HttpServlet {
 			//request.setAttribute(FIELD_EMAIL, email);
 			//request.setAttribute(FIELD_PWD1, "");
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-		}
+		}*/
+		
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 

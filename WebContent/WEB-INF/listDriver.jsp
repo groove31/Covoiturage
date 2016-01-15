@@ -5,11 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-
 <title>Liste des conducteurs</title>
 </head>
 <body>
-
     <form class="form-horizontal well col-sm-12" method="POST">
         <div id="form" style="width: 900px;" class="col-sm-12">
             <fieldset>
@@ -76,9 +74,6 @@
             </table>
             </fieldset>
         </div>
-    
-
-</form>
-
+    </form>
 </body>
 </html>
