@@ -32,7 +32,9 @@
     	                map: map,
     	                position: results[0].geometry.location,
     	                title: "Berger-Levrault",
-    	                icon : "http://www.berger-levrault.com/public/css/page/logo.png"
+    	                //icon : "http://www.berger-levrault.com/public/css/page/logo.png"
+    	                icon : "http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png",
+    	                title :  "Berger-Levrault"
     	            });
     	        }
     	    });
@@ -68,32 +70,31 @@
         <center><p>Les fous du volant</p></center>
     </div>
 
-    <div id="contenu">
-    
-        <center>
-        <div id="destinationForm">
-        <form action="" method="get" name="direction" id="direction">
-            <input type="text" name="origin" id="origin" placeholder="Adresse..." onchange="calcRoute();">
-         
-            <SELECT class="liste_d" name="rayon" size="1">
-                <OPTION>1 
-                <OPTION>2
-                <OPTION>3
-                <OPTION>4
-                <OPTION selected>5
-                <OPTION>10
-            </SELECT>
-            km  
-            
-            <input type="button" value="Rechercher" onclick="javascript:calculate()">       
-        </form>
-        </div>
-        </center>
-      
-        <div id="map_canvas"></div>
-    </div>
+	<div id="contenu">
 
-    <center>
+		<center>
+			<div id="destinationForm">
+				<form action="" method="get" name="direction" id="direction">
+					<input type="text" name="origin" id="origin"
+						placeholder="Adresse..." onchange="calcRoute();"> <SELECT
+						class="liste_d" name="rayon" size="1">
+						<OPTION>1
+						<OPTION>2
+						<OPTION>3
+						<OPTION>4
+						<OPTION selected>5
+						<OPTION>10
+					</SELECT> km <input type="button" value="Rechercher"
+						onclick="javascript:calculate()">
+				</form>
+			</div>
+			<h4>Emplacements des conducteurs prêts à vous amener à Berger-Levrault </h4>
+		</center>
+ 
+		<div id="map_canvas"></div>
+	</div>
+
+	<center>
 
     <div id="pied">
         &copy; 2016 Les fous du volant
