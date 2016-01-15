@@ -10,43 +10,56 @@
     <title>Accueil</title>
     
     <script>
-    var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
-    var map;
+   
+    
+    
 
     function initialize() {
-      directionsDisplay = new google.maps.DirectionsRenderer();
-      var destination = new google.maps.LatLng(43.5408083, 1.5140049999999974);
-      var mapOptions = {
-        zoom: 12,
-        center: destination,
-      }      
-      
-      map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-      var optionsMarqueur = {
-              position: map.getCenter(),
-              map: map,
-              title: "Berger-Levrault"
-      };
-      var marqueur = new google.maps.Marker(optionsMarqueur);
-      
-      directionsDisplay.setMap(map);
+    	 var addressesString = ["Place François Mitterrand, 31750 Escalquens, France",
+    	                           "48, rue des Fontanelles, 31320 Castanet-Tolosan, France",
+    	                           "29 Avenue de Toulouse, 31320 Castanet-Tolosan",
+    	                           "8 Allée de l'Appel du 18 juin 1940, 31130 Balma, France"
+    	                           ];
+    	    
+    	    //var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
+    	    var ADDRESSE_BL = document.getElementById('ADDRESSE_BL').value;
+    	    var geocoder = new google.maps.Geocoder();
+    	    var directionsDisplay;
+    	    var directionsService = new google.maps.DirectionsService();
+    	    var map;
+    	    
+    	    geocoder.geocode( { 'address': ADDRESSE_BL}, function(results, status) {
+    	        if (status == google.maps.GeocoderStatus.OK) {
+    	            map = new google.maps.Map(document.getElementById('map_canvas'), 
+    	                      {
+    	                        zoom: 10,
+    	                        center: results[0].geometry.location
+    	                      }
+    	                );
+    	            var marker = new google.maps.Marker({
+    	                map: map,
+    	                position: results[0].geometry.location,
+    	                title: "Berger-Levrault",
+    	                icon : "http://www.berger-levrault.com/public/css/page/logo.png"
+    	            });
+    	        }
+    	    });
+    	
+    	
+    	    for (var i = 0; i < addressesString.length; i++) {
+    	        geocoder.geocode( { 'address': addressesString[i]}, function(results, status) {
+    	            if (status == google.maps.GeocoderStatus.OK) {
+    	                var marker = new google.maps.Marker({
+    	                    map: map,
+    	                    position: results[0].geometry.location,
+    	                    title: addressesString[i]
+    	                });
+    	            }
+    	        });
+    	        
+    	    }
     }
-
-    function calcRoute() {
-      var start = document.getElementById("origin").value;
-      var end = new google.maps.LatLng(43.5408083, 1.5140049999999974); //document.getElementById("end").value;
-      var request = {
-        origin:start,
-        destination:end,
-        travelMode: google.maps.TravelMode.DRIVING
-      };
-      directionsService.route(request, function(result, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(result);
-        }
-      });
-    }
+    
     </script>
         
 </head>
@@ -54,8 +67,8 @@
     
     <div id="menu" class="fixed">
  	    <ul>
-	        <li><a href="/login"/>Se connecter</a></li>
-	        <li><a href="/register"/>S'inscrire</a></li>
+	        <li><a href="Login"/>Se connecter</a></li>
+	        <li><a href="Register"/>S'inscrire</a></li>
 	    </ul>
     </div>
     
@@ -93,6 +106,9 @@
     <div id="pied">
         &copy; 2016 Les fous du volant
     </div>
+    
+    <div style="visibility: hidden"><input type="text" id="ADDRESSE_BL" value="${ADDRESSE_BL}"></div>
+    <div style="visibility: hidden"><input type="text" id="conducteurs" value="${conducteurs}"></div>
 
     </center>
 
