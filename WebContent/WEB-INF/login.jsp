@@ -44,7 +44,7 @@
                <div class="col-sm-6">
 	           <div class="form-group">
 	               <button class="btn btn-primary" type="submit" name="submit" value="Connexion">Connexion</button>
-	               <button class="btn btn-default" type="reset" name="reset" value="Annuler" onclick="location.href='index.jsp'">Annuler</button>
+	               <button class="btn btn-default" type="reset" name="reset" value="Annuler" onclick="location.href='Index'">Annuler</button>
 	           </div>
 	           </div>
 	        </div>

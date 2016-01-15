@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" name="inscription" value="Inscription">Inscription</button>
-                <button class="btn btn-default" type="reset" name="inscription" value="Annuler" onclick="location.href='index.jsp'">Annuler</button>
+                <button class="btn btn-default" type="reset" name="inscription" value="Annuler" onclick="location.href='Index'">Annuler</button>
                 <span class="info">${actionMessage}</span>
             </fieldset>
         </div>
