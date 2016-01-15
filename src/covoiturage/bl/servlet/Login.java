@@ -43,13 +43,15 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter(FIELD_EMAIL);
 		String pwd1 = request.getParameter(FIELD_PWD1);
+		
 		String actionMessage = "";
 		boolean resultatExiste = false;
 		//		Map<String, String> erreurs = new HashMap<String,String>();
 		Connexion connexion = new Connexion("Covoiturage.db");
 		connexion.connect();
-
-		ResultSet resultSet = connexion.query("SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'");
+		String sql = "SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'" +
+				" and password = '" + pwd1 + "'";
+		ResultSet resultSet = connexion.query(sql);
 		// si resultSet est vide ou null, alors resultatExiste = false
 		// si resultSet n'est pas vide, alors resultatExite = true
 		
@@ -70,8 +72,8 @@ public class Login extends HttpServlet {
 			resultatExiste = false;
 
 		}
-		if (resultatExiste && pwd1.equals(email)) {
-			actionMessage = "Utilisateur acceptÃ©.";
+		if (resultatExiste) {
+			actionMessage = "Utilisateur accepté.";
 			request.setAttribute("actionMessage", actionMessage);
 			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 			getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
@@ -79,6 +81,8 @@ public class Login extends HttpServlet {
 		} else {
 			actionMessage = "Utilisateur ou mot de passe incorrect.";
 			request.setAttribute("actionMessage", actionMessage);
+			request.setAttribute(FIELD_EMAIL, email);
+			request.setAttribute(FIELD_PWD1, "");
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 		}
 	}
