@@ -100,7 +100,7 @@ public class Register extends HttpServlet {
 	
 			}
 			if (resultatExiste) {
-				actionMessage = "Utilisateur accepté.";
+				actionMessage = "Utilisateur acceptï¿½.";
 				request.setAttribute("actionMessage", actionMessage);
 				//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 				getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
@@ -139,6 +139,8 @@ public class Register extends HttpServlet {
 		String adressWay = request.getParameter(FIELD_ADRESSWAY);
 		String adressCP = request.getParameter(FIELD_ADRESSCP);
 		String adressCity = request.getParameter(FIELD_ADRESSCITY);
+		String longitude = request.getParameter(FIELD_LONGITUDE);
+		String latitude = request.getParameter(FIELD_LATITUDE);
 		String phoneNumber = request.getParameter(FIELD_PHONENUMBER);
 		String sexe = request.getParameter(FIELD_SEXE);
 	//	String isConducteur = request.getParameter(FIELD_ISCONDUCTEUR); en attente d'utilisation
@@ -169,7 +171,7 @@ public class Register extends HttpServlet {
 			}
 		}
 		
-		//Reinit des valeurs a renvoyer à la vue en cas de problèmes
+		//Reinit des valeurs a renvoyer Ã  la vue en cas de problÃ¨me
 		 form.put(FIELD_EMAIL, email);
 		 form.put(FIELD_LASTNAME, lastName);
 		 form.put(FIELD_FIRSTNAME, firstName);
@@ -185,7 +187,7 @@ public class Register extends HttpServlet {
 		 
 		if(errMsg==null){
 
-			 actionMessage = "Succès de l'inscription";
+			 actionMessage = "SuccÃ¨s de l'inscription";
 			 request.setAttribute("errorStatus", false);
 		} else {
 			actionMessage = "Echec de l'inscription";
@@ -193,7 +195,7 @@ public class Register extends HttpServlet {
 		}
 		
 		
-		//On vérifie si le login existe déjà dans la base
+		//On vï¿½rifie si le login existe dï¿½jï¿½ dans la base
 		boolean resultatExiste = false;
 		//		Map<String, String> erreurs = new HashMap<String,String>();
 		Connexion connexion = new Connexion("Covoiturage.db");
@@ -221,7 +223,7 @@ public class Register extends HttpServlet {
 
 		}
 		if (resultatExiste) {
-			actionMessage = "Utilisateur déjà existant";
+			actionMessage = "Utilisateur dÃ©jÃ  existant";
 			request.setAttribute("form", form);
 			request.setAttribute("erreurs", erreurs);
 			request.setAttribute("actionMessage", actionMessage);
@@ -229,10 +231,10 @@ public class Register extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 			
 		} else {
-			actionMessage = "Création de l'utilisateur";
+			actionMessage = "CrÃ©ation de l'utilisateur";
 			request.setAttribute("actionMessage", actionMessage);
 			String sql = "INSERT INTO User " +
-					"(email, lastName, fisrtName, addressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe, isConducteur, isSmoker, area, password) " +
+					"(email, lastName, fisrtName, addressNumber, addressWay, addressCP,addressCity,longitude, latitude, phonenUmber, sexe, isConducteur, isSmoker, area, password) " +
 					" VALUES ( '" + email.toLowerCase() + "', " +
 					
 					" '" + lastName + "', " +
@@ -241,6 +243,8 @@ public class Register extends HttpServlet {
 					" '" + adressWay + "', " +
 					" '" + adressCP + "', " +
 					" '" + adressCity + "', " +
+					" '" + latitude + "', " +
+					" '" + longitude + "', " +
 					" '" + phoneNumber + "', " +
 					" '" + sexe +  "', " +
 					" '" + isConducteur + "', " +
@@ -252,7 +256,7 @@ public class Register extends HttpServlet {
 			System.out.println(sql);
 			
 			connexion.query(sql);
-			System.out.println("Insert passé");		
+			System.out.println("Insert passÃ©");		
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 		}
 	
@@ -296,8 +300,8 @@ public class Register extends HttpServlet {
 
                 if (pass1.length() < 8) {
                     //logger.info(pass1 + " is length < 11");
-                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractères <br>");
-                    return ("Le mot de passe est trop court. Il doit contenir 8 caractères");
+                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractÃ¨res <br>");
+                    return ("Le mot de passe est trop court. Il doit contenir 8 caractÃ¨res");
                 }
 
                 if (!hasUppercase) {
@@ -320,13 +324,13 @@ public class Register extends HttpServlet {
 
             }else{
                 //logger.info(pass1 + " != " + pass2);
-                retVal.append("Mots de passe différents <br>");
-                return ("Mots de passe différents");
+                retVal.append("Mots de passe diffÃ©rents <br>");
+                return ("Mots de passe diffÃ©rents");
             }
         }else{
             //logger.info("Passwords = null");
-            retVal.append("Mots de passe non renseignés <br>");
-            return ("Mots de passe non renseignés");
+            retVal.append("Mots de passe non renseignÃ©s <br>");
+            return ("Mots de passe non renseignÃ©s");
         }
         
 
