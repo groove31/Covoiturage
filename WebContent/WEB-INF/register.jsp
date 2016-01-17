@@ -8,14 +8,20 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="js/menu.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="js/Register.js"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?callback=Initialize"></script>-->
 <title>Covoiturage</title>
 </head>
 <body>
 <c:import url="/WEB-INF/Menu/menu.jsp" />
-    <form class="form-horizontal well col-lg-12" action="Register" method="POST">
+    <form class="form-horizontal well col-lg-12" action="Register" method="POST" id="theForm">
         <div id="form" style="width: 900px;" class="col-sm-6">
+        <!-- <div style="visibility: hidden"> 
+                    <input type="hidden" id="latitude" name="latitude" value="hiddenValue" />
+                    <input type="hidden" id="longitude" name="longitude" value="hiddenValue" />
+                <!--</div> -->
             <fieldset>
             <div class="form-group">
                 <legend style="color: blue; font-weight: bold;"><span class="glyphicon glyphicon-pencil"> Inscription</legend>
@@ -145,7 +151,8 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit" name="inscription" value="Inscription">Inscription</button>
+                
+                <button class="btn btn-primary" type="button" id="submit_button" name="inscription" value="Inscription" onclick="getLatLng()">Inscription </button>
                 <button class="btn btn-default" type="reset" name="inscription" value="Annuler" onclick="location.href='Index'">Annuler</button>
                 <span class="info">${actionMessage}</span>
             </fieldset>
@@ -160,4 +167,5 @@
         </div>
     </fieldset>
     </div>
+    
 </body>
