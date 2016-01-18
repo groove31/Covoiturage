@@ -5,57 +5,10 @@
 <html>
 <head>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+    <script src="js/index.js"></script>
     <link rel= "stylesheet" type = "text/css" href="css/menu.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Accueil</title>
-    
-    <script>
-  
-    function initialize() {
-    	     var addressesString = ${conducteurs};
-    	    //var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
-    	    var ADDRESSE_BL = "${ADDRESSE_BL}";
-    	    var geocoder = new google.maps.Geocoder();
-    	    var directionsDisplay;
-    	    var directionsService = new google.maps.DirectionsService();
-    	    var map;
-    	    
-    	    geocoder.geocode( { 'address': ADDRESSE_BL}, function(results, status) {
-    	        if (status == google.maps.GeocoderStatus.OK) {
-    	            map = new google.maps.Map(document.getElementById('map_canvas'), 
-    	                      {
-    	                        zoom: 10,
-    	                        center: results[0].geometry.location
-    	                      }
-    	                );
-    	            var marker = new google.maps.Marker({
-    	                map: map,
-    	                position: results[0].geometry.location,
-    	                title: "Berger-Levrault",
-    	                //icon : "http://www.berger-levrault.com/public/css/page/logo.png"
-    	                icon : "http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png",
-    	                title :  "Berger-Levrault"
-    	            });
-    	        }
-    	    });
-    	
-    	
-    	    for (var i = 0; i < addressesString.length; i++) {
-    	        geocoder.geocode( { 'address': addressesString[i]}, function(results, status) {
-    	            if (status == google.maps.GeocoderStatus.OK) {
-    	                var marker = new google.maps.Marker({
-    	                    map: map,
-    	                    position: results[0].geometry.location,
-    	                    title: addressesString[i]
-    	                });
-    	            }
-    	        });
-    	        
-    	    }
-    }
-    
-    </script>
-        
 </head>
 <body onload="initialize()">
     
