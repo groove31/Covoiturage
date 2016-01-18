@@ -243,8 +243,8 @@ public class Register extends HttpServlet {
 					" '" + adressWay + "', " +
 					" '" + adressCP + "', " +
 					" '" + adressCity + "', " +
-					" '" + latitude + "', " +
 					" '" + longitude + "', " +
+					" '" + latitude + "', " +
 					" '" + phoneNumber + "', " +
 					" '" + sexe +  "', " +
 					" '" + isConducteur + "', " +
