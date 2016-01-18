@@ -1,7 +1,5 @@
 function initialize() {
-	var addressesString = ${conducteurs};
-	//var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
-	var ADDRESSE_BL = "${ADDRESSE_BL}";
+	
 	var geocoder = new google.maps.Geocoder();
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
