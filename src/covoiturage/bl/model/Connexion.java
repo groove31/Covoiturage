@@ -22,13 +22,13 @@ public class Connexion {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + DBPath);
             statement = connection.createStatement();
-            System.out.println("Connexion a " + DBPath + " avec succès");
+            System.out.println("Connexion a " + DBPath + " avec succÃ¨s");
         } catch (ClassNotFoundException notFoundException) {
             notFoundException.printStackTrace();
-            System.out.println("Erreur de connecxion");
+            System.out.println("Erreur de connexion");
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-            System.out.println("Erreur de connecxion");
+            System.out.println("Erreur de connexion");
         }
     }
  
@@ -36,7 +36,7 @@ public class Connexion {
         try {
             connection.close();
            // statement.close();
-            System.out.println("Férmeture de " + DBPath + " avec succès");
+            System.out.println("Fermeture de " + DBPath + " avec succÃ¨s");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,28 +58,60 @@ public class Connexion {
     public void addUser(UserDB user) {
    	 try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    .prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             preparedStatement.setLong(1, user.getID());
-            preparedStatement.setString(2, user.getSexe());
+            preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getLastName());
             preparedStatement.setString(4, user.getFirstName());
-            preparedStatement.setString(5, user.getEmail());
-            preparedStatement.setString(6, user.getAddressNumber());
-            preparedStatement.setString(7, user.getAddressWay());
-            preparedStatement.setString(8, user.getAddressCP());
-            preparedStatement.setString(9, user.getAddressCity());
-            preparedStatement.setString(10, user.getLongitude());
-            preparedStatement.setString(11, user.getLatitude());
+            preparedStatement.setString(5, user.getAddressNumber());
+            preparedStatement.setString(6, user.getAddressWay());
+            preparedStatement.setString(7, user.getAddressCP());
+            preparedStatement.setString(8, user.getAddressCity());
+            preparedStatement.setString(9, user.getLongitude());
+            preparedStatement.setString(10, user.getLatitude());
+            preparedStatement.setString(11, user.getSexe());
             preparedStatement.setString(12, user.getPhoneNumber());
             preparedStatement.setString(13, user.getIsConducteur());
             preparedStatement.setString(14, user.getIsSmoker());
             preparedStatement.setString(15, user.getArea());
+            preparedStatement.setString(16, user.getPassword());
      
             preparedStatement.executeUpdate();
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
+    }
+    
+    public void MajUser(UserDB user){
+    	
+    	Statement stmt;
+		try {
+			stmt = connection.createStatement();
+			
+			String sql = "UPDATE User SET " +
+					"lastName = '" + user.getLastName() + "', " +
+					"firstName = '" + user.getFirstName() + "', " +
+					"addressNumber = '" + user.getAddressNumber() + "', " +
+					"addressWay = '" + user.getAddressWay() + "', " +
+					"addressCP = '" + user.getAddressCP() + "', " +
+					"addressCity = '" + user.getAddressCity() + "', " +
+					"phoneNumber = '" + user.getPhoneNumber() + "', " +
+					"sexe = '" + user.getSexe() + "', " +
+					"isConducteur = '" + user.getIsConducteur() + "', " +
+					"isSmoker = '" + user.getIsSmoker() + "', " +
+					"area = '" + user.getArea() + "', " +
+					"password = '" + user.getPassword() + "' " +
+					" WHERE lower(email) = '"+ user.getEmail().toLowerCase() + "'";
+			
+			System.out.println("Requete Update : " + sql);
+			stmt.executeUpdate(sql);
+	 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

@@ -20,7 +20,7 @@ import covoiturage.bl.model.Connexion;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/login.jsp";
-	public static String VIEW_PAGES_URL_LIST="/WEB-INF/listDriver.jsp";
+	public static String VIEW_PAGES_URL_LIST="/ListDriver";
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "pwd1";
 
@@ -75,12 +75,13 @@ public class Login extends HttpServlet {
 
 		}
 		if (resultatExiste) {
-			actionMessage = "Utilisateur accepté.";
+			actionMessage = "Utilisateur acceptï¿½.";
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
 			request.setAttribute("actionMessage", actionMessage);
 			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-			getServletContext().getRequestDispatcher(VIEW_PAGES_URL_LIST).forward(request, response);
+			//getServletContext().getRequestDispatcher(VIEW_PAGES_URL_LIST).forward(request, response);
+			response.sendRedirect("ListDriver");
 			
 		} else {
 			actionMessage = "Utilisateur ou mot de passe incorrect.";

@@ -21,8 +21,8 @@ public class ConnexionInsert {
         Connexion connexion = new Connexion("Covoiturage.db");
         connexion.connect();
  
-        UserDB user = new UserDB(2,"M","Doe","John","tata@fr.rt","2","4","rue des écoles","31290","Villenouvelle","","",
-        		"true","true", "10");
+        UserDB user = new UserDB(2,"tata@fr.rt","Doe","John","2","4","rue des ï¿½coles","31290","Villenouvelle","","M","",
+        		"true","true", "10", "toto");
         
         connexion.addUser(user);
         ResultSet resultSet = connexion.query("SELECT * FROM User");

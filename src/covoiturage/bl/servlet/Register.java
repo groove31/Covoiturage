@@ -1,12 +1,15 @@
 package covoiturage.bl.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.LongToIntFunction;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,16 +28,18 @@ import covoiturage.bl.model.UserDB;
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/register.jsp";
+	public static String VIEW_PAGES_URL_MODIF="/WEB-INF/listDriver.jsp";
+	public static String VIEW_PAGES_URL_CREATION="/Login";
 	
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "pwd1";
 	public static final String FIELD_PWD2 = "pwd2";
 	public static final String FIELD_FIRSTNAME = "firstName";
 	public static final String FIELD_LASTNAME = "lastName";
-	public static final String FIELD_ADRESSNUMBER = "adressNumber";
-	public static final String FIELD_ADRESSWAY = "adressWay";
-	public static final String FIELD_ADRESSCP = "adressCp";
-	public static final String FIELD_ADRESSCITY = "adressCity";
+	public static final String FIELD_ADRESSNUMBER = "addressNumber";
+	public static final String FIELD_ADRESSWAY = "addressWay";
+	public static final String FIELD_ADRESSCP = "addressCp";
+	public static final String FIELD_ADRESSCITY = "addressCity";
 	public static final String FIELD_LONGITUDE = "longitude";
 	public static final String FIELD_LATITUDE = "latitude";
 	public static final String FIELD_PHONENUMBER = "phoneNumber";
@@ -43,11 +48,12 @@ public class Register extends HttpServlet {
 	public static final String FIELD_ISSMOKER = "isSmoker";
 	public static final String FIELD_AREA = "area";
 	
+	public boolean modeCreation = true;
 	
 	UserDB newUser = new UserDB(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
 			FIELD_EMAIL, FIELD_ADRESSNUMBER, FIELD_ADRESSWAY,
 			FIELD_ADRESSCP, FIELD_ADRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
-			FIELD_PHONENUMBER,FIELD_SEXE, FIELD_ISCONDUCTEUR, FIELD_ISSMOKER, FIELD_AREA );
+			FIELD_PHONENUMBER,FIELD_SEXE, FIELD_ISCONDUCTEUR, FIELD_ISSMOKER, FIELD_AREA, FIELD_PWD1 );
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -63,21 +69,32 @@ public class Register extends HttpServlet {
 		
 		String email = "";
 		
-		email = request.getParameter(FIELD_EMAIL);
-
+		Map<String, String> form = new HashMap<String, String>();
+		HttpSession session = request.getSession();
+		email = (String) session.getAttribute(FIELD_EMAIL);
+		//email = request.getParameter(FIELD_EMAIL);
+		
+		System.out.println("Email : " + email);
 		if (email!=null) {
+			modeCreation = false;
 			String actionMessage = "";
+			String actionMessageValidation = "";
 			String lastName="";
 			
 			boolean resultatExiste = false;
 			//		Map<String, String> erreurs = new HashMap<String,String>();
+			
+			System.out.println("On passe avant le connect dans Register");        
 			Connexion connexion = new Connexion("Covoiturage.db");
 			connexion.connect();
-			String sql = "SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'" ;
-					
+			System.out.println("On passe apr√®s le connect dans Register");
+			
+			String sql = "SELECT * FROM User WHERE lower(email) = '"+ email.toLowerCase() + "'" ;
+			System.out.println("Requete : " + sql);		
 			ResultSet resultSet = connexion.query(sql);
 			// si resultSet est vide ou null, alors resultatExiste = false
 			// si resultSet n'est pas vide, alors resultatExite = true
+			
 			
 			if (resultSet == null) {
 				resultatExiste = false;
@@ -88,41 +105,37 @@ public class Register extends HttpServlet {
 			} 
 			
 			try {
+				lastName = resultSet.getString(FIELD_LASTNAME);
+				System.out.println("lastName1 : " + lastName);
 				if (resultSet.next()) {
 					resultatExiste = true;
-					
 					lastName = resultSet.getString(FIELD_LASTNAME);
-					
+					form.put(FIELD_EMAIL, email);
+					form.put(FIELD_LASTNAME, resultSet.getString(FIELD_LASTNAME));
+					form.put(FIELD_FIRSTNAME, resultSet.getString(FIELD_FIRSTNAME));
+					form.put(FIELD_ADRESSNUMBER, resultSet.getString(FIELD_ADRESSNUMBER));
+					form.put(FIELD_ADRESSWAY, resultSet.getString(FIELD_ADRESSWAY));
+					form.put(FIELD_ADRESSCP, resultSet.getString(FIELD_ADRESSCP));
+					form.put(FIELD_ADRESSCITY, resultSet.getString(FIELD_ADRESSCITY));
+					form.put(FIELD_PHONENUMBER, resultSet.getString(FIELD_PHONENUMBER));
+					form.put(FIELD_SEXE, resultSet.getString(FIELD_SEXE));
+					form.put(FIELD_ISSMOKER, resultSet.getString(FIELD_ISSMOKER));
+					form.put(FIELD_AREA, resultSet.getString(FIELD_AREA));
+					form.put("pwd1", resultSet.getString("password"));
+					form.put("pwd2", resultSet.getString("password"));
 					connexion.close();
+					request.setAttribute("form",  form);
 				}
 			} catch (SQLException e) {
 				resultatExiste = false;
-	
-			}
-			if (resultatExiste) {
-				actionMessage = "Utilisateur acceptÈ.";
-				request.setAttribute("actionMessage", actionMessage);
-				//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-				getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
-				
-			} else {
-				actionMessage = "Utilisateur ou mot de passe incorrect.";
-				request.setAttribute("actionMessage", actionMessage);
-				request.setAttribute(FIELD_EMAIL, email);
-				request.setAttribute(FIELD_PWD1, "");
-				this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 			}
 			
-			Map<String, String> form = new HashMap<String, String>();
-			
-			form.put(FIELD_EMAIL, email);
-			form.put(FIELD_LASTNAME, lastName);
-			request.setAttribute("form",  form);
-		}	
-		request.setAttribute("errorStatus", true);
+		} else {
+			modeCreation = true;
+		}
 		
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
-	
+		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+
 	}
 
 	/**
@@ -141,7 +154,6 @@ public class Register extends HttpServlet {
 		String adressCity = request.getParameter(FIELD_ADRESSCITY);
 		String phoneNumber = request.getParameter(FIELD_PHONENUMBER);
 		String sexe = request.getParameter(FIELD_SEXE);
-	//	String isConducteur = request.getParameter(FIELD_ISCONDUCTEUR); en attente d'utilisation
 		String isConducteur = "cond";
 		String isSmoker = request.getParameter(FIELD_ISSMOKER);
 		String area = request.getParameter(FIELD_AREA);
@@ -149,27 +161,40 @@ public class Register extends HttpServlet {
 		
 		newUser.setEmail(email);
 		newUser.setLastName(lastName);
+		
 		String errMsg = null;
+		String errMsgTempo = null;
 		String actionMessage = "";
+		String actionMessageValidation = "";
 		Map<String, String> erreurs = new HashMap<String,String>();
 		Map<String, String> form = new HashMap<String, String>();
 		
+		/**
+		 * V√©rification si la saisie est OK
+		 */
 		errMsg = validateEmail(email);
 		if(errMsg!=null){
+			errMsgTempo = errMsg;
 			erreurs.put(FIELD_EMAIL, errMsg);
-		} else {
-			errMsg = validateNewPass(pwd1, pwd2);
-			if(errMsg!=null){
-				erreurs.put(FIELD_PWD1, errMsg);
-			} else {
-				errMsg = validateName(lastName);
-				if(errMsg!=null){
-					erreurs.put(FIELD_LASTNAME, errMsg);
-				}
-			}
+		} 
+		
+		System.out.println("Mot de passe 1 : " + pwd1 + " mot de passe 2 : " + pwd2);
+		errMsg = validateNewPass(pwd1, pwd2);
+		if(errMsg!=null){
+			errMsgTempo = errMsg;
+			erreurs.put(FIELD_PWD1, errMsg);
 		}
 		
-		//Reinit des valeurs a renvoyer ‡ la vue en cas de problËmes
+		errMsg = validateName(lastName);
+		if(errMsg!=null){
+			erreurs.put(FIELD_LASTNAME, errMsg);
+		}
+		if (errMsgTempo!=null){
+			errMsg = errMsgTempo;
+		}
+		
+		
+		//Reinit des valeurs a renvoyer √† la vue en cas de problÔøΩmes
 		 form.put(FIELD_EMAIL, email);
 		 form.put(FIELD_LASTNAME, lastName);
 		 form.put(FIELD_FIRSTNAME, firstName);
@@ -180,84 +205,96 @@ public class Register extends HttpServlet {
 		 form.put(FIELD_PHONENUMBER, phoneNumber);
 		 form.put(FIELD_SEXE, sexe);
 		 form.put(FIELD_PWD1, pwd1);
+		 form.put(FIELD_PWD2, pwd1);
 		 form.put(FIELD_ISSMOKER, isSmoker);
 		 form.put(FIELD_AREA, area);
 		 
-		if(errMsg==null){
-
-			 actionMessage = "SuccËs de l'inscription";
+		 
+		 //Si pas d'erreur ci dessus
+		 if(errMsg==null){
+			 actionMessageValidation = "Succ√®s de l'inscription";
 			 request.setAttribute("errorStatus", false);
+			 
+			 
+			//On v√©rifie si le login existe d√©j√† dans la base
+				boolean resultatExiste = false;
+				//		Map<String, String> erreurs = new HashMap<String,String>();
+				Connexion connexion = new Connexion("Covoiturage.db");
+				connexion.connect();
+
+				ResultSet resultSet = connexion.query("SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'");
+				// si resultSet est vide ou null, alors resultatExiste = false
+				// si resultSet n'est pas vide, alors resultatExite = true
+				
+				if (resultSet == null) {
+					resultatExiste = false;
+					connexion.close();
+					actionMessage = "Une erreur de BDD est survenue.";
+					request.setAttribute("actionMessage", actionMessage);
+					this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+				} 
+				
+				try {
+					if (resultSet.next()) {
+						resultatExiste = true;
+					}
+				} catch (SQLException e) {
+					resultatExiste = false;
+
+				}
+				if (resultatExiste) {
+					// Partie de mise √† jour d'un user 
+					actionMessageValidation = "Mise √† jour de l'utilisateur effectu√©e";
+					connexion.close();
+					
+					connexion.connect();
+					UserDB newUser = new UserDB(0,email,lastName,firstName, 
+							adressNumber, adressWay, adressCP,adressCity,"0", "0",
+							sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
+					
+					connexion.MajUser(newUser);
+					
+					connexion.close();
+					System.out.println("Update pass√©");
+					request.setAttribute("form", form);
+					request.setAttribute("actionMessage", actionMessage);
+					request.setAttribute("actionMessageValidation", actionMessageValidation);
+					System.out.println("On passe par la avec " + VIEW_PAGES_URL_MODIF);
+					this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_MODIF).forward(request, response);
+					
+				} else {
+					//Partie d'insertion d'un nouvel utilisateur
+					actionMessageValidation = "Cr√©ation de l'utilisateur effectu√©e";
+					request.setAttribute("actionMessage", actionMessage);
+					
+					connexion.close();
+					connexion.connect();
+					
+					UserDB newUser = new UserDB(0,email,lastName,firstName, 
+							adressNumber, adressWay, adressCP,
+							adressCity,"0", "0",sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
+					
+					connexion.addUser(newUser);
+					
+					connexion.close();
+					this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_CREATION).forward(request, response);
+				}
 		} else {
-			actionMessage = "Echec de l'inscription";
+			actionMessage = "Echec de l'enregistrement";
 			request.setAttribute("errorStatus", true);
-		}
-		
-		
-		//On vÈrifie si le login existe dÈj‡ dans la base
-		boolean resultatExiste = false;
-		//		Map<String, String> erreurs = new HashMap<String,String>();
-		Connexion connexion = new Connexion("Covoiturage.db");
-		connexion.connect();
-
-		ResultSet resultSet = connexion.query("SELECT * FROM User where lower(email) = '"+ email.toLowerCase() + "'");
-		// si resultSet est vide ou null, alors resultatExiste = false
-		// si resultSet n'est pas vide, alors resultatExite = true
-		
-		if (resultSet == null) {
-			resultatExiste = false;
-			connexion.close();
-			actionMessage = "Une erreur de BDD est survenue.";
-			request.setAttribute("actionMessage", actionMessage);
-			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-		} 
-		
-		try {
-			if (resultSet.next()) {
-				resultatExiste = true;
-				connexion.close();
-			}
-		} catch (SQLException e) {
-			resultatExiste = false;
-
-		}
-		if (resultatExiste) {
-			actionMessage = "Utilisateur dÈj‡ existant";
 			request.setAttribute("form", form);
 			request.setAttribute("erreurs", erreurs);
 			request.setAttribute("actionMessage", actionMessage);
-			request.setAttribute("newUser", newUser);
-			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-			
-		} else {
-			actionMessage = "CrÈation de l'utilisateur";
-			request.setAttribute("actionMessage", actionMessage);
-			String sql = "INSERT INTO User " +
-					"(email, lastName, fisrtName, addressNumber, addressWay, addressCP,addressCity,phonenUmber, sexe, isConducteur, isSmoker, area, password) " +
-					" VALUES ( '" + email.toLowerCase() + "', " +
-					
-					" '" + lastName + "', " +
-					" '" + firstName + "', " +
-					" '" + adressNumber + "', " +
-					" '" + adressWay + "', " +
-					" '" + adressCP + "', " +
-					" '" + adressCity + "', " +
-					" '" + phoneNumber + "', " +
-					" '" + sexe +  "', " +
-					" '" + isConducteur + "', " +
-					" '" + isSmoker + "', " +
-					" '" + area + "', "+
-					" '" + pwd1 + "');"; 
+			request.setAttribute("actionMessageValidation", actionMessageValidation);
 
-			System.out.println("Test");
-			System.out.println(sql);
-			
-			connexion.query(sql);
-			System.out.println("Insert passÈ");		
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 		}
 	
 	}
 	
+	/*
+	 * Partie de v√©rification des saisies
+	 */
 	private String validateEmail(String email ) {
 		if ( email != null && email.trim().length() != 0 ) {
 			if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
@@ -280,8 +317,10 @@ public class Register extends HttpServlet {
 	
 	private String validateNewPass(String pass1, String pass2) {
         StringBuilder retVal = new StringBuilder();
-
-        if(pass1.length() < 1 || pass2.length() < 1 )retVal.append("Mot de passe vide <br>");
+        System.out.println("pwd1 = " + pass1 + " pwd2 = " + pass2);
+        if(pass1.length() < 1 || pass2.length() < 1 ){
+        	retVal.append("Mot de passe vide <br>");
+        }
 
         if (pass1 != null && pass2 != null) {
 
@@ -296,8 +335,8 @@ public class Register extends HttpServlet {
 
                 if (pass1.length() < 8) {
                     //logger.info(pass1 + " is length < 11");
-                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caractËres <br>");
-                    return ("Le mot de passe est trop court. Il doit contenir 8 caractËres");
+                    retVal.append("Le mot de passe est trop court. Il doit contenir 8 caract√®res <br>");
+                    return ("Le mot de passe est trop court. Il doit contenir 8 caract√®res");
                 }
 
                 if (!hasUppercase) {
@@ -320,13 +359,13 @@ public class Register extends HttpServlet {
 
             }else{
                 //logger.info(pass1 + " != " + pass2);
-                retVal.append("Mots de passe diffÈrents <br>");
-                return ("Mots de passe diffÈrents");
+                retVal.append("Mots de passe diff√©rents <br>");
+                return ("Mots de passe diff√©rents");
             }
         }else{
             //logger.info("Passwords = null");
-            retVal.append("Mots de passe non renseignÈs <br>");
-            return ("Mots de passe non renseignÈs");
+            retVal.append("Mots de passe non renseign√©s <br>");
+            return ("Mots de passe non renseign√©s");
         }
         
 
