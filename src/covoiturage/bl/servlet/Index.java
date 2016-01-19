@@ -19,6 +19,22 @@ public class Index extends HttpServlet {
 	public static String VIEW_PAGES_URL="/index.jsp";
 	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
 	private static List<String> listeAdresses = new ArrayList<String>(); 
+	public static final String FIELD_EMAIL = "email";
+	public static final String FIELD_PWD1 = "pwd1";
+	public static final String FIELD_PWD2 = "pwd2";
+	public static final String FIELD_FIRSTNAME = "firstName";
+	public static final String FIELD_LASTNAME = "lastName";
+	public static final String FIELD_ADRESSNUMBER = "adressNumber";
+	public static final String FIELD_ADRESSWAY = "adressWay";
+	public static final String FIELD_ADRESSCP = "adressCp";
+	public static final String FIELD_ADRESSCITY = "adressCity";
+	public static final String FIELD_LONGITUDE = "longitude";
+	public static final String FIELD_LATITUDE = "latitude";
+	public static final String FIELD_PHONENUMBER = "phoneNumber";
+	public static final String FIELD_SEXE = "sexe";
+	public static final String FIELD_ISCONDUCTEUR = "isConducteur";
+	public static final String FIELD_ISSMOKER = "isSmoker";
+	public static final String FIELD_AREA = "area";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,6 +66,9 @@ public class Index extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String longitude = request.getParameter(FIELD_LONGITUDE);
+		String latitude = request.getParameter(FIELD_LATITUDE);
+		String area = request.getParameter(FIELD_AREA);
 		doGet(request, response);
 	}
 
