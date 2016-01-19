@@ -31,15 +31,17 @@
 	<div id="contenu">
 		<center>
 			<div id="destinationForm">
-				<form action="/Index" method="POST" name="direction" id="direction">
-					<input type="text" name="origin" id="origin" placeholder="Adresse..." onchange="calcRoute();"> 
-					<SELECT class="liste_d" name="area" size="1" id="selection">
-						<OPTION value="1">1 Km</option>
-						<OPTION value="2">2 Km</option>
-						<OPTION value="3">3 Km</option>
-						<OPTION value="4">4 Km</option>
-						<OPTION value="5" selected>5 Km</option>
-						<OPTION value="10">10 Km</option>
+				<form action="Index" method="POST" name="direction" id="direction">
+					<input type="text" name="origin" id="origin" placeholder="Adresse..."> 
+					<SELECT class="liste_d" name="area" size="1" id="area">
+						<OPTION value="1 Km">1 Km</option>
+						<OPTION value="2 Km">2 Km</option>
+						<OPTION value="3 Km">3 Km</option>
+						<OPTION value="4 Km">4 Km</option>
+						<OPTION value="5 Km" selected>5 Km</option>
+						<OPTION value="10 Km">10 Km</option>
+						<OPTION value="20 Km">20 Km</option>
+						<OPTION value="30 Km">30 Km</option>
 					</SELECT>
 					<input type="button" value="Rechercher" onclick="javascript:sendToServer()">
 				</form>
