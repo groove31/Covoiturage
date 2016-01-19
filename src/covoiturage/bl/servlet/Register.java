@@ -36,10 +36,10 @@ public class Register extends HttpServlet {
 	public static final String FIELD_PWD2 = "pwd2";
 	public static final String FIELD_FIRSTNAME = "firstName";
 	public static final String FIELD_LASTNAME = "lastName";
-	public static final String FIELD_ADRESSNUMBER = "addressNumber";
-	public static final String FIELD_ADRESSWAY = "addressWay";
-	public static final String FIELD_ADRESSCP = "addressCp";
-	public static final String FIELD_ADRESSCITY = "addressCity";
+	public static final String FIELD_ADDRESSNUMBER = "addressNumber";
+	public static final String FIELD_ADDRESSWAY = "addressWay";
+	public static final String FIELD_ADDRESSCP = "addressCp";
+	public static final String FIELD_ADDRESSCITY = "addressCity";
 	public static final String FIELD_LONGITUDE = "longitude";
 	public static final String FIELD_LATITUDE = "latitude";
 	public static final String FIELD_PHONENUMBER = "phoneNumber";
@@ -51,8 +51,8 @@ public class Register extends HttpServlet {
 	public boolean modeCreation = true;
 	
 	UserDB newUser = new UserDB(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
-			FIELD_EMAIL, FIELD_ADRESSNUMBER, FIELD_ADRESSWAY,
-			FIELD_ADRESSCP, FIELD_ADRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
+			FIELD_EMAIL, FIELD_ADDRESSNUMBER, FIELD_ADDRESSWAY,
+			FIELD_ADDRESSCP, FIELD_ADDRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
 			FIELD_PHONENUMBER,FIELD_SEXE, FIELD_ISCONDUCTEUR, FIELD_ISSMOKER, FIELD_AREA, FIELD_PWD1 );
 	
     /**
@@ -113,10 +113,10 @@ public class Register extends HttpServlet {
 					form.put(FIELD_EMAIL, email);
 					form.put(FIELD_LASTNAME, resultSet.getString(FIELD_LASTNAME));
 					form.put(FIELD_FIRSTNAME, resultSet.getString(FIELD_FIRSTNAME));
-					form.put(FIELD_ADRESSNUMBER, resultSet.getString(FIELD_ADRESSNUMBER));
-					form.put(FIELD_ADRESSWAY, resultSet.getString(FIELD_ADRESSWAY));
-					form.put(FIELD_ADRESSCP, resultSet.getString(FIELD_ADRESSCP));
-					form.put(FIELD_ADRESSCITY, resultSet.getString(FIELD_ADRESSCITY));
+					form.put(FIELD_ADDRESSNUMBER, resultSet.getString(FIELD_ADDRESSNUMBER));
+					form.put(FIELD_ADDRESSWAY, resultSet.getString(FIELD_ADDRESSWAY));
+					form.put(FIELD_ADDRESSCP, resultSet.getString(FIELD_ADDRESSCP));
+					form.put(FIELD_ADDRESSCITY, resultSet.getString(FIELD_ADDRESSCITY));
 					form.put(FIELD_PHONENUMBER, resultSet.getString(FIELD_PHONENUMBER));
 					form.put(FIELD_SEXE, resultSet.getString(FIELD_SEXE));
 					form.put(FIELD_ISSMOKER, resultSet.getString(FIELD_ISSMOKER));
@@ -148,10 +148,12 @@ public class Register extends HttpServlet {
 		String pwd2 = request.getParameter(FIELD_PWD2);
 		String lastName = request.getParameter(FIELD_LASTNAME);
 		String firstName = request.getParameter(FIELD_FIRSTNAME);
-		String adressNumber = request.getParameter(FIELD_ADRESSNUMBER);
-		String adressWay = request.getParameter(FIELD_ADRESSWAY);
-		String adressCP = request.getParameter(FIELD_ADRESSCP);
-		String adressCity = request.getParameter(FIELD_ADRESSCITY);
+		String addressNumber = request.getParameter(FIELD_ADDRESSNUMBER);
+		String addressWay = request.getParameter(FIELD_ADDRESSWAY);
+		String addressCP = request.getParameter(FIELD_ADDRESSCP);
+		String addressCity = request.getParameter(FIELD_ADDRESSCITY);
+		String longitude = request.getParameter(FIELD_LONGITUDE);
+		String latitude = request.getParameter(FIELD_LATITUDE);
 		String phoneNumber = request.getParameter(FIELD_PHONENUMBER);
 		String sexe = request.getParameter(FIELD_SEXE);
 		String isConducteur = "cond";
@@ -198,10 +200,10 @@ public class Register extends HttpServlet {
 		 form.put(FIELD_EMAIL, email);
 		 form.put(FIELD_LASTNAME, lastName);
 		 form.put(FIELD_FIRSTNAME, firstName);
-		 form.put(FIELD_ADRESSNUMBER, adressNumber);
-		 form.put(FIELD_ADRESSWAY, adressWay);
-		 form.put(FIELD_ADRESSCP, adressCP);
-		 form.put(FIELD_ADRESSCITY, adressCity);
+		 form.put(FIELD_ADDRESSNUMBER, addressNumber);
+		 form.put(FIELD_ADDRESSWAY, addressWay);
+		 form.put(FIELD_ADDRESSCP, addressCP);
+		 form.put(FIELD_ADDRESSCITY, addressCity);
 		 form.put(FIELD_PHONENUMBER, phoneNumber);
 		 form.put(FIELD_SEXE, sexe);
 		 form.put(FIELD_PWD1, pwd1);
@@ -249,7 +251,7 @@ public class Register extends HttpServlet {
 					
 					connexion.connect();
 					UserDB newUser = new UserDB(0,email,lastName,firstName, 
-							adressNumber, adressWay, adressCP,adressCity,"0", "0",
+							addressNumber, addressWay, addressCP,addressCity,"0", "0",
 							sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 					
 					connexion.MajUser(newUser);
@@ -271,8 +273,8 @@ public class Register extends HttpServlet {
 					connexion.connect();
 					
 					UserDB newUser = new UserDB(0,email,lastName,firstName, 
-							adressNumber, adressWay, adressCP,
-							adressCity,"0", "0",sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
+							addressNumber, addressWay, addressCP,
+							addressCity,"0", "0",sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 					
 					connexion.addUser(newUser);
 					
@@ -298,10 +300,10 @@ public class Register extends HttpServlet {
 	private String validateEmail(String email ) {
 		if ( email != null && email.trim().length() != 0 ) {
 			if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-				return ("Veuillez saisir une adresse mail valide");
+				return ("Veuillez saisir une addresse mail valide");
 			}
 		} else {
-			return ("L'adresse mail est	obligatoire");
+			return ("L'addresse mail est	obligatoire");
 		}
 		return null;
 	}

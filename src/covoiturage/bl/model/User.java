@@ -3,14 +3,14 @@ package covoiturage.bl.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	public User(String lastName, String firstName, String email, String adressNumber, String addressWay,
+	public User(String lastName, String firstName, String email, String addressNumber, String addressWay,
 			String addressCP, String addressCity, String longitude, String latitude, String phoneNumber, String sexe,
 			String isConducteur, String isSmoker, String area ) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-		this.adressNumber = adressNumber;
+		this.addressNumber = addressNumber;
 		this.addressWay = addressWay;
 		this.addressCP = addressCP;
 		this.addressCity = addressCity;
@@ -31,7 +31,7 @@ public class User implements Serializable {
 	private  String lastName="";
 	private  String firstName="";
 	private  String email="";
-	private  String adressNumber="";
+	private  String addressNumber="";
 	private  String addressWay="";
 	private  String addressCP="";
 	private  String addressCity="";
@@ -68,10 +68,10 @@ public class User implements Serializable {
 		this.email = email;
 	}
 	public String getAdressNumber() {
-		return adressNumber;
+		return addressNumber;
 	}
-	public void setAdressNumber(String adressNumber) {
-		this.adressNumber = adressNumber;
+	public void setAdressNumber(String addressNumber) {
+		this.addressNumber = addressNumber;
 	}
 	public String getAddressWay() {
 		return addressWay;

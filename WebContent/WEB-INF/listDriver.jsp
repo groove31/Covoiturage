@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +14,7 @@
   
     function initialize() {
             var addressesString = ${conducteurs};
-            var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
+            var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 LabÃ¨ge";
             //var ADDRESSE_BL = "${ADDRESSE_BL}";
             var geocoder = new google.maps.Geocoder();
             var directionsDisplay;
@@ -94,7 +94,7 @@
                             Nom
                         </th>
                         <th scope="col">
-                            Prénom
+                            PrÃ©nom
                         </th>
                         <th scope="col">
                             Distance
