@@ -75,7 +75,7 @@ public class Login extends HttpServlet {
 
 		}
 		if (resultatExiste) {
-			actionMessage = "Utilisateur accepté.";
+			actionMessage = "Utilisateur acceptÃ©.";
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
 			request.setAttribute("actionMessage", actionMessage);
