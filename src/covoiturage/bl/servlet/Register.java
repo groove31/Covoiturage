@@ -251,7 +251,7 @@ public class Register extends HttpServlet {
 					
 					connexion.connect();
 					UserDB newUser = new UserDB(0,email,lastName,firstName, 
-							addressNumber, addressWay, addressCP,addressCity,"0", "0",
+							addressNumber, addressWay, addressCP,addressCity,longitude, latitude,
 							sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 					
 					connexion.MajUser(newUser);
@@ -274,7 +274,7 @@ public class Register extends HttpServlet {
 					
 					UserDB newUser = new UserDB(0,email,lastName,firstName, 
 							addressNumber, addressWay, addressCP,
-							addressCity,"0", "0",sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
+							addressCity,longitude, latitude,sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 					
 					connexion.addUser(newUser);
 					

@@ -99,6 +99,8 @@ public class Connexion {
 					"addressCP = '" + user.getAddressCP() + "', " +
 					"addressCity = '" + user.getAddressCity() + "', " +
 					"phoneNumber = '" + user.getPhoneNumber() + "', " +
+					"longitude = '" + user.getLongitude() + "', " +
+					"latitude = '" + user.getLatitude() + "', " +
 					"sexe = '" + user.getSexe() + "', " +
 					"isConducteur = '" + user.getIsConducteur() + "', " +
 					"isSmoker = '" + user.getIsSmoker() + "', " +
