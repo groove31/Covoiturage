@@ -4,7 +4,10 @@ var directionsService = new google.maps.DirectionsService();
 var map;
 
 
+
 function afficherBL() {
+	var ADDRESSE_BL = document.getElementById("ADDRESSE_BL").value;
+	var conducteurs = document.getElementById("conducteurs").value;
 	geocoder.geocode( { 'address': ADDRESSE_BL}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			map = new google.maps.Map(document.getElementById('map_canvas'), 

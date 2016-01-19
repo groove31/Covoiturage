@@ -12,6 +12,9 @@
 <title>Accueil</title>
 </head>
 <body onload="afficherBL()">
+<input type="hidden" id="conducteurs" value="${conducteurs}">
+<input type="hidden" id="ADDRESSE_BL" value="${ADDRESSE_BL}">
+
 	<div id="menu" class="fixed">
 		<ul>
 			<li><a href="Login" />Se connecter</a></li>
@@ -57,9 +60,4 @@
 	</center>
 
 </body>
-<script>
-	var addressesString = ${conducteurs};
-	//var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
-	var ADDRESSE_BL = "${ADDRESSE_BL}";
-</script>
 </html>
