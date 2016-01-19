@@ -1,14 +1,14 @@
 
 function getLatLng() {
-	var adressNumber = document.getElementById("adressNumber").value;
-	var adressWay = document.getElementById("adressWay").value;
-	var adressCp = document.getElementById("adressCp").value;
-	var adressCity = document.getElementById("adressCity").value;
+	var addressNumber = document.getElementById("addressNumber").value;
+	var addressWay = document.getElementById("addressWay").value;
+	var addressCp = document.getElementById("addressCp").value;
+	var addressCity = document.getElementById("addressCity").value;
 	var theLatitude = "";
 	var theLongitude = "";
 	var form = document.forms['theForm'];
 
-	var address = adressNumber + ", " + adressWay + ", " + adressCp + " " + adressCity + ", France";
+	var address = addressNumber + ", " + addressWay + ", " + addressCp + " " + addressCity + ", France";
 	var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&sensor=false";
 	$.getJSON(url)
 		.done(function(data) {

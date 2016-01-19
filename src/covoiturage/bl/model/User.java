@@ -3,13 +3,14 @@ package covoiturage.bl.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	public User(String lastName, String firstName, String email, String adressNumber, String addressWay,
-			String addressCP, String addressCity, String longitude, String latitude, String phoneNumber, String sexe) {
+	public User(String lastName, String firstName, String email, String addressNumber, String addressWay,
+			String addressCP, String addressCity, String longitude, String latitude, String phoneNumber, String sexe,
+			String isConducteur, String isSmoker, String area ) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-		this.adressNumber = adressNumber;
+		this.addressNumber = addressNumber;
 		this.addressWay = addressWay;
 		this.addressCP = addressCP;
 		this.addressCity = addressCity;
@@ -17,6 +18,10 @@ public class User implements Serializable {
 		this.latitude = latitude;
 		this.phoneNumber = phoneNumber;
 		this.sexe = sexe;
+		this.isConducteur = isConducteur;
+		this.isSmoker = isSmoker;
+		this.area = area;
+		
 		
 	}
 	/**
@@ -26,7 +31,7 @@ public class User implements Serializable {
 	private  String lastName="";
 	private  String firstName="";
 	private  String email="";
-	private  String adressNumber="";
+	private  String addressNumber="";
 	private  String addressWay="";
 	private  String addressCP="";
 	private  String addressCity="";
@@ -34,6 +39,9 @@ public class User implements Serializable {
 	private  String latitude="";
 	private  String phoneNumber;
 	private  String sexe;
+	private  String isConducteur;
+	private  String isSmoker;
+	private  String area;
 	
 	public String getSexe() {
 		return sexe;
@@ -60,10 +68,10 @@ public class User implements Serializable {
 		this.email = email;
 	}
 	public String getAdressNumber() {
-		return adressNumber;
+		return addressNumber;
 	}
-	public void setAdressNumber(String adressNumber) {
-		this.adressNumber = adressNumber;
+	public void setAdressNumber(String addressNumber) {
+		this.addressNumber = addressNumber;
 	}
 	public String getAddressWay() {
 		return addressWay;
@@ -101,5 +109,22 @@ public class User implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	public String getIsConducteur() {
+		return isConducteur;
+	}
+	public void setIsConducteur(String isConducteur) {
+		this.isConducteur = isConducteur;
+	}
+	public String getIsSmoker() {
+		return isSmoker;
+	}
+	public void setIsSmoker(String isSmoker) {
+		this.isSmoker = isSmoker;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
 }
