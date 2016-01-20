@@ -3,14 +3,18 @@ package covoiturage.bl.servlet;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import covoiturage.bl.model.Connexion;
+import covoiturage.bl.model.UserDB;
 
 /**
  * Servlet implementation class listDriver
@@ -21,6 +25,9 @@ public class ListDriver extends HttpServlet {
 	public static String VIEW_PAGES_URL="/WEB-INF/listDriver.jsp";
 	public static String VIEW_PAGES_URL_REGISTER="/WEB-INF/register.jsp";
 	public static final String FIELD_EMAIL = "email";
+	public static final String ATT_USERS = "users";
+	public static final HashMap<String, UserDB> usersHashMap = new HashMap<String, UserDB>();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,16 +42,20 @@ public class ListDriver extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String email = request.getParameter(FIELD_EMAIL);
 		//String pwd1 = request.getParameter(FIELD_PWD1);
-		/*
+		
 		String actionMessage = "";
 		boolean resultatExiste = false;
-		//		Map<String, String> erreurs = new HashMap<String,String>();
+		Map<String, String> erreurs = new HashMap<String,String>();
+				
 		Connexion connexion = new Connexion("Covoiturage.db");
 		connexion.connect();
+		
 		String sql = "SELECT * FROM User  ";
+		
 		ResultSet resultSet = connexion.query(sql);
 		// si resultSet est vide ou null, alors resultatExiste = false
 		// si resultSet n'est pas vide, alors resultatExite = true
+		
 		
 		if (resultSet == null) {
 			resultatExiste = false;
@@ -54,6 +65,54 @@ public class ListDriver extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 		} 
 		
+	
+		try {
+			HttpSession session = request.getSession();            
+	         Map<String, UserDB> users = (HashMap<String, UserDB>) session.getAttribute( ATT_USERS );
+	         
+	          /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
+	           if ( users == null ) {
+	            	users = usersHashMap;
+	            }
+	            
+			while (resultSet.next()) {
+				UserDB newUser=null;
+				newUser=new UserDB(resultSet.getInt(0),
+						resultSet.getString(1),
+						resultSet.getString(2),
+						resultSet.getString(3),
+						resultSet.getString(4),
+						resultSet.getString(5),
+						resultSet.getString(6),
+						resultSet.getString(8),
+						resultSet.getString(9),
+						resultSet.getString(10),
+						resultSet.getString(11),
+						resultSet.getString(12),
+						resultSet.getString(13),
+						resultSet.getString(14),
+						resultSet.getString(15),
+						resultSet.getString(16));
+				
+				
+		            /* Puis ajout de l'utilisateur dans la map */
+		            users.put( newUser.getEmail(), newUser );
+		            
+		            /* Et enfin (rÃ©)enregistrement de la map en session */
+		            session.setAttribute( ATT_USERS, users );
+				
+
+			}
+			resultatExiste = true;
+			connexion.close();
+			
+		} catch (SQLException e) {
+			resultatExiste = false;
+
+		}
+		
+		
+		/*
 		try {
 			if (resultSet.next()) {
 				resultatExiste = true;
@@ -63,8 +122,10 @@ public class ListDriver extends HttpServlet {
 			resultatExiste = false;
 
 		}
+		
+		/*
 		if (resultatExiste) {
-			actionMessage = "Utilisateur accepté.";
+			actionMessage = "Utilisateur accept2.";
 			request.setAttribute("actionMessage", actionMessage);
 			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 			getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
@@ -75,7 +136,8 @@ public class ListDriver extends HttpServlet {
 			//request.setAttribute(FIELD_EMAIL, email);
 			//request.setAttribute(FIELD_PWD1, "");
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-		}*/
+		}
+		*/
 		
 		System.out.println("On passe dans le doget de ListDriver");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
@@ -91,7 +153,7 @@ public class ListDriver extends HttpServlet {
 		email = request.getParameter(FIELD_EMAIL);
 		System.out.println(email);
 		request.setAttribute(FIELD_EMAIL, email);
-		System.out.println("On passe par là");
+		System.out.println("On passe par lï¿½");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_REGISTER).forward(request, response);
 	}
 
