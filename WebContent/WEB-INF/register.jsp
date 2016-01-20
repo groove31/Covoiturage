@@ -113,12 +113,12 @@
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="form-group">
-                            <label for="addressNumber" class="col-sm-3 control-label">N° Rue / Rue</label>
+                            <label for="addressNumber" class="col-sm-3 control-label">N° Rue / Rue<span class="requis"> *</span></label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="addressNumber" id="addressNumber" value="${form.addressNumber}"/>
                             </div>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="addressWay" id="addressWay" value="${form.addressWay}"/>
+                                <input type="text" class="form-control" name="addressWay" id="addressWay" required="required" value="${form.addressWay}"/>
                             </div>
                         </div>
                     </div>
@@ -126,12 +126,12 @@
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="form-group">
-                            <label for="addressCp" class="col-sm-3 control-label">Code Postal / Ville</label>
+                            <label for="addressCp" class="col-sm-3 control-label">Code Postal<span class="requis"> *</span> / Ville<span class="requis"> *</span></label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="addressCp" id="addressCp" value="${form.addressCp}"/>
+                                <input type="text" class="form-control" name="addressCp" id="addressCp" required="required" value="${form.addressCp}"/>
                             </div>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="addressCity" id="addressCity" value="${form.addressCity}"/>
+                                <input type="text" class="form-control" name="addressCity" id="addressCity" required="required" value="${form.addressCity}"/>
                             </div>
                         </div>
                     </div>

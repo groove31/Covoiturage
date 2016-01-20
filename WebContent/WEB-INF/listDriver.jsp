@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -90,58 +91,32 @@
             <table class="table table-striped table-bordered no-userselection listTable">
                 <thead>
                     <tr>
-                        <th scope="col">
-                            Nom
-                        </th>
-                        <th scope="col">
-                            Prénom
-                        </th>
-                        <th scope="col">
-                            Distance
-                        </th>
-                        <th scope="col">
-                            Sexe
-                        </th>
-                        <th scope="col">
-                            Fumeur
-                        </th>
+                        <th scope="col"> Nom  </th>
+                        <th scope="col"> Prénom </th>
+                        <th scope="col"> Distance </th>
+                        <th scope="col"> Sexe </th>
+                        <th scope="col"> Fumeur </th>
+                        <th scope= "col"> Numéro de téléphone </th>
+                        <th scope= "col"> Conducteur </th> 
                     </tr>
                 </thead>
+                                    
+                
                 <tbody>
-                    <tr>
-                        <td>
-                            TEST
-                        </td>
-                        <td>
-                            JEAN
-                        </td>
-                        <td>
-                            0.8 kms
-                        </td>
-                        <td>
-                            H
-                        </td>
-                        <td>
-                            Oui
-                        </td>
-                    </tr> 
-                    <tr>
-                        <td>
-                            DUPONT
-                        </td>
-                        <td>
-                            MARTINE
-                        </td>
-                        <td>
-                            1.5 kms
-                        </td>
-                        <td>
-                            F
-                        </td>
-                        <td>
-                            Non
-                        </td>
-                    </tr> 
+	               <!--  Parcours de la Map des utilisateurs en session, et utilisation de l'objet varStatus.
+	                TODO : affichage de la table -->
+	                  <c:forEach var="user" items="${sessionScope.users}" varStatus="i">
+	                  <tr class="${i.index %2 == 0 ? 'pair' : 'impair' }">
+	                         <td>${user.value.lastname}</td>
+	                         <td>${user.value.firstname}</td>
+	                         <td>${user.value.area}</td>
+	                         <td>${user.value.sexe}</td>
+	                         <td>${user.value.isSmoker}</td>
+	                         <td>${user.value.phoneNumber}</td>
+	                         <td>${user.value.isConducteur}</td>
+	                  </tr>
+	                    
+	                   </c:forEach>
                 </tbody>
             </table>
             </fieldset>
