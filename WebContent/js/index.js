@@ -1,6 +1,5 @@
 var geocoder = new google.maps.Geocoder();
 var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
 var map;
 var circle;
 var markers=[];
@@ -75,7 +74,9 @@ function sendToServer() {
 
 		var lat1 = Number(theLatitude);
 		var lng1 = Number(theLongitude);
-		var rayon = Number(document.getElementById("area").selectedIndex) * 1000;
+		var x = document.getElementById("area").selectedIndex;
+		var y = document.getElementById("area").options;
+		var rayon = Number(y[x].value) * 1000;
 
 		delCircle();
 		//Add the circle for this city to the map.
@@ -92,6 +93,8 @@ function sendToServer() {
 			radius: rayon
 		});
 		addCircle(newCircle);
+		var ADDRESSE_BL = document.getElementById("ADDRESSE_BL").value;
+		afficheTrajet(address, ADDRESSE_BL)
 	});
 }
 
@@ -125,6 +128,39 @@ function delCircle() {
 	}
 }
 
+function afficheTrajet(adresseDepart, adresseDestination) {
+	delDirection();
+	direction = new google.maps.DirectionsRenderer({
+	    map   : map
+	    //,
+	    //panel : panel // Dom element pour afficher les instructions d'itinéraire
+	  });
+	if(adresseDepart && adresseDestination){
+        var request = {
+            origin      : adresseDepart,
+            destination : adresseDestination,
+            travelMode  : google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+        }
+        var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+        directionsService.route(request, function(response, status){ // Envoie de la requête pour calculer le parcours
+            if(status == google.maps.DirectionsStatus.OK){
+                direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+            }
+        });
+    }
+	addDirection(direction);
+}
+
+function addDirection(directionsDisplayToAdd) {
+	directionsDisplay = directionsDisplayToAdd;
+}
+
+function delDirection() {
+	if(directionsDisplay != null) {
+		directionsDisplay.setMap(null);
+		directionsDisplay = null;
+	}
+}
 
 
 //function initialize() {	

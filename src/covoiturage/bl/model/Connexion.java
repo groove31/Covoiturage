@@ -57,6 +57,7 @@ public class Connexion {
 
     public void addUser(UserDB user) {
    	 try {
+   		 	/*
             PreparedStatement preparedStatement = connection
                     .prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             preparedStatement.setLong(1, user.getID());
@@ -75,8 +76,36 @@ public class Connexion {
             preparedStatement.setString(14, user.getIsSmoker());
             preparedStatement.setString(15, user.getArea());
             preparedStatement.setString(16, user.getPassword());
-     
+     	
             preparedStatement.executeUpdate();
+            */
+   		Statement stmt;
+   		
+   		stmt = connection.createStatement();
+		
+		String sql = "INSERT INTO User " +
+				"(email,lastName, firstName, addressNumber, addressWay, addressCP, addressCity, phoneNumber, "+
+				" longitude, latitude, sexe, isConducteur, isSmoker, area, password) " +
+				" VALUES (" +
+				" '" + user.getEmail() + "', " +
+				" '" + user.getLastName() + "', " +
+				" '" + user.getFirstName() + "', " +
+				" '" + user.getAddressNumber() + "', " +
+				" '" + user.getAddressWay() + "', " +
+				" '" + user.getAddressCP() + "', " +
+				" '" + user.getAddressCity() + "', " +
+				" '" + user.getPhoneNumber() + "', " +
+				" '" + user.getLongitude() + "', " +
+				" '" + user.getLatitude() + "', " +
+				" '" + user.getSexe() + "', " +
+				" '" + user.getIsConducteur() + "', " +
+				" '" + user.getIsSmoker() + "', " +
+				" '" + user.getArea() + "', " +
+				" '" + user.getPassword() + "' " +
+				" ) ";
+		
+		System.out.println("Requete Insert : " + sql);
+		stmt.executeUpdate(sql);
             
         } catch (SQLException e) {
             // TODO Auto-generated catch block

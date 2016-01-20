@@ -31,19 +31,9 @@
         <li class="hidden">
             <a href="#page-top"></a>
         </li>
-        <c:if test="${not empty email}">
-	        <li>
-	            <a class="page-scroll" href="Register"><span>${email}</span></a>
-	        </li>
-	        <li>
-                <a class="page-scroll" href="Deconnexion">Se deconnecter</a>
-            </li>
-	    </c:if>
-        <c:if test="${empty email}">
-	        <li>
-	            <a class="page-scroll" href="Register">S'inscrire</a>
-	        </li>
-	    </c:if>
+	    <li>
+            <a class="page-scroll" href="Register">S'inscrire</a>
+        </li>
       </ul>
     </div>
   </div>
