@@ -1,6 +1,5 @@
 var geocoder = new google.maps.Geocoder();
 var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
 var map;
 var circle;
 var markers=[];
@@ -92,6 +91,8 @@ function sendToServer() {
 			radius: rayon
 		});
 		addCircle(newCircle);
+		var ADDRESSE_BL = document.getElementById("ADDRESSE_BL").value;
+		afficheTrajet(address, ADDRESSE_BL)
 	});
 }
 
@@ -125,6 +126,26 @@ function delCircle() {
 	}
 }
 
+function afficheTrajet(adresseDepart, adresseDestination) {
+	direction = new google.maps.DirectionsRenderer({
+	    map   : map
+	    //,
+	    //panel : panel // Dom element pour afficher les instructions d'itinéraire
+	  });
+	if(adresseDepart && adresseDestination){
+        var request = {
+            origin      : adresseDepart,
+            destination : adresseDestination,
+            travelMode  : google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+        }
+        var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+        directionsService.route(request, function(response, status){ // Envoie de la requête pour calculer le parcours
+            if(status == google.maps.DirectionsStatus.OK){
+                direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+            }
+        });
+    }
+}
 
 
 //function initialize() {	
