@@ -100,15 +100,16 @@
                         <th scope= "col"> Conducteur </th> 
                     </tr>
                 </thead>
-                                    
+                
+                    
                 
                 <tbody>
 	               <!--  Parcours de la Map des utilisateurs en session, et utilisation de l'objet varStatus.
 	                TODO : affichage de la table -->
 	                  <c:forEach var="user" items="${sessionScope.users}" varStatus="i">
-	                  <tr class="${i.index %2 == 0 ? 'pair' : 'impair' }">
-	                         <td>${user.value.lastname}</td>
-	                         <td>${user.value.firstname}</td>
+	                  <tr>
+	                         <td>${user.value.lastName}</td>
+	                         <td>${user.value.firstName}</td>
 	                         <td>${user.value.area}</td>
 	                         <td>${user.value.sexe}</td>
 	                         <td>${user.value.isSmoker}</td>

@@ -77,8 +77,7 @@ public class ListDriver extends HttpServlet {
 	            
 			while (resultSet.next()) {
 				UserDB newUser=null;
-				newUser=new UserDB(resultSet.getInt(0),
-						resultSet.getString(1),
+				newUser=new UserDB(resultSet.getInt(1),
 						resultSet.getString(2),
 						resultSet.getString(3),
 						resultSet.getString(4),
@@ -92,9 +91,10 @@ public class ListDriver extends HttpServlet {
 						resultSet.getString(12),
 						resultSet.getString(13),
 						resultSet.getString(14),
-						resultSet.getString(15));
+						resultSet.getString(15),
+						resultSet.getString(16));
 				
-				System.out.println("Name : "+resultSet.getString(1));
+				
 		            /* Puis ajout de l'utilisateur dans la map */
 		            users.put( newUser.getEmail(), newUser );
 
@@ -107,6 +107,7 @@ public class ListDriver extends HttpServlet {
 			
 		} catch (SQLException e) {
 			resultatExiste = false;
+			e.printStackTrace();
 
 		}
 
