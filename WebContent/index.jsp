@@ -20,7 +20,7 @@
 <title>Accueil</title>
 </head>
 <body onload="afficherBL()">
-<input type="hidden" id="conducteurs" value="${conducteurs}">
+<!--  <input type="hidden" id="conducteurs" value="${conducteurs}"> -->
 <input type="hidden" id="ADDRESSE_BL" value="${ADDRESSE_BL}">
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
@@ -58,26 +58,27 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-6 floating-label-form-group controls">
                             <label>Adresse à chercher</label>
-                            <input type="text" class="form-control" placeholder="Adresse à chercher" id="adresse" required data-validation-required-message="Please enter adresse." aria-invalid="false">
+                            <input type="text" name="origin" id="origin" class="form-control" placeholder="Adresse à chercher" id="adresse" required data-validation-required-message="Please enter adresse." aria-invalid="false">
                             <p class="help-block text-danger"></p>
                             
                         </div>
                         <span class="col-xs-1"></span>
-                        <SELECT class="liste_d col-xs-2 input-lg" name="area" size="1" id="selection">
-                                <OPTION value="1">1 Km</option>
-                                <OPTION value="2">2 Km</option>
-                                <OPTION value="3">3 Km</option>
-                                <OPTION value="4">4 Km</option>
-                                <OPTION value="5" selected>5 Km</option>
-                                <OPTION value="10">10 Km</option>
-                            </SELECT>
-                            <span class="col-xs-1"></span>
-                            <button class="btn btn-success btn-lg col-xs-2" type="button" value="Rechercher" onclick="javascript:sendToServer()">Rechercher</button>
+                        <SELECT class="liste_d col-xs-2 input-lg" name="area" size="1" id="area">
+                                <OPTION value="1 Km">1 Km</option>
+                                <OPTION value="2 Km">2 Km</option>
+                                <OPTION value="3 Km">3 Km</option>
+                                <OPTION value="4 Km">4 Km</option>
+                                <OPTION value="5 Km" selected>5 Km</option>
+                                <OPTION value="10 Km">10 Km</option>
+                                <OPTION value="20 Km">20 Km</option>
+                                <OPTION value="30 Km">30 Km</option>
+                        </SELECT>
+                        <span class="col-xs-1"></span>
+                        <button class="btn btn-success btn-lg col-xs-2" type="button" value="Rechercher" onclick="javascript:sendToServer()">Rechercher</button>
                     </div>
 		                    <!--  input class="col-sm-6" type="text" name="origin" id="origin" placeholder="Adresse..." onchange="calcRoute();"-->
-		                    <div class="col-sm3"> 
-		                    
-		                    </div>
+                    <div class="col-sm3"> 
+		            </div>
                             
                 </form>
             </div>
@@ -86,7 +87,6 @@
         </div>
    
         <div id="map_canvas"></div>
-
 </div>
 </section>
 <footer class="text-center">
@@ -100,10 +100,5 @@
 	    </div>
 	</div>
 </footer>
-
-
-
-
-
 </body>
 </html>
