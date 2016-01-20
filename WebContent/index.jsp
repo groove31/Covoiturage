@@ -54,7 +54,7 @@
 <section>
 <div class="container">   
             <div id="destinationForm">
-                <form action="/Index" method="POST" name="direction" id="direction">
+                <form action="Index" method="POST" name="direction" id="direction">
                     <div class="row control-group">
                         <div class="form-group col-xs-6 floating-label-form-group controls">
                             <label>Adresse à chercher</label>
