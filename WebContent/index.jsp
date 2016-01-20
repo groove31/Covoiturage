@@ -12,7 +12,7 @@
 <title>Accueil</title>
 </head>
 <body onload="afficherBL()">
-<input type="hidden" id="conducteurs" value="${conducteurs}">
+<!--  <input type="hidden" id="conducteurs" value="${conducteurs}"> -->
 <input type="hidden" id="ADDRESSE_BL" value="${ADDRESSE_BL}">
 
 	<div id="menu" class="fixed">
