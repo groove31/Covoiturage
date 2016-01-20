@@ -29,7 +29,8 @@ public class Covoiturage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward( request, response );
+		response.sendRedirect("Index");
+//		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward( request, response );
 	}
 
 	/**

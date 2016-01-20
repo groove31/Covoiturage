@@ -79,7 +79,6 @@ public class Index extends HttpServlet {
 		String latitude = request.getParameter(FIELD_LATITUDE);
 		String longitude = request.getParameter(FIELD_LONGITUDE);
 		String area = request.getParameter(FIELD_AREA);
-		area = area.substring(0, area.length() - 3);
 		ArrayList<UserDB> listeUserDB = new ArrayList<UserDB>();
 		UserDB userDB;
 
