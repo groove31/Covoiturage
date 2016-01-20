@@ -64,14 +64,14 @@
                         </div>
                         <span class="col-xs-1"></span>
                         <SELECT class="liste_d col-xs-2 input-lg" name="area" size="1" id="area">
-                                <OPTION value="1 Km">1 Km</option>
-                                <OPTION value="2 Km">2 Km</option>
-                                <OPTION value="3 Km">3 Km</option>
-                                <OPTION value="4 Km">4 Km</option>
-                                <OPTION value="5 Km" selected>5 Km</option>
-                                <OPTION value="10 Km">10 Km</option>
-                                <OPTION value="20 Km">20 Km</option>
-                                <OPTION value="30 Km">30 Km</option>
+                                <OPTION value="1">1 Km</option>
+                                <OPTION value="2">2 Km</option>
+                                <OPTION value="3">3 Km</option>
+                                <OPTION value="4">4 Km</option>
+                                <OPTION value="5" selected>5 Km</option>
+                                <OPTION value="10">10 Km</option>
+                                <OPTION value="20">20 Km</option>
+                                <OPTION value="30">30 Km</option>
                         </SELECT>
                         <span class="col-xs-1"></span>
                         <button class="btn btn-success btn-lg col-xs-2" type="button" value="Rechercher" onclick="javascript:sendToServer()">Rechercher</button>
