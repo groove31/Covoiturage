@@ -74,7 +74,9 @@ function sendToServer() {
 
 		var lat1 = Number(theLatitude);
 		var lng1 = Number(theLongitude);
-		var rayon = Number(document.getElementById("area").selectedIndex) * 1000;
+		var x = document.getElementById("area").selectedIndex;
+		var y = document.getElementById("area").options;
+		var rayon = Number(y[x].value) * 1000;
 
 		delCircle();
 		//Add the circle for this city to the map.
@@ -127,6 +129,7 @@ function delCircle() {
 }
 
 function afficheTrajet(adresseDepart, adresseDestination) {
+	delDirection();
 	direction = new google.maps.DirectionsRenderer({
 	    map   : map
 	    //,
@@ -145,6 +148,18 @@ function afficheTrajet(adresseDepart, adresseDestination) {
             }
         });
     }
+	addDirection(direction);
+}
+
+function addDirection(directionsDisplayToAdd) {
+	directionsDisplay = directionsDisplayToAdd;
+}
+
+function delDirection() {
+	if(directionsDisplay != null) {
+		directionsDisplay.setMap(null);
+		directionsDisplay = null;
+	}
 }
 
 
