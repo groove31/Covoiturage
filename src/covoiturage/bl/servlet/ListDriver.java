@@ -84,6 +84,7 @@ public class ListDriver extends HttpServlet {
 						resultSet.getString(4),
 						resultSet.getString(5),
 						resultSet.getString(6),
+						resultSet.getString(7),
 						resultSet.getString(8),
 						resultSet.getString(9),
 						resultSet.getString(10),
@@ -91,18 +92,16 @@ public class ListDriver extends HttpServlet {
 						resultSet.getString(12),
 						resultSet.getString(13),
 						resultSet.getString(14),
-						resultSet.getString(15),
-						resultSet.getString(16));
+						resultSet.getString(15));
 				
-				
+				System.out.println("Name : "+resultSet.getString(1));
 		            /* Puis ajout de l'utilisateur dans la map */
 		            users.put( newUser.getEmail(), newUser );
-		            
-		            /* Et enfin (ré)enregistrement de la map en session */
-		            session.setAttribute( ATT_USERS, users );
-				
 
 			}
+            /* Et enfin (ré)enregistrement de la map en session */
+            session.setAttribute( ATT_USERS, users );
+
 			resultatExiste = true;
 			connexion.close();
 			
@@ -110,34 +109,7 @@ public class ListDriver extends HttpServlet {
 			resultatExiste = false;
 
 		}
-		
-		
-		/*
-		try {
-			if (resultSet.next()) {
-				resultatExiste = true;
-				connexion.close();
-			}
-		} catch (SQLException e) {
-			resultatExiste = false;
 
-		}
-		
-		/*
-		if (resultatExiste) {
-			actionMessage = "Utilisateur accept2.";
-			request.setAttribute("actionMessage", actionMessage);
-			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-			getServletContext().getRequestDispatcher("/googlemaps.html").forward(request, response);
-			
-		} else {
-			actionMessage = "Utilisateur ou mot de passe incorrect.";
-			request.setAttribute("actionMessage", actionMessage);
-			//request.setAttribute(FIELD_EMAIL, email);
-			//request.setAttribute(FIELD_PWD1, "");
-			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-		}
-		*/
 		
 		System.out.println("On passe dans le doget de ListDriver");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
