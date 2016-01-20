@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href="css/bootstrap.css" rel="stylesheet" media="screen">
-<link href="css/bootstrap-theme.css" rel="stylesheet" media="screen">
+<link href="css/freelancer.css" rel="stylesheet">
 <script src="js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -19,7 +19,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
 
-<nav class="navbar navbar-info navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Les Fous du volant</a>
@@ -55,7 +55,9 @@
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" name="email" id="email" value="${form.email}"/>
                             </div>
-                            <span class="col-sm-2 alert-danger">${erreurs.email}</span>
+                            <c:if test="${not empty erreurs.email}">
+                                <span class="col-sm-2 alert-danger">${erreurs.email}</span>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -66,7 +68,9 @@
                             <div class="col-sm-4">
                                 <input type="password" class="form-control" name="pwd1" id="pwd1" required="required" value="${form.pwd1}"/>
                             </div>
-                            <span class="col-sm-5 alert-danger">${erreurs.pwd1}</span>
+                            <c:if test="${not empty erreurs.pwd1}">
+                                <span class="col-sm-5 alert-danger">${erreurs.pwd1}</span>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -77,7 +81,9 @@
                             <div class="col-sm-4">
                                 <input type="password" class="form-control" name="pwd2" id="pwd2" required="required" value="${form.pwd2}"/>
                             </div>
-                            <span class="col-sm-2 alert-danger">${erreurs.pwd2}</span>
+                            <c:if test="${not empty erreurs.pwd2}">
+                                <span class="col-sm-2 alert-danger">${erreurs.pwd2}</span>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -88,7 +94,9 @@
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" name="lastName" id="lastName" value="${form.lastName}"/>
                             </div>
-                            <span class="col-sm-2 alert-danger">${erreurs.lastName}</span>
+                            <c:if test="${not empty erreurs.lastName}">
+                                <span class="col-sm-2 alert-danger">${erreurs.lastName}</span>
+                            </c:if>
                         </div>
                     </div>
                 </div>

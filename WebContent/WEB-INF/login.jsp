@@ -4,29 +4,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
-<link href="css/bootstrap-theme.css" rel="stylesheet" type = "text/css">
+<!--  link href="css/bootstrap-theme.css" rel="stylesheet" type = "text/css"-->
+<link href="css/freelancer.css" rel="stylesheet">
+
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
 <script src="js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <title>Connexion</title>
 </head>
-<body>
+<body id="page-top" class="index">
 <!-- Collect the nav links, forms, and other content for toggling -->
 
-<nav class="navbar navbar-info navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Les Fous du volant</a>
+    <div class="navbar-header page-scroll">
+        <a class="navbar-brand" href="#">Les Fous du volant</a>
     </div>
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">
             <a href="#page-top"></a>
         </li>
-        <li>
-            <a class="page-scroll" href="Register">S'inscrire</a>
-        </li>
+        <c:if test="${not empty email}">
+	        <li>
+	            <a class="page-scroll" href="Register"><span>${email}</span></a>
+	        </li>
+	        <li>
+                <a class="page-scroll" href="Deconnexion">Se deconnecter</a>
+            </li>
+	    </c:if>
+        <c:if test="${empty email}">
+	        <li>
+	            <a class="page-scroll" href="Register">S'inscrire</a>
+	        </li>
+	    </c:if>
       </ul>
     </div>
   </div>

@@ -6,8 +6,8 @@
 <head>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
-    <link href="css/bootstrap-theme.css" rel="stylesheet" type = "text/css">
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link href="css/freelancer.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Liste des conducteurs</title>
 	
 	<script>
@@ -60,7 +60,7 @@
 </head>
 <body onload="initialize()">
     
-<nav class="navbar navbar-info navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Les Fous du volant</a>
