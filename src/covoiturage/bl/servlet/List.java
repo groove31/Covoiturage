@@ -44,67 +44,7 @@ public class List extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String email = request.getParameter(FIELD_EMAIL);
-		//String pwd1 = request.getParameter(FIELD_PWD1);
-		
-		String actionMessage = "";
-		ArrayList<UserDB> listeUserDB = new ArrayList<UserDB>();
-		
-		Connexion connexion = new Connexion("Covoiturage.db");
-		connexion.connect();
-		
-		String sql = "SELECT * FROM User Order by ID ";
-		
-		ResultSet resultSet = connexion.query(sql);
-		// si resultSet est vide ou null, alors resultatExiste = false
-		// si resultSet n'est pas vide, alors resultatExite = true
 
-		if (resultSet == null) {
-			connexion.close();
-			actionMessage = "Une erreur de BDD est survenue.";
-			request.setAttribute("actionMessage", actionMessage);
-			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
-		} 
-
-		try {
-			while (resultSet.next()) {
-				UserDB newUser=null;
-				newUser=new UserDB(resultSet.getInt(1),
-						resultSet.getString(2),
-						resultSet.getString(3),
-						resultSet.getString(4),
-						resultSet.getString(5),
-						resultSet.getString(6),
-						resultSet.getString(7),
-						resultSet.getString(8),
-						resultSet.getString(9),
-						resultSet.getString(10),
-						resultSet.getString(11),
-						resultSet.getString(12),
-						resultSet.getString(13),
-						resultSet.getString(14),
-						resultSet.getString(15),
-						resultSet.getString(16));
-		          /* Puis ajout de l'utilisateur dans la liste */
-				listeUserDB.add(newUser);
-			}
-           connexion.close();
-           Gson gson = new Gson();
-	   		String json = new Gson().toJson(listeUserDB);
-	   		System.out.println(json);
-	
-	   		response.reset();
-	   		response.setContentType("application/json");
-	   		response.setCharacterEncoding("UTF-8");
-	   		response.setStatus(HttpServletResponse.SC_OK);
-	   		PrintWriter out = response.getWriter();
-	   		out.print(json);
-	   		out.flush();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
 		//System.out.println("On passe dans le doget de ListDriver");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
@@ -119,7 +59,7 @@ public class List extends HttpServlet {
 		email = request.getParameter(FIELD_EMAIL);
 		System.out.println(email);
 		request.setAttribute(FIELD_EMAIL, email);
-		System.out.println("On passe par l�");
+		System.out.println("On passe par là");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_REGISTER).forward(request, response);
 	}
 
