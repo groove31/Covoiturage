@@ -3,6 +3,11 @@ var directionsDisplay;
 var map;
 var circle;
 var markers=[];
+$(document).keypress(function(e) {
+    if( (e.which == 13) || (e.key ==13 ) ){
+    	return false;
+    }
+});
 
 
 function afficherBL() {
@@ -29,6 +34,7 @@ function afficherBL() {
 
 function sendToServer() {
 	$("#direction").submit(function(e) {
+		e.preventDefault();	//STOP default action
 		delMarkers();
 		var postData = $(this).serializeArray();
 		var formURL = $(this).attr("action");
@@ -47,7 +53,6 @@ function sendToServer() {
 					{
 					}
 				});
-		e.preventDefault();	//STOP default action
 			});	
 
 
