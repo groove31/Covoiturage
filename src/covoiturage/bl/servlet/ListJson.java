@@ -100,7 +100,7 @@ public class ListJson extends HttpServlet {
 
 		}
 		
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
+		//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 
 	/**

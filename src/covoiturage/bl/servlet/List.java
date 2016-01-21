@@ -59,7 +59,7 @@ public class List extends HttpServlet {
 		email = request.getParameter(FIELD_EMAIL);
 		System.out.println(email);
 		request.setAttribute(FIELD_EMAIL, email);
-		System.out.println("On passe par l�");
+		System.out.println("On passe par là");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_REGISTER).forward(request, response);
 	}
 
