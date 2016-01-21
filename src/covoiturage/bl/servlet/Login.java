@@ -20,7 +20,7 @@ import covoiturage.bl.model.Connexion;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/login.jsp";
-	public static String VIEW_PAGES_URL_LIST="/ListDriver";
+	public static String VIEW_PAGES_URL_LIST="/List";
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "pwd1";
 
