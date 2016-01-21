@@ -34,7 +34,6 @@
             <a class="page-scroll" href="Login">Se connecter</a>
         </li>
       </ul>
-    </div>
   </div>
 </nav>
     <form class="form-horizontal well col-lg-12" action="Register" method="POST" id="theForm">
@@ -191,6 +190,26 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="isConducteur" class="col-sm-3 control-label">Conducteur</label>
+                            <div class="col-sm-4">
+	                            <c:choose>
+	                                <c:when test="${form.isConducteur == '1' }">
+	                                    <input type="radio" class="radio radio-inline" id="isConducteur" name="isConducteur" value="1" checked> Oui<br>
+	                                    <input type="radio" class="radio radio-inline" id="isConducteur" name="isConducteur" value="0"> Non<br>
+	                                </c:when>
+	                                <c:otherwise>
+	                                    <input type="radio" class="radio radio-inline" id="isConducteur" name="isConducteur" value="1"> Oui<br>
+	                                    <input type="radio" class="radio radio-inline" id="isConducteur" name="isConducteur" value="0" checked> Non<br>
+	                                </c:otherwise>
+	                            </c:choose>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                  <div class="col-sm-12">
                     <div class="row">
                         <div class="form-group">
@@ -226,6 +245,7 @@
                     </div>
                 </div>
                 </c:if>
+                <input type="hidden" id="creation" name="creation" value="${mode_creation}" />
             </fieldset>
         </div>
     </form>

@@ -76,6 +76,7 @@ public class Register extends HttpServlet {
 		
 		System.out.println("Email : " + email);
 		if (email!=null) {
+			//On est en inscription et non en modification
 			modeCreation = false;
 			String actionMessage = "";
 			String actionMessageValidation = "";
@@ -83,11 +84,9 @@ public class Register extends HttpServlet {
 			
 			boolean resultatExiste = false;
 			//		Map<String, String> erreurs = new HashMap<String,String>();
-			
-			System.out.println("On passe avant le connect dans Register");        
+			      
 			Connexion connexion = new Connexion("Covoiturage.db");
 			connexion.connect();
-			System.out.println("On passe après le connect dans Register");
 			
 			String sql = "SELECT * FROM User WHERE lower(email) = '"+ email.toLowerCase() + "'" ;
 			System.out.println("Requete : " + sql);		
@@ -119,6 +118,7 @@ public class Register extends HttpServlet {
 					form.put(FIELD_ADDRESSCITY, resultSet.getString(FIELD_ADDRESSCITY));
 					form.put(FIELD_PHONENUMBER, resultSet.getString(FIELD_PHONENUMBER));
 					form.put(FIELD_SEXE, resultSet.getString(FIELD_SEXE));
+					form.put(FIELD_ISCONDUCTEUR, resultSet.getString(FIELD_ISCONDUCTEUR));
 					form.put(FIELD_ISSMOKER, resultSet.getString(FIELD_ISSMOKER));
 					form.put(FIELD_AREA, resultSet.getString(FIELD_AREA));
 					form.put("pwd1", resultSet.getString("password"));
@@ -133,7 +133,7 @@ public class Register extends HttpServlet {
 		} else {
 			modeCreation = true;
 		}
-		
+
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 
 	}
@@ -156,12 +156,15 @@ public class Register extends HttpServlet {
 		String latitude = request.getParameter(FIELD_LATITUDE);
 		String phoneNumber = request.getParameter(FIELD_PHONENUMBER);
 		String sexe = request.getParameter(FIELD_SEXE);
-		String isConducteur = "cond";
+		String isConducteur = request.getParameter(FIELD_ISCONDUCTEUR);
 		String isSmoker = request.getParameter(FIELD_ISSMOKER);
 		String area = request.getParameter(FIELD_AREA);
 		
 		newUser.setEmail(email);
 		newUser.setLastName(lastName);
+		
+		System.out.println("Mode création dans Do Post : " + modeCreation); 
+		
 		
 		String errMsg = null;
 		String errMsgTempo = null;
@@ -179,7 +182,6 @@ public class Register extends HttpServlet {
 			erreurs.put(FIELD_EMAIL, errMsg);
 		} 
 		
-		System.out.println("Mot de passe 1 : " + pwd1 + " mot de passe 2 : " + pwd2);
 		errMsg = validateNewPass(pwd1, pwd2);
 		if(errMsg!=null){
 			errMsgTempo = errMsg;
@@ -208,6 +210,7 @@ public class Register extends HttpServlet {
 		 form.put(FIELD_PWD1, pwd1);
 		 form.put(FIELD_PWD2, pwd1);
 		 form.put(FIELD_ISSMOKER, isSmoker);
+		 form.put(FIELD_ISCONDUCTEUR, isConducteur);
 		 form.put(FIELD_AREA, area);
 		 
 		 
@@ -243,42 +246,68 @@ public class Register extends HttpServlet {
 					resultatExiste = false;
 
 				}
-				if (resultatExiste) {
-					// Partie de mise à jour d'un user 
-					actionMessageValidation = "Mise à jour de l'utilisateur effectuée";
-					connexion.close();
-					
-					connexion.connect();
-					UserDB newUser = new UserDB(0,email,lastName,firstName, 
-							addressNumber, addressWay, addressCP,addressCity,longitude, latitude,
-							sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
-					
-					connexion.MajUser(newUser);
-					
-					connexion.close();
-					System.out.println("Update passé");
-					request.setAttribute("form", form);
-					request.setAttribute("actionMessage", actionMessage);
-					request.setAttribute("actionMessageValidation", actionMessageValidation);
-					System.out.println("On passe par la avec " + VIEW_PAGES_URL_MODIF);
-					this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_MODIF).forward(request, response);
-					
+				
+				//Si l'utilisateur n'existe pas 
+				if (!resultatExiste) {
+					//On le créé dans le cas où on est rentré en création sur la fiche
+					if (modeCreation){
+						//Partie d'insertion d'un nouvel utilisateur
+						actionMessageValidation = "Création de l'utilisateur effectuée";
+						request.setAttribute("actionMessage", actionMessage);
+						
+						connexion.close();
+						connexion.connect();
+						
+						UserDB newUser = new UserDB(0,email,lastName,firstName, 
+								addressNumber, addressWay, addressCP,
+								addressCity,longitude, latitude,sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
+						
+						connexion.addUser(newUser);
+						
+						connexion.close();
+						this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_CREATION).forward(request, response);
+					} 
+					//On doit voir ce qu'on fait au niveau de l'email
+					else {
+						
+						//TODO il faut gérer la modification de l'email initial !!!!!!
+					}
 				} else {
-					//Partie d'insertion d'un nouvel utilisateur
-					actionMessageValidation = "Création de l'utilisateur effectuée";
-					request.setAttribute("actionMessage", actionMessage);
-					
-					connexion.close();
-					connexion.connect();
-					
-					UserDB newUser = new UserDB(0,email,lastName,firstName, 
-							addressNumber, addressWay, addressCP,
-							addressCity,longitude, latitude,sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
-					
-					connexion.addUser(newUser);
-					
-					connexion.close();
-					this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_CREATION).forward(request, response);
+					//Le user existe  et nous ne sommes pas en mode Création donc on modifie la fiche
+					if ((!modeCreation)) {
+						// Partie de mise à jour d'un user 
+						actionMessageValidation = "Mise à jour de l'utilisateur effectuée";
+						connexion.close();
+						
+						connexion.connect();
+						UserDB newUser = new UserDB(0,email,lastName,firstName, 
+								addressNumber, addressWay, addressCP,addressCity,longitude, latitude,
+								sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
+						
+						connexion.MajUser(newUser);
+						
+						connexion.close();
+						System.out.println("Update passé");
+						request.setAttribute("form", form);
+						request.setAttribute("actionMessage", actionMessage);
+						request.setAttribute("actionMessageValidation", actionMessageValidation);
+						this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_MODIF).forward(request, response);
+						
+					} 
+					//Le user existe et nous sommes en création : illogique on ne fait rien 
+					else
+					{
+						erreurs.put(FIELD_EMAIL, "Email déjà existant");
+						actionMessage = "Enregistrement impossible : utilisateur déjà existant";
+						request.setAttribute("errorStatus", true);
+						request.setAttribute("form", form);
+						request.setAttribute("erreurs", erreurs);
+						request.setAttribute("actionMessage", actionMessage);
+						request.setAttribute("actionMessageValidation", actionMessageValidation);
+
+						this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
+					}
+				
 				}
 		} else {
 			actionMessage = "Echec de l'enregistrement";
@@ -299,10 +328,10 @@ public class Register extends HttpServlet {
 	private String validateEmail(String email ) {
 		if ( email != null && email.trim().length() != 0 ) {
 			if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-				return ("Veuillez saisir une addresse mail valide");
+				return ("Veuillez saisir une adresse mail valide");
 			}
 		} else {
-			return ("L'addresse mail est	obligatoire");
+			return ("L'adresse mail est obligatoire");
 		}
 		return null;
 	}
