@@ -13,9 +13,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js"></script>
 
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css">
+<link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css"
 	rel="stylesheet" type="text/css">
@@ -30,13 +28,14 @@
 <body onload="loadData()">
 
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="Index"><i class="fa fa-car"></i>
-				Les Fous du volant</a>
-		</div>
+  <div class="container-fluid">
+    <div class="navbar-header page-scroll">
+        <a class="navbar-brand" href="#"><i class="fa fa-car"></i> Les Fous du volant</a>
+    </div>
 		<ul class="nav navbar-nav navbar-right">
-			<li class="hidden"><a href="#page-top"></a></li>
+        <li class="hidden">
+            <a href="#page-top"></a>
+        </li>
 			<li><a class="page-scroll" href="Register"><span>${email}</span></a>
 			</li>
 			<li><a class="page-scroll" href="Deconnexion">Se deconnecter</a>
