@@ -160,7 +160,6 @@ public class Register extends HttpServlet {
 		String isSmoker = request.getParameter(FIELD_ISSMOKER);
 		String area = request.getParameter(FIELD_AREA);
 		
-		
 		newUser.setEmail(email);
 		newUser.setLastName(lastName);
 		

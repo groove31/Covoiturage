@@ -8,8 +8,10 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
     <link href="css/freelancer.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Liste des conducteurs</title>
+	<link rel="shortcut icon" type="image/x-icon" href="img/auto.png" />
+    <title>Les fous du volant - Utilisateurs</title>
 	
 	<script>
   
@@ -64,7 +66,7 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Les Fous du volant</a>
+      <a class="navbar-brand" href="Index"><i class="fa fa-car"></i> Les Fous du volant</a>
     </div>
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">

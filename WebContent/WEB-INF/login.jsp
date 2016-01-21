@@ -17,7 +17,8 @@
 <script src="js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<title>Connexion</title>
+<link rel="shortcut icon" type="image/x-icon" href="img/auto.png" />
+<title>Les fous du volant - Connexion</title>
 </head>
 <body id="page-top" class="index">
 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -25,7 +26,7 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header page-scroll">
-        <a class="navbar-brand" href="#">Les Fous du volant</a>
+        <a class="navbar-brand" href="Index"><i class="fa fa-car"></i> Les Fous du volant</a>
     </div>
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">

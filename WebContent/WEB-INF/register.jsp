@@ -8,12 +8,14 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href="css/bootstrap.css" rel="stylesheet" media="screen">
 <link href="css/freelancer.css" rel="stylesheet">
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <script src="js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/Register.js"></script>
 <!--<script src="https://maps.googleapis.com/maps/api/js?callback=Initialize"></script>-->
-<title>Covoiturage</title>
+<link rel="shortcut icon" type="image/x-icon" href="img/auto.png" />
+<title>Les fous du volant - Inscription</title>
 </head>
 <body>
 
@@ -22,7 +24,7 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Les Fous du volant</a>
+      <a class="navbar-brand" href="Index"><i class="fa fa-car"></i> Les Fous du volant</a>
     </div>
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">
@@ -118,7 +120,7 @@
                                 <input type="text" class="form-control" name="addressNumber" id="addressNumber" value="${form.addressNumber}"/>
                             </div>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="addressWay" id="addressWay" required="required" value="${form.addressWay}"/>
+                                <input type="text" class="form-control" name="addressWay" id="addressWay" required="true" value="${form.addressWay}"/>
                             </div>
                         </div>
                     </div>
@@ -128,7 +130,7 @@
                         <div class="form-group">
                             <label for="addressCp" class="col-sm-3 control-label">Code Postal<span class="requis"> *</span> / Ville<span class="requis"> *</span></label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="addressCp" id="addressCp" required="required" value="${form.addressCp}"/>
+                                <input type="text"  class="form-control" name="addressCp" id="addressCp" required="required" value="${form.addressCp}"/>
                             </div>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" name="addressCity" id="addressCity" required="required" value="${form.addressCity}"/>
@@ -152,7 +154,17 @@
                         <div class="form-group">
                             <label for="sexe" class="col-sm-3 control-label">Sexe</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="sexe" id="sexe" value="${form.sexe}" placeholder="H ou F"/>
+                                <c:choose>
+                                <c:when test="${form.sexe == '1' }">
+                                    <input type="radio" class="radio radio-inline" id="sexe" name="sexe" value="1" checked> Homme<br>
+                                    <input type="radio" class="radio radio-inline" id="sexe" name="sexe" value="2"> Femme<br>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="radio" class="radio radio-inline" id="sexe" name="sexe" value="1"> Homme<br>
+                                    <input type="radio" class="radio radio-inline" id="sexe" name="sexe" value="2" checked> Femme<br>
+                                </c:otherwise>
+                            </c:choose>
+                                <!-- input type="text" class="form-control" name="sexe" id="sexe" value="${form.sexe}" placeholder="H ou F"/-->
                             </div>
                         </div>
                     </div>
@@ -163,7 +175,18 @@
                         <div class="form-group">
                             <label for="isSmoker" class="col-sm-3 control-label">Fumeur</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="isSmoker" id="isSmoker" value="${form.isSmoker}"/>
+                            <c:choose>
+                                <c:when test="${form.isSmoker == '1' }">
+                                    <input type="radio" class="radio radio-inline" id="isSmoker" name="isSmoker" value="1" checked> Oui<br>
+                                    <input type="radio" class="radio radio-inline" id="isSmoker" name="isSmoker" value="0"> Non<br>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="radio" class="radio radio-inline" id="isSmoker" name="isSmoker" value="1"> Oui<br>
+                                    <input type="radio" class="radio radio-inline" id="isSmoker" name="isSmoker" value="0" checked> Non<br>
+                                </c:otherwise>
+                            </c:choose>
+                                    <!--  input type="text" class="form-control" name="isSmoker" id="isSmoker" value="${form.isSmoker}"/-->
+                                 
                             </div>
                         </div>
                     </div>
@@ -171,7 +194,7 @@
                  <div class="col-sm-12">
                     <div class="row">
                         <div class="form-group">
-                            <label for="area" class="col-sm-3 control-label">Rayon</label>
+                            <label for="area" class="col-sm-3 control-label">Rayon (en km)</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="area" id="area" value="${form.area}"/>
                             </div>
@@ -207,13 +230,5 @@
         </div>
     </form>
     <br>
-    <div class="col-sm-6">
-    <fieldset>
-        <div>
-            <p>Email : ${ newUser.email }</p>
-            <p>Nom : ${ newUser.lastName }</p>
-        </div>
-    </fieldset>
-    </div>
     
 </body>
