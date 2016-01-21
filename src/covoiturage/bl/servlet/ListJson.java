@@ -89,10 +89,11 @@ public class ListJson extends HttpServlet {
 	
 	   		response.reset();
 	   		response.setContentType("application/json");
-	   		response.setCharacterEncoding("UTF-8");
+//	   		response.setCharacterEncoding("UTF-8");
 	   		response.setStatus(HttpServletResponse.SC_OK);
 	   		PrintWriter out = response.getWriter();
 	   		out.print(json);
+//	   		out.print("[{\"lastName\":\"OLLIER\",\"firstName\":\"Julien\"}]");
 	   		out.flush();
 			
 		} catch (SQLException e) {
