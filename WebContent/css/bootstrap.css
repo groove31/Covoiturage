@@ -7068,3 +7068,9 @@ a.list-group-item-danger.active:focus {
             width: 800px;
             margin:20px auto;
 }
+
+#map-canvas > .map_canvas_listDriver {
+            height: 200px;
+            width: 450px;
+            margin:20px auto;
+}

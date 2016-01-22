@@ -9,7 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="js/index.js"></script>
 	<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js"></script>
     <link
@@ -55,26 +55,31 @@
 		</ul>
 	</div>
 </nav>
- <br>
+<br>
+<br>
+<br>
+<br>
 <br>
 
-   	   <div id="contenu">
-		
-			<div id="form" style="width: 900px;" class="col-sm-12">
+<div class="box box-primary">
+    <div id="box-content" class="box-body">
+        <div class="panel-primary">
+            <div class="col-lg-7">
+			         <!--  div id="form" style="width: 900px;" class="col-sm-12"-->
 				<fieldset>
 
-					<div class="form-group">
+					<!--  div class="form-group">
 						<legend style="color: blue; font-weight: bold;">
 							<span class="glyphicon glyphicon-pencil"> Liste des	conducteurs 
 						</legend>
-					</div>
+					</div-->
 
 					<!-- data-toolbar="#toolbar" 
-               data-url="http://localhost:8080/Covoiturage/ListJson">
-               data-side-pagination="server"
-               -->
-					<div class="container">
-						<div class="row">
+                        data-url="http://localhost:8080/Covoiturage/ListJson">
+                        data-side-pagination="server"
+                    -->
+					<!--  div class="container"-->
+						<!--  div class="row"-->
 							<div class="col-xs-12">
 								<div class="table-responsive">
 									<table class="table table-striped" id="tableBS" 
@@ -122,12 +127,16 @@
 									}
 								</script>
 							</div>
-						</div>
-					</div>
+
 				</fieldset>
-			</div>
-		</div>
-			<div id="map_canvas" class="form-group"></div>
-    
+            </div>
+            <div class="col-lg-5">
+                <div class="map_canvas_listDriver">
+                    <div id="map_canvas" class="map_canvas_listDriver"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
