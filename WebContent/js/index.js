@@ -135,11 +135,6 @@ function delCircle() {
 
 function afficheTrajet(adresseDepart, adresseDestination) {
 	delDirection();
-	direction = new google.maps.DirectionsRenderer({
-	    map   : map
-	    //,
-	    //panel : panel // Dom element pour afficher les instructions d'itinéraire
-	  });
 	if(adresseDepart && adresseDestination){
         var request = {
             origin      : adresseDepart,
@@ -149,13 +144,18 @@ function afficheTrajet(adresseDepart, adresseDestination) {
         var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
         directionsService.route(request, function(response, status){ // Envoie de la requête pour calculer le parcours
             if(status == google.maps.DirectionsStatus.OK){
+            	direction = new google.maps.DirectionsRenderer({
+            		map   : map
+            		//,
+            		//panel : panel // Dom element pour afficher les instructions d'itinéraire
+            	});
                 direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                addDirection(direction);
 
             }
         });
                        
     }
-	addDirection(direction);
 }
 
 function addDirection(directionsDisplayToAdd) {
