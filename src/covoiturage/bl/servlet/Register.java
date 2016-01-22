@@ -30,6 +30,7 @@ public class Register extends HttpServlet {
 	public static String VIEW_PAGES_URL="/WEB-INF/register.jsp";
 	public static String VIEW_PAGES_URL_MODIF="/WEB-INF/listDriver.jsp";
 	public static String VIEW_PAGES_URL_CREATION="/Login";
+	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
 	
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "pwd1";
@@ -291,6 +292,7 @@ public class Register extends HttpServlet {
 						request.setAttribute("form", form);
 						request.setAttribute("actionMessage", actionMessage);
 						request.setAttribute("actionMessageValidation", actionMessageValidation);
+						request.setAttribute("ADDRESSE_BL", ADDRESSE_BL);
 						this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_MODIF).forward(request, response);
 						
 					} 
