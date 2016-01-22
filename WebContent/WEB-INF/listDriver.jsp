@@ -8,16 +8,22 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="js/index.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/filter-control/bootstrap-table-multiple-sort.js"></script>
+    
     <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css"
 	rel="stylesheet" type="text/css">
     <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
     <link href="css/freelancer.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    
+    
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" type="image/x-icon" href="img/auto.png" />
     <title>Les fous du volant - Utilisateurs</title>
@@ -83,40 +89,41 @@
 							<div class="col-xs-12">
 								<div class="table-responsive">
 									<table class="table table-striped" id="tableBS" 
-									data-height="600" 
-									data-toggle="table"
-									data-toolbar="#toolbar"
-           
-                                    data-search="true"
-                                    data-show-refresh="true"
-                                    data-show-toggle="true"
-                                    data-show-columns="true"
-                                    data-show-export="true"
-                                    data-detail-view="true"
-                                    data-detail-formatter="detailFormatter"
-                                    data-minimum-count-columns="2"
-                                    data-show-pagination-switch="true"
-                                    
-                                    
-                                    data-page-list="[10, 25, 50, 100, ALL]"
-                                    data-show-footer="true"
-                                    
-			
+										data-height="600" 
+										data-toggle="table"
+										data-toolbar="#toolbar"
+										
+						                data-filter-control="true"
+                                        data-show-multi-sort="true" 
+                                        data-sort-priority='[{"sortName": "github.count.forks","sortOrder":"desc"},{"sortName":"github.count.stargazers","sortOrder":"desc"}]'
+                    
+	                                    data-search="true"
+	                                    data-show-refresh="true"
+	                                    data-show-toggle="true"
+	                                    data-show-columns="true"
+	                                    data-show-export="true"
+	                                    data-detail-view="true"
+	                                    data-detail-formatter="detailFormatter"
+	                                    data-minimum-count-columns="2"
+	                                    data-show-pagination-switch="true"
+	                                    
+	                                    data-page-list="[10, 25, 50, 100, ALL]"
+	                                    data-show-footer="true"
+	            
 										data-pagination="true"
 										data-url="http://localhost:8080/Covoiturage/ListJson">
 
 										<thead>
-
-											<tr>
-												<th data-field="lastName">Nom</th>
-												<th data-field="firstName">Prénom</th>
-												<th data-field="area">Distance</th>
-												<th data-field="sexe">Sexe</th>
-												<th data-field="phoneNumber">Numéro de téléphone</th>
-												<th data-field="email">Email</th>
-												<th data-field="isConducteur">Conducteur</th>
-												<th data-field="isSmoker">Fumeur</th>
-											</tr>
+                                            <tr>
+                                                <th data-field="lastName" data-filter-control="input" data-sortable="true">Nom</th>
+                                                <th data-field="firstName" data-filter-control="input" data-sortable="true">Prénom</th>
+                                                <th data-field="area" data-filter-control="select" data-sortable="true">Distance</th>
+                                                <th data-field="sexe" data-filter-control="select" data-sortable="true">Sexe</th>
+                                                <th data-field="phoneNumber" data-filter-control="input" data-sortable="true">Numéro de téléphone</th>
+                                                <th data-field="email" data-filter-control="input" data-sortable="true">Email</th>
+                                                <th data-field="isConducteur" data-filter-control="select" data-sortable="true">Conducteur</th>
+                                                <th data-field="isSmoker" data-filter-control="select" data-sortable="true">Fumeur</th>
+                                            </tr>
 										</thead>
 									</table>
 								</div>
