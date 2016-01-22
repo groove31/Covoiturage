@@ -89,7 +89,7 @@
 							<div class="col-xs-12">
 								<div class="table-responsive">
 									<table class="table table-striped" id="tableBS" 
-										data-height="600" 
+										data-height="750" 
 										data-toggle="table"
 										data-toolbar="#toolbar"
 										
@@ -119,7 +119,7 @@
                                                 <th data-field="firstName" data-filter-control="input" data-sortable="true">Prénom</th>
                                                 <th data-field="area" data-filter-control="select" data-sortable="true">Distance</th>
                                                 <th data-field="sexe" data-filter-control="select" data-sortable="true">Sexe</th>
-                                                <th data-field="phoneNumber" data-filter-control="input" data-sortable="true">Numéro de téléphone</th>
+                                                <th data-field="phoneNumber" data-filter-control="input" data-sortable="true">Téléphone</th>
                                                 <th data-field="email" data-filter-control="input" data-sortable="true">Email</th>
                                                 <th data-field="isConducteur" data-filter-control="select" data-sortable="true">Conducteur</th>
                                                 <th data-field="isSmoker" data-filter-control="select" data-sortable="true">Fumeur</th>
@@ -137,10 +137,12 @@
 
 				</fieldset>
             </div>
-            <div class="col-lg-5">
-                <div class="map_canvas_listDriver">
-                    <div id="map_canvas" class="map_canvas_listDriver"></div>
-                </div>
+            <div class="col-lg-4">
+                <br>
+                <br>
+                <br>
+                <div id="map_canvas" class="map_canvas_listdriver"></div>
+                
             </div>
         </div>
     </div>

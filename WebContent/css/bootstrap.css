@@ -7063,14 +7063,19 @@ a.list-group-item-danger.active:focus {
   color: #2c3e50;
 }
 
+
+
 #map_canvas {
-            height: 500px;
-            width: 800px;
-            margin:20px auto;
+
 }
 
-#map-canvas > .map_canvas_listDriver {
-            height: 200px;
-            width: 450px;
+.map_canvas_listdriver {
+            height: 450px;
+            width: 700px;
+}
+
+.map_canvas_accueil {
+            height: 500px;
+            width: 800px;
             margin:20px auto;
 }
