@@ -12,7 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/filter-control/bootstrap-table-filter-control.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/filter-control/bootstrap-table-multiple-sort.js"></script>
     
     <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css"
@@ -132,9 +131,13 @@
 									function loadData() {
 										$('#tableBS').bootstrapTable('getData');
 									}
-									$('.table > tbody > tr').click(function() {
-									    // row was clicked
-									    alert("clic");
+									$('#tableBS').bootstrapTable({
+									    onClickRow: function (row, element) {
+									        // row: the record corresponding to the clicked row, 
+									        // $element: the tr element.
+									        init();
+									        afficheTrajet(row.latitude + "," + row.longitude, " ");
+									    }
 									});
 								</script>
 							</div>
