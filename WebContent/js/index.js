@@ -134,6 +134,9 @@ function delCircle() {
 }
 
 function afficheTrajet(adresseDepart, adresseDestination) {
+	if( (adresseDestination == null) || (adresseDestination == " " ) ) {
+		var adresseDestination = document.getElementById("ADDRESSE_BL").value;
+	}
 	delDirection();
 	if(adresseDepart && adresseDestination){
         var request = {
