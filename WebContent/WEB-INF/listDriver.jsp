@@ -27,7 +27,7 @@
 </head>
 <body onload="loadData()">
 
-	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header page-scroll">
         <a class="navbar-brand" href="#"><i class="fa fa-car"></i> Les Fous du volant</a>
@@ -42,18 +42,18 @@
 			</li>
 		</ul>
 	</div>
-	</nav>
+</nav>
+<br>
+<br>
 
-	<div id="contenu">
-		<form class="form-horizontal well col-sm-12" method="POST"
-			action="Register">
+   	   <!--  div id="contenu"-->
+		
 			<div id="form" style="width: 900px;" class="col-sm-12">
 				<fieldset>
 
 					<div class="form-group">
 						<legend style="color: blue; font-weight: bold;">
-							<span class="glyphicon glyphicon-pencil"> Liste des
-								conducteurs 
+							<span class="glyphicon glyphicon-pencil"> Liste des	conducteurs 
 						</legend>
 					</div>
 
@@ -65,15 +65,34 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="table-responsive">
-									<table id="tableBS" data-height="460" data-toggle="table"
+									<table class="table table-striped" id="tableBS" 
+									data-height="600" 
+									data-toggle="table"
+									data-toolbar="#toolbar"
+           
+                                    data-search="true"
+                                    data-show-refresh="true"
+                                    data-show-toggle="true"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-detail-view="true"
+                                    data-detail-formatter="detailFormatter"
+                                    data-minimum-count-columns="2"
+                                    data-show-pagination-switch="true"
+                                    
+                                    
+                                    data-page-list="[10, 25, 50, 100, ALL]"
+                                    data-show-footer="true"
+                                    
+			
 										data-pagination="true"
 										data-url="http://localhost:8080/Covoiturage/ListJson">
 
 										<thead>
 
 											<tr>
-												<th data-field="firstName">Nom</th>
-												<th data-field="lastName">Prénom</th>
+												<th data-field="lastName">Nom</th>
+												<th data-field="firstName">Prénom</th>
 												<th data-field="area">Distance</th>
 												<th data-field="sexe">Sexe</th>
 												<th data-field="phoneNumber">Numéro de téléphone</th>
@@ -96,7 +115,6 @@
 				</fieldset>
 			</div>
 			<div id="map_canvas"></div>
-		</form>
-	</div>
+
 </body>
 </html>
