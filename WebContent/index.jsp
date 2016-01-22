@@ -85,7 +85,7 @@
 	    <h5>Emplacements des conducteurs prêts à vous amener à Berger-Levrault</h5>
 	</div>
 	   
-	<div id="map_canvas"></div>
+	<div id="map_canvas" class="map_canvas_accueil"></div>
 	
 </section>
 <footer class="text-center">
