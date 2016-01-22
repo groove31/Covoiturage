@@ -34,7 +34,7 @@
     	//String lat = "${latitude}";
     	//String lng = "${longitude}";
     	//String latlng = "{lat:${latitude},lng:${longitude}}";
-    	//afficheTrajet("{lat:${latitude},lng:${longitude}}","${ADDRESSE_BL}");
+    	afficheTrajet("${latitude},${longitude}","${ADDRESSE_BL}");
   	      
     }
     </script>
@@ -132,6 +132,10 @@
 									function loadData() {
 										$('#tableBS').bootstrapTable('getData');
 									}
+									$('.table > tbody > tr').click(function() {
+									    // row was clicked
+									    alert("clic");
+									});
 								</script>
 							</div>
 

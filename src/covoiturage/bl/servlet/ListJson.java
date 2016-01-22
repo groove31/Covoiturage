@@ -61,8 +61,22 @@ public class ListJson extends HttpServlet {
 		} 
 
 		try {
+			/* régles métier
+			 * isConducteur= 1 => est conducteur, = 0 => n'est pas conducteur
+			 * isSmoker= 1 => est fumeur, = 0 => n'est pas fumeur
+			 * sexe= 1 => Homme ; = 2 est femme
+			 */
+			String s_isConducteur ="";
+			String s_isSmoker="";
+			String s_sexe ="";
+			
 			while (resultSet.next()) {
 				UserDB newUser=null;
+
+				s_sexe= (resultSet.getString(11).equals("1")) ? "H" : "F";
+				s_isConducteur = (resultSet.getString(13).equals("0")) ? "N":"O";
+				s_isSmoker= (resultSet.getString(14).equals("0")) ? "N" : "O";
+				
 				newUser=new UserDB(resultSet.getInt(1),
 						resultSet.getString(2),
 						resultSet.getString(3),
@@ -73,10 +87,10 @@ public class ListJson extends HttpServlet {
 						resultSet.getString(8),
 						resultSet.getString(9),
 						resultSet.getString(10),
-						resultSet.getString(11),
+						s_sexe,
 						resultSet.getString(12),
-						resultSet.getString(13),
-						resultSet.getString(14),
+						s_isConducteur,
+						s_isSmoker,
 						resultSet.getString(15),
 						resultSet.getString(16));
 		          /* Puis ajout de l'utilisateur dans la liste */
