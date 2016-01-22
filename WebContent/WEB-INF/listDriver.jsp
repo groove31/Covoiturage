@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,6 +8,13 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="js/index.js"></script>
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js"></script>
+    <link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css"
+	rel="stylesheet" type="text/css">
     <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
     <link href="css/freelancer.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -22,111 +29,105 @@
     	//String lng = "${longitude}";
     	//String latlng = "{lat:${latitude},lng:${longitude}}";
     	//afficheTrajet("{lat:${latitude},lng:${longitude}}","${ADDRESSE_BL}");
-  	    
-        var directionsService = new google.maps.DirectionsService();
-        var latlng = new google.maps.LatLng(51.764696,5.526042);
-	    var myOptions = {
-	      zoom: 14,
-	      center: "Toulouse",
-	      mapTypeId: google.maps.MapTypeId.ROADMAP,
-	    };
-    
-	    var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-	    var marker = new google.maps.Marker({
-	      position: "Toulouse", 
-	      map: map, 
-	      title:"My location"
-	    }); 
-   
-	    var direction = new google.maps.DirectionsRenderer({
-	        map   : map,
-	        //,
-	        //panel : panel // Dom element pour afficher les instructions d'itinéraire
-	    });
-	    var start = "4 rue des Pyrénées, 31600 Labastidette";
-	    var end = "64 Rue Jean Rostand, 31670 Labège";
-	    var request = {
-	      origin:start,
-	      destination:end,
-	      travelMode: google.maps.DirectionsTravelMode.DRIVING
-	    };
-	    directionsService.route(request, function(response, status) {
-	      if (status == google.maps.DirectionsStatus.OK) {
-	        direction.setDirections(response);
-	      }
-	    });
-  
+  	      
     }
     </script>
 </head>
 
-<body onload="init()">
+<body onload="init();loadData()">
     <!--  <input type="hidden" id="conducteurs" value="${conducteurs}"> -->
     <input type="hidden" id="ADDRESSE_BL" value="${ADDRESSE_BL}">
     <input type="hidden" id="LATLONG" value="${latitude},${longitude}">
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header page-scroll">
       <a class="navbar-brand" href="Index"><i class="fa fa-car"></i> Les Fous du volant</a>
     </div>
-      <ul class="nav navbar-nav navbar-right">
+		<ul class="nav navbar-nav navbar-right">
         <li class="hidden">
             <a href="#page-top"></a>
         </li>
-        <li>
-            <a class="page-scroll" href="Register"><span>${email}</span></a>
-        </li>
-        <li>
-            <a class="page-scroll" href="Deconnexion">Se deconnecter</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+			<li><a class="page-scroll" href="Register"><span>${email}</span></a>
+			</li>
+			<li><a class="page-scroll" href="Deconnexion">Se deconnecter</a>
+			</li>
+		</ul>
+	</div>
 </nav>
-    <div id="contenu">
-    <form class="form-horizontal well col-sm-12" method="POST" action="Register">
-        <div id="form" style="width: 900px;" class="col-sm-12">
-            <fieldset>
-            
-            <div class="form-group">
-                <legend style="color: blue; font-weight: bold;"><span class="glyphicon glyphicon-pencil"> Liste des conducteurs</legend>
-            </div>
-            <table class="table table-striped table-bordered no-userselection listTable">
-                <thead>
-                    <tr>
-                        <th scope="col"> Nom  </th>
-                        <th scope="col"> Prénom </th>
-                        <th scope="col"> Distance </th>
-                        <th scope="col"> Sexe </th>
-                        <th scope="col"> Fumeur </th>
-                        <th scope= "col"> Numéro de téléphone </th>
-                        <th scope= "col"> Conducteur </th> 
-                    </tr>
-                </thead>
- 
-                <tbody>
-	               <!--  Parcours de la Map des utilisateurs en session, et utilisation de l'objet varStatus.
-	                TODO : affichage de la table -->
-	                  <c:forEach var="user" items="${sessionScope.users}" varStatus="i">
-	                  <tr>
-	                         <td>${user.value.lastName}</td>
-	                         <td>${user.value.firstName}</td>
-	                         <td>${user.value.area}</td>
-	                         <td>${user.value.sexe}</td>
-	                         <td>${user.value.isSmoker}</td>
-	                         <td>${user.value.phoneNumber}</td>
-	                         <td>${user.value.isConducteur}</td>
-	                  </tr>
-	                    
-	                   </c:forEach>
-                </tbody>
-            </table>
-            </fieldset>
-        </div>
-        <div id="map_canvas" class="form-group"></div>
-        </form>
-        
-    </div>
+ <br>
+<br>
+
+   	   <div id="contenu">
+		
+			<div id="form" style="width: 900px;" class="col-sm-12">
+				<fieldset>
+
+					<div class="form-group">
+						<legend style="color: blue; font-weight: bold;">
+							<span class="glyphicon glyphicon-pencil"> Liste des	conducteurs 
+						</legend>
+					</div>
+
+					<!-- data-toolbar="#toolbar" 
+               data-url="http://localhost:8080/Covoiturage/ListJson">
+               data-side-pagination="server"
+               -->
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="table-responsive">
+									<table class="table table-striped" id="tableBS" 
+									data-height="600" 
+									data-toggle="table"
+									data-toolbar="#toolbar"
+           
+                                    data-search="true"
+                                    data-show-refresh="true"
+                                    data-show-toggle="true"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-detail-view="true"
+                                    data-detail-formatter="detailFormatter"
+                                    data-minimum-count-columns="2"
+                                    data-show-pagination-switch="true"
+                                    
+                                    
+                                    data-page-list="[10, 25, 50, 100, ALL]"
+                                    data-show-footer="true"
+                                    
+			
+										data-pagination="true"
+										data-url="http://localhost:8080/Covoiturage/ListJson">
+
+										<thead>
+
+											<tr>
+												<th data-field="lastName">Nom</th>
+												<th data-field="firstName">Prénom</th>
+												<th data-field="area">Distance</th>
+												<th data-field="sexe">Sexe</th>
+												<th data-field="phoneNumber">Numéro de téléphone</th>
+												<th data-field="email">Email</th>
+												<th data-field="isConducteur">Conducteur</th>
+												<th data-field="isSmoker">Fumeur</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+
+								<script>
+									function loadData() {
+										$('#tableBS').bootstrapTable('getData');
+									}
+								</script>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+			<div id="map_canvas" class="form-group"></div>
+    
 </body>
 </html>

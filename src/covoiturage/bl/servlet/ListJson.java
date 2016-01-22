@@ -1,39 +1,34 @@
 package covoiturage.bl.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import covoiturage.bl.model.Connexion;
 import covoiturage.bl.model.UserDB;
 
 /**
- * Servlet implementation class listDriver
+ * Servlet implementation class ListJson
  */
-@WebServlet("/ListDriver")
-public class ListDriver extends HttpServlet {
+@WebServlet("/ListJson")
+public class ListJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/listDriver.jsp";
-	public static String VIEW_PAGES_URL_REGISTER="/WEB-INF/register.jsp";
-	public static final String FIELD_EMAIL = "email";
-	public static final String ATT_USERS = "users";
-	public static final HashMap<String, UserDB> usersHashMap = new HashMap<String, UserDB>();
-	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
-	public static final String FIELD_LONGITUDE = "longitude";
-	public static final String FIELD_LATITUDE = "latitude";
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListDriver() {
+    public ListJson() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,14 +37,13 @@ public class ListDriver extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		//String email = request.getParameter(FIELD_EMAIL);
-		//String pwd1 = request.getParameter(FIELD_PWD1);	
-		request.setAttribute("ADDRESSE_BL", ADDRESSE_BL);
-			
+		//String pwd1 = request.getParameter(FIELD_PWD1);
+		
 		String actionMessage = "";
-		boolean resultatExiste = false;
-		Map<String, String> erreurs = new HashMap<String,String>();
-				
+		ArrayList<UserDB> listeUserDB = new ArrayList<UserDB>();
+		
 		Connexion connexion = new Connexion("Covoiturage.db");
 		connexion.connect();
 		
@@ -58,26 +52,15 @@ public class ListDriver extends HttpServlet {
 		ResultSet resultSet = connexion.query(sql);
 		// si resultSet est vide ou null, alors resultatExiste = false
 		// si resultSet n'est pas vide, alors resultatExite = true
-		
-		
+
 		if (resultSet == null) {
-			resultatExiste = false;
 			connexion.close();
 			actionMessage = "Une erreur de BDD est survenue.";
 			request.setAttribute("actionMessage", actionMessage);
 			this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 		} 
-		
-	
+
 		try {
-			HttpSession session = request.getSession();            
-	         Map<String, UserDB> users = (HashMap<String, UserDB>) session.getAttribute( ATT_USERS );
-	         
-	          /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
-	           if ( users == null ) {
-	            	users = usersHashMap;
-	            }
-	            
 			while (resultSet.next()) {
 				UserDB newUser=null;
 				newUser=new UserDB(resultSet.getInt(1),
@@ -96,42 +79,37 @@ public class ListDriver extends HttpServlet {
 						resultSet.getString(14),
 						resultSet.getString(15),
 						resultSet.getString(16));
-		          /* Puis ajout de l'utilisateur dans la map */
-		          users.put( newUser.getEmail(), newUser );
+		          /* Puis ajout de l'utilisateur dans la liste */
+				listeUserDB.add(newUser);
 			}
-            /* Et enfin (ré)enregistrement de la map en session */
-            session.setAttribute( ATT_USERS, users );
-
-            String latitude, longitude;
-            latitude = (String) session.getAttribute( FIELD_LATITUDE );
-            longitude = (String) session.getAttribute( FIELD_LONGITUDE );
-                  
-			resultatExiste = true;
-			connexion.close();
+           connexion.close();
+           Gson gson = new Gson();
+	   		String json = new Gson().toJson(listeUserDB);
+	   		System.out.println(json);
+	
+	   		response.reset();
+	   		response.setContentType("application/json");
+//	   		response.setCharacterEncoding("UTF-8");
+	   		response.setStatus(HttpServletResponse.SC_OK);
+	   		PrintWriter out = response.getWriter();
+	   		out.print(json);
+//	   		out.print("[{\"lastName\":\"OLLIER\",\"firstName\":\"Julien\"}]");
+	   		out.flush();
 			
 		} catch (SQLException e) {
-			resultatExiste = false;
 			e.printStackTrace();
 
 		}
-
 		
-		System.out.println("On passe dans le doget de ListDriver");
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
+		//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub	
-		String email;
-		System.out.println("Passage ici");
-		email = request.getParameter(FIELD_EMAIL);
-		System.out.println(email);
-		request.setAttribute(FIELD_EMAIL, email);		
-		System.out.println("On passe par l�");
-		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_REGISTER).forward(request, response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
