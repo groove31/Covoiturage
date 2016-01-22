@@ -22,6 +22,7 @@
 </head>
 <body onload="afficherBL()">
 
+<input type="hidden" id="ADDRESSE_BL" value="${ADDRESSE_BL}"> 
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header page-scroll">
