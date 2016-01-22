@@ -21,8 +21,6 @@
 <title>Les fous du volant - Accueil</title>
 </head>
 <body onload="afficherBL()">
-<!--  <input type="hidden" id="conducteurs" value="${conducteurs}"> -->
-<input type="hidden" id="ADDRESSE_BL" value="${ADDRESSE_BL}">
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">

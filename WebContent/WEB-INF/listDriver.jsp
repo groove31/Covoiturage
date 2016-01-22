@@ -6,63 +6,65 @@
 <html>
 <head>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="js/index.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
     <link href="css/freelancer.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="shortcut icon" type="image/x-icon" href="img/auto.png" />
     <title>Les fous du volant - Utilisateurs</title>
-	
-	<script>
+    
+    <script>
+    function init() {
+    	afficherBL();
+    	//String lat = "${latitude}";
+    	//String lng = "${longitude}";
+    	//String latlng = "{lat:${latitude},lng:${longitude}}";
+    	//afficheTrajet("{lat:${latitude},lng:${longitude}}","${ADDRESSE_BL}");
+  	    
+        var directionsService = new google.maps.DirectionsService();
+        var latlng = new google.maps.LatLng(51.764696,5.526042);
+	    var myOptions = {
+	      zoom: 14,
+	      center: "Toulouse",
+	      mapTypeId: google.maps.MapTypeId.ROADMAP,
+	    };
+    
+	    var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+	    var marker = new google.maps.Marker({
+	      position: "Toulouse", 
+	      map: map, 
+	      title:"My location"
+	    }); 
+   
+	    var direction = new google.maps.DirectionsRenderer({
+	        map   : map,
+	        //,
+	        //panel : panel // Dom element pour afficher les instructions d'itinéraire
+	    });
+	    var start = "4 rue des Pyrénées, 31600 Labastidette";
+	    var end = "64 Rue Jean Rostand, 31670 Labège";
+	    var request = {
+	      origin:start,
+	      destination:end,
+	      travelMode: google.maps.DirectionsTravelMode.DRIVING
+	    };
+	    directionsService.route(request, function(response, status) {
+	      if (status == google.maps.DirectionsStatus.OK) {
+	        direction.setDirections(response);
+	      }
+	    });
   
-    function initialize() {
-            var addressesString = ${conducteurs};
-            var ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
-            //var ADDRESSE_BL = "${ADDRESSE_BL}";
-            var geocoder = new google.maps.Geocoder();
-            var directionsDisplay;
-            var directionsService = new google.maps.DirectionsService();
-            var map;
-            
-            geocoder.geocode( { 'address': ADDRESSE_BL}, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    map = new google.maps.Map(document.getElementById('map_canvas'), 
-                              {
-                                zoom: 10,
-                                center: results[0].geometry.location
-                              }
-                        );
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location,
-                        title: "Berger-Levrault",
-                        icon : "http://www.berger-levrault.com/public/css/page/logo.png"
-                    });
-                }
-            });
-        
-        
-            for (var i = 0; i < addressesString.length; i++) {
-                geocoder.geocode( { 'address': addressesString[i]}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: results[0].geometry.location,
-                            title: addressesString[i]
-                        });
-                    }
-                });
-                
-            }
     }
-    
     </script>
-        
-
-
 </head>
-<body onload="initialize()">
-    
+
+<body onload="init()">
+    <!--  <input type="hidden" id="conducteurs" value="${conducteurs}"> -->
+    <input type="hidden" id="ADDRESSE_BL" value="${ADDRESSE_BL}">
+    <input type="hidden" id="LATLONG" value="${latitude},${longitude}">
+
 <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -102,9 +104,7 @@
                         <th scope= "col"> Conducteur </th> 
                     </tr>
                 </thead>
-                
-                    
-                
+ 
                 <tbody>
 	               <!--  Parcours de la Map des utilisateurs en session, et utilisation de l'objet varStatus.
 	                TODO : affichage de la table -->
@@ -124,7 +124,7 @@
             </table>
             </fieldset>
         </div>
-        <div id="map_canvas"></div>
+        <div id="map_canvas" class="form-group"></div>
         </form>
         
     </div>

@@ -27,7 +27,9 @@ public class ListDriver extends HttpServlet {
 	public static final String FIELD_EMAIL = "email";
 	public static final String ATT_USERS = "users";
 	public static final HashMap<String, UserDB> usersHashMap = new HashMap<String, UserDB>();
-	
+	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
+	public static final String FIELD_LONGITUDE = "longitude";
+	public static final String FIELD_LATITUDE = "latitude";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,8 +43,9 @@ public class ListDriver extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String email = request.getParameter(FIELD_EMAIL);
-		//String pwd1 = request.getParameter(FIELD_PWD1);
-		
+		//String pwd1 = request.getParameter(FIELD_PWD1);	
+		request.setAttribute("ADDRESSE_BL", ADDRESSE_BL);
+			
 		String actionMessage = "";
 		boolean resultatExiste = false;
 		Map<String, String> erreurs = new HashMap<String,String>();
@@ -102,6 +105,10 @@ public class ListDriver extends HttpServlet {
             /* Et enfin (ré)enregistrement de la map en session */
             session.setAttribute( ATT_USERS, users );
 
+            String latitude, longitude;
+            latitude = (String) session.getAttribute( FIELD_LATITUDE );
+            longitude = (String) session.getAttribute( FIELD_LONGITUDE );
+                  
 			resultatExiste = true;
 			connexion.close();
 			
@@ -120,12 +127,12 @@ public class ListDriver extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
 		String email;
 		System.out.println("Passage ici");
 		email = request.getParameter(FIELD_EMAIL);
 		System.out.println(email);
-		request.setAttribute(FIELD_EMAIL, email);
+		request.setAttribute(FIELD_EMAIL, email);		
 		System.out.println("On passe par l�");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_REGISTER).forward(request, response);
 	}

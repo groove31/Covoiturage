@@ -23,7 +23,8 @@ public class Login extends HttpServlet {
 	public static String VIEW_PAGES_URL_LIST="/ListDriver";
 	public static final String FIELD_EMAIL = "email";
 	public static final String FIELD_PWD1 = "pwd1";
-
+	public static final String FIELD_LONGITUDE = "longitude";
+	public static final String FIELD_LATITUDE = "latitude";
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -46,6 +47,8 @@ public class Login extends HttpServlet {
 		String email = request.getParameter(FIELD_EMAIL);
 		String pwd1 = request.getParameter(FIELD_PWD1);
 		
+		String longitude = "";
+		String latitude = "";
 		String actionMessage = "";
 		boolean resultatExiste = false;
 		//		Map<String, String> erreurs = new HashMap<String,String>();
@@ -68,6 +71,9 @@ public class Login extends HttpServlet {
 		try {
 			if (resultSet.next()) {
 				resultatExiste = true;
+				// Récupération de la longitude et de la latitude de la personne connectée
+				longitude = resultSet.getString(FIELD_LONGITUDE);
+				latitude = resultSet.getString(FIELD_LATITUDE);
 				connexion.close();
 			}
 		} catch (SQLException e) {
@@ -78,6 +84,10 @@ public class Login extends HttpServlet {
 			actionMessage = "Utilisateur accepté.";
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
+			
+			session.setAttribute("longitude", longitude);
+			session.setAttribute("latitude", latitude);
+			
 			request.setAttribute("actionMessage", actionMessage);
 			//this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL).include(request, response);
 			//getServletContext().getRequestDispatcher(VIEW_PAGES_URL_LIST).forward(request, response);
