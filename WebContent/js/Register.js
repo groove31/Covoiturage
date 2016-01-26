@@ -10,8 +10,11 @@ function getLatLng() {
 
 	var address = addressNumber + ", " + addressWay + ", " + addressCp + " " + addressCity + ", France";
 	var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(address) + "&sensor=false";
-	$.getJSON(url)
-		.done(function(data) {
+	$.ajax({
+		dataType : "json",
+		url : url,
+		async:false,
+		success : function(data){
 			theLatitude= (data.results[0].geometry.location.lat).toString();
 			theLongitude= (data.results[0].geometry.location.lng).toString();
 			var el = document.createElement("input");
@@ -24,7 +27,16 @@ function getLatLng() {
 			   el.name = "longitude";
 			   el.value = theLongitude;
 			   form.appendChild(el);   
-			form.submit();
-		});
+		}
+		
+	});
+	//$.getJSON(url)
+	
+		//.done(function(data) {
+		//if (success) {
+			
+			//form.submit();
+		//});
+		//}
 }
 

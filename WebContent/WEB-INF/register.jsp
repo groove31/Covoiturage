@@ -9,7 +9,6 @@
 <link href="css/bootstrap.css" rel="stylesheet" media="screen">
 <link href="css/freelancer.css" rel="stylesheet">
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<script src="js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/Register.js"></script>
@@ -17,6 +16,25 @@
 <!--<script src="https://maps.googleapis.com/maps/api/js?callback=Initialize"></script>-->
 <link rel="shortcut icon" type="image/x-icon" href="img/auto.png" />
 <title>Les fous du volant - Inscription</title>
+
+<script>
+function validate() {
+	
+	$('#theForm').validator().on('submit', function (e) {
+		
+		if (e.isDefaultPrevented()) {
+		    // handle the invalid form...
+		    
+		} else {
+	    // everything looks good!
+			getLatLng();
+	       
+        }
+		
+		
+	});	
+}
+</script>
 </head>
 <body>
 
@@ -227,7 +245,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-success" type="button" id="submit_button" name="inscription" value="Inscription"  onclick="getLatLng()">Enregistrer </button>
+                <button class="btn btn-success" type="submit" id="submit_button" name="inscription" value="Inscription"  onclick="validate()">Enregistrer </button>
                 <button class="btn btn-default" type="reset" name="inscription" value="Annuler" onclick="location.href='Deconnexion'">Annuler</button>
                 <br><br>
                 <c:if test="${not empty actionMessage}">

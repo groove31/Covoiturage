@@ -5,14 +5,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    <!---------------------------------- LES SCRIPTS JS ------------------------------------------------->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="js/index.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+    <script src="js/bootstrap-table-filter-control.js"></script>
+    <!--  script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/filter-control/bootstrap-table-filter-control.js"></script-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
     
+    <!--------------------------------------- LES CSS ------------------------------------------------>
     <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css"
 	rel="stylesheet" type="text/css">
@@ -87,10 +90,11 @@
 						<!--  div class="row"-->
 							<div class="col-xs-12">
 								<div class="table-responsive">
-									<table class="table table-striped" id="tableBS" 
+									<table class="table fixed-table-container" id="tableBS" 
 										data-height="750" 
 										data-toggle="table"
 										data-toolbar="#toolbar"
+										data-click-to-select="true"
 										
 						                data-filter-control="true"
                                         data-show-multi-sort="true" 
@@ -112,8 +116,9 @@
 										data-pagination="true"
 										data-url="http://localhost:8080/Covoiturage/ListJson">
 
-										<thead>
+										<thead class="fixed-table-container">
                                             <tr>
+                                                <!--  th data-field="state" data-checkbox="true" ></th-->
                                                 <th data-field="lastName" data-filter-control="input" data-sortable="true">Nom</th>
                                                 <th data-field="firstName" data-filter-control="input" data-sortable="true">Prénom</th>
                                                 <th data-field="area" data-filter-control="select" data-sortable="true">Distance</th>
