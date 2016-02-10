@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
+import com.google.gson.Gson;
 
 import covoiturage.bl.model.Connexion;
 import covoiturage.bl.model.UserDB;
-import com.google.gson.*;
+import covoiturage.bl.service.Constantes;
 
 /**
  * Servlet implementation class Index
@@ -28,23 +28,6 @@ public class Index extends HttpServlet {
 	public static String VIEW_PAGES_URL="/index.jsp";
 	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
 	private static List<String> listeAdresses = new ArrayList<String>(); 
-	public static final String FIELD_EMAIL = "email";
-	public static final String FIELD_PASSWORD = "password";
-	public static final String FIELD_PWD1 = "pwd1";
-	public static final String FIELD_PWD2 = "pwd2";
-	public static final String FIELD_FIRSTNAME = "firstName";
-	public static final String FIELD_LASTNAME = "lastName";
-	public static final String FIELD_ADRESSNUMBER = "addressNumber";
-	public static final String FIELD_ADRESSWAY = "addressWay";
-	public static final String FIELD_ADRESSCP = "addressCp";
-	public static final String FIELD_ADRESSCITY = "addressCity";
-	public static final String FIELD_LONGITUDE = "longitude";
-	public static final String FIELD_LATITUDE = "latitude";
-	public static final String FIELD_PHONENUMBER = "phoneNumber";
-	public static final String FIELD_SEXE = "sexe";
-	public static final String FIELD_ISCONDUCTEUR = "isConducteur";
-	public static final String FIELD_ISSMOKER = "isSmoker";
-	public static final String FIELD_AREA = "area";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -76,9 +59,9 @@ public class Index extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String latitude = request.getParameter(FIELD_LATITUDE);
-		String longitude = request.getParameter(FIELD_LONGITUDE);
-		String area = request.getParameter(FIELD_AREA);
+		String latitude = request.getParameter(Constantes.FIELD_LATITUDE);
+		String longitude = request.getParameter(Constantes.FIELD_LONGITUDE);
+		String area = request.getParameter(Constantes.FIELD_AREA);
 		ArrayList<UserDB> listeUserDB = new ArrayList<UserDB>();
 		UserDB userDB;
 
@@ -100,21 +83,21 @@ public class Index extends HttpServlet {
 			while (resultSet.next()) {
 				resultatExiste = true;
 				userDB = new UserDB(0,
-						resultSet.getString(FIELD_EMAIL),
-						resultSet.getString(FIELD_LASTNAME),
-						resultSet.getString(FIELD_FIRSTNAME),
-						resultSet.getString(FIELD_ADRESSNUMBER),
-						resultSet.getString(FIELD_ADRESSWAY),
-						resultSet.getString(FIELD_ADRESSCP),
-						resultSet.getString(FIELD_ADRESSCITY),
-						resultSet.getString(FIELD_LONGITUDE),
-						resultSet.getString(FIELD_LATITUDE),
-						resultSet.getString(FIELD_SEXE),
-						resultSet.getString(FIELD_PHONENUMBER),
-						resultSet.getString(FIELD_ISCONDUCTEUR),
-						resultSet.getString(FIELD_ISSMOKER),
-						resultSet.getString(FIELD_AREA),
-						resultSet.getString(FIELD_PASSWORD)
+						resultSet.getString(Constantes.FIELD_EMAIL),
+						resultSet.getString(Constantes.FIELD_LASTNAME),
+						resultSet.getString(Constantes.FIELD_FIRSTNAME),
+						resultSet.getString(Constantes.FIELD_ADDRESSNUMBER),
+						resultSet.getString(Constantes.FIELD_ADDRESSWAY),
+						resultSet.getString(Constantes.FIELD_ADDRESSCP),
+						resultSet.getString(Constantes.FIELD_ADDRESSCITY),
+						resultSet.getString(Constantes.FIELD_LONGITUDE),
+						resultSet.getString(Constantes.FIELD_LATITUDE),
+						resultSet.getString(Constantes.FIELD_SEXE),
+						resultSet.getString(Constantes.FIELD_PHONENUMBER),
+						resultSet.getString(Constantes.FIELD_ISCONDUCTEUR),
+						resultSet.getString(Constantes.FIELD_ISSMOKER),
+						resultSet.getString(Constantes.FIELD_AREA),
+						resultSet.getString(Constantes.FIELD_PWD1)
 						);
 				System.out.println(userDB.getLastName());
 				double lat = tryParseDouble(userDB.getLatitude());
@@ -153,6 +136,7 @@ public class Index extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print(json);
 		out.flush();
+		out.close();
 		//		doGet(request, response);
 	}
 
