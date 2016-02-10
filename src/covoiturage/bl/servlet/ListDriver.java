@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import covoiturage.bl.model.Connexion;
 import covoiturage.bl.model.UserDB;
+import covoiturage.bl.service.Constantes;
 
 /**
  * Servlet implementation class listDriver
@@ -24,12 +25,8 @@ public class ListDriver extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/WEB-INF/listDriver.jsp";
 	public static String VIEW_PAGES_URL_REGISTER="/WEB-INF/register.jsp";
-	public static final String FIELD_EMAIL = "email";
 	public static final String ATT_USERS = "users";
 	public static final HashMap<String, UserDB> usersHashMap = new HashMap<String, UserDB>();
-	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
-	public static final String FIELD_LONGITUDE = "longitude";
-	public static final String FIELD_LATITUDE = "latitude";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,9 +39,9 @@ public class ListDriver extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String email = request.getParameter(FIELD_EMAIL);
-		//String pwd1 = request.getParameter(FIELD_PWD1);	
-		request.setAttribute("ADDRESSE_BL", ADDRESSE_BL);
+		//String email = request.getParameter(Constantes.FIELD_EMAIL);
+		//String pwd1 = request.getParameter(Constantes.FIELD_PWD1);	
+		request.setAttribute("ADDRESSE_BL", Constantes.ADDRESSE_BL);
 			
 		String actionMessage = "";
 		boolean resultatExiste = false;
@@ -103,8 +100,8 @@ public class ListDriver extends HttpServlet {
             session.setAttribute( ATT_USERS, users );
 
             String latitude, longitude;
-            latitude = (String) session.getAttribute( FIELD_LATITUDE );
-            longitude = (String) session.getAttribute( FIELD_LONGITUDE );
+            latitude = (String) session.getAttribute( Constantes.FIELD_LATITUDE );
+            longitude = (String) session.getAttribute( Constantes.FIELD_LONGITUDE );
                   
 			resultatExiste = true;
 			connexion.close();
@@ -127,9 +124,9 @@ public class ListDriver extends HttpServlet {
 		// TODO Auto-generated method stub	
 		String email;
 		System.out.println("Passage ici");
-		email = request.getParameter(FIELD_EMAIL);
+		email = request.getParameter(Constantes.FIELD_EMAIL);
 		System.out.println(email);
-		request.setAttribute(FIELD_EMAIL, email);		
+		request.setAttribute(Constantes.FIELD_EMAIL, email);		
 		System.out.println("On passe par l�");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_REGISTER).forward(request, response);
 	}

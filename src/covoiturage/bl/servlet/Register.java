@@ -1,15 +1,10 @@
 package covoiturage.bl.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.LongToIntFunction;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import covoiturage.bl.model.Connexion;
 import covoiturage.bl.model.UserDB;
+import covoiturage.bl.service.Constantes;
 
 /**
  * Servlet implementation class Register
@@ -30,31 +26,16 @@ public class Register extends HttpServlet {
 	public static String VIEW_PAGES_URL="/WEB-INF/register.jsp";
 	public static String VIEW_PAGES_URL_MODIF="/WEB-INF/listDriver.jsp";
 	public static String VIEW_PAGES_URL_CREATION="/Login";
-	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
 	
-	public static final String FIELD_EMAIL = "email";
-	public static final String FIELD_PWD1 = "pwd1";
-	public static final String FIELD_PWD2 = "pwd2";
-	public static final String FIELD_FIRSTNAME = "firstName";
-	public static final String FIELD_LASTNAME = "lastName";
-	public static final String FIELD_ADDRESSNUMBER = "addressNumber";
-	public static final String FIELD_ADDRESSWAY = "addressWay";
-	public static final String FIELD_ADDRESSCP = "addressCp";
-	public static final String FIELD_ADDRESSCITY = "addressCity";
-	public static final String FIELD_LONGITUDE = "longitude";
-	public static final String FIELD_LATITUDE = "latitude";
-	public static final String FIELD_PHONENUMBER = "phoneNumber";
-	public static final String FIELD_SEXE = "sexe";
-	public static final String FIELD_ISCONDUCTEUR = "isConducteur";
-	public static final String FIELD_ISSMOKER = "isSmoker";
-	public static final String FIELD_AREA = "area";
+	
+	
 	
 	public boolean modeCreation = true;
 	
-	UserDB newUser = new UserDB(5,FIELD_LASTNAME,FIELD_FIRSTNAME, 
-			FIELD_EMAIL, FIELD_ADDRESSNUMBER, FIELD_ADDRESSWAY,
-			FIELD_ADDRESSCP, FIELD_ADDRESSCITY,FIELD_LONGITUDE, FIELD_LATITUDE,
-			FIELD_PHONENUMBER,FIELD_SEXE, FIELD_ISCONDUCTEUR, FIELD_ISSMOKER, FIELD_AREA, FIELD_PWD1 );
+	UserDB newUser = new UserDB(5,Constantes.FIELD_LASTNAME,Constantes.FIELD_FIRSTNAME, 
+			Constantes.FIELD_EMAIL, Constantes.FIELD_ADDRESSNUMBER, Constantes.FIELD_ADDRESSWAY,
+			Constantes.FIELD_ADDRESSCP, Constantes.FIELD_ADDRESSCITY,Constantes.FIELD_LONGITUDE, Constantes.FIELD_LATITUDE,
+			Constantes.FIELD_PHONENUMBER,Constantes.FIELD_SEXE, Constantes.FIELD_ISCONDUCTEUR, Constantes.FIELD_ISSMOKER, Constantes.FIELD_AREA, Constantes.FIELD_PWD1 );
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -72,8 +53,8 @@ public class Register extends HttpServlet {
 		
 		Map<String, String> form = new HashMap<String, String>();
 		HttpSession session = request.getSession();
-		email = (String) session.getAttribute(FIELD_EMAIL);
-		//email = request.getParameter(FIELD_EMAIL);
+		email = (String) session.getAttribute(Constantes.FIELD_EMAIL);
+		//email = request.getParameter(Constantes.FIELD_EMAIL);
 		
 		System.out.println("Email : " + email);
 		if (email!=null) {
@@ -105,23 +86,23 @@ public class Register extends HttpServlet {
 			} 
 			
 			try {
-				lastName = resultSet.getString(FIELD_LASTNAME);
+				lastName = resultSet.getString(Constantes.FIELD_LASTNAME);
 				System.out.println("lastName1 : " + lastName);
 				if (resultSet.next()) {
 					resultatExiste = true;
-					lastName = resultSet.getString(FIELD_LASTNAME);
-					form.put(FIELD_EMAIL, email);
-					form.put(FIELD_LASTNAME, resultSet.getString(FIELD_LASTNAME));
-					form.put(FIELD_FIRSTNAME, resultSet.getString(FIELD_FIRSTNAME));
-					form.put(FIELD_ADDRESSNUMBER, resultSet.getString(FIELD_ADDRESSNUMBER));
-					form.put(FIELD_ADDRESSWAY, resultSet.getString(FIELD_ADDRESSWAY));
-					form.put(FIELD_ADDRESSCP, resultSet.getString(FIELD_ADDRESSCP));
-					form.put(FIELD_ADDRESSCITY, resultSet.getString(FIELD_ADDRESSCITY));
-					form.put(FIELD_PHONENUMBER, resultSet.getString(FIELD_PHONENUMBER));
-					form.put(FIELD_SEXE, resultSet.getString(FIELD_SEXE));
-					form.put(FIELD_ISCONDUCTEUR, resultSet.getString(FIELD_ISCONDUCTEUR));
-					form.put(FIELD_ISSMOKER, resultSet.getString(FIELD_ISSMOKER));
-					form.put(FIELD_AREA, resultSet.getString(FIELD_AREA));
+					lastName = resultSet.getString(Constantes.FIELD_LASTNAME);
+					form.put(Constantes.FIELD_EMAIL, email);
+					form.put(Constantes.FIELD_LASTNAME, resultSet.getString(Constantes.FIELD_LASTNAME));
+					form.put(Constantes.FIELD_FIRSTNAME, resultSet.getString(Constantes.FIELD_FIRSTNAME));
+					form.put(Constantes.FIELD_ADDRESSNUMBER, resultSet.getString(Constantes.FIELD_ADDRESSNUMBER));
+					form.put(Constantes.FIELD_ADDRESSWAY, resultSet.getString(Constantes.FIELD_ADDRESSWAY));
+					form.put(Constantes.FIELD_ADDRESSCP, resultSet.getString(Constantes.FIELD_ADDRESSCP));
+					form.put(Constantes.FIELD_ADDRESSCITY, resultSet.getString(Constantes.FIELD_ADDRESSCITY));
+					form.put(Constantes.FIELD_PHONENUMBER, resultSet.getString(Constantes.FIELD_PHONENUMBER));
+					form.put(Constantes.FIELD_SEXE, resultSet.getString(Constantes.FIELD_SEXE));
+					form.put(Constantes.FIELD_ISCONDUCTEUR, resultSet.getString(Constantes.FIELD_ISCONDUCTEUR));
+					form.put(Constantes.FIELD_ISSMOKER, resultSet.getString(Constantes.FIELD_ISSMOKER));
+					form.put(Constantes.FIELD_AREA, resultSet.getString(Constantes.FIELD_AREA));
 					form.put("pwd1", resultSet.getString("password"));
 					form.put("pwd2", resultSet.getString("password"));
 					connexion.close();
@@ -144,22 +125,22 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter(FIELD_EMAIL);
-		String pwd1 = request.getParameter(FIELD_PWD1);
-		String pwd2 = request.getParameter(FIELD_PWD2);
-		String lastName = request.getParameter(FIELD_LASTNAME);
-		String firstName = request.getParameter(FIELD_FIRSTNAME);
-		String addressNumber = request.getParameter(FIELD_ADDRESSNUMBER);
-		String addressWay = request.getParameter(FIELD_ADDRESSWAY);
-		String addressCP = request.getParameter(FIELD_ADDRESSCP);
-		String addressCity = request.getParameter(FIELD_ADDRESSCITY);
-		String longitude = request.getParameter(FIELD_LONGITUDE);
-		String latitude = request.getParameter(FIELD_LATITUDE);
-		String phoneNumber = request.getParameter(FIELD_PHONENUMBER);
-		String sexe = request.getParameter(FIELD_SEXE);
-		String isConducteur = request.getParameter(FIELD_ISCONDUCTEUR);
-		String isSmoker = request.getParameter(FIELD_ISSMOKER);
-		String area = request.getParameter(FIELD_AREA);
+		String email = request.getParameter(Constantes.FIELD_EMAIL);
+		String pwd1 = request.getParameter(Constantes.FIELD_PWD1);
+		String pwd2 = request.getParameter(Constantes.FIELD_PWD2);
+		String lastName = request.getParameter(Constantes.FIELD_LASTNAME);
+		String firstName = request.getParameter(Constantes.FIELD_FIRSTNAME);
+		String addressNumber = request.getParameter(Constantes.FIELD_ADDRESSNUMBER);
+		String addressWay = request.getParameter(Constantes.FIELD_ADDRESSWAY);
+		String addressCP = request.getParameter(Constantes.FIELD_ADDRESSCP);
+		String addressCity = request.getParameter(Constantes.FIELD_ADDRESSCITY);
+		String longitude = request.getParameter(Constantes.FIELD_LONGITUDE);
+		String latitude = request.getParameter(Constantes.FIELD_LATITUDE);
+		String phoneNumber = request.getParameter(Constantes.FIELD_PHONENUMBER);
+		String sexe = request.getParameter(Constantes.FIELD_SEXE);
+		String isConducteur = request.getParameter(Constantes.FIELD_ISCONDUCTEUR);
+		String isSmoker = request.getParameter(Constantes.FIELD_ISSMOKER);
+		String area = request.getParameter(Constantes.FIELD_AREA);
 		
 		newUser.setEmail(email);
 		newUser.setLastName(lastName);
@@ -180,18 +161,18 @@ public class Register extends HttpServlet {
 		errMsg = validateEmail(email);
 		if(errMsg!=null){
 			errMsgTempo = errMsg;
-			erreurs.put(FIELD_EMAIL, errMsg);
+			erreurs.put(Constantes.FIELD_EMAIL, errMsg);
 		} 
 		
 		errMsg = validateNewPass(pwd1, pwd2);
 		if(errMsg!=null){
 			errMsgTempo = errMsg;
-			erreurs.put(FIELD_PWD1, errMsg);
+			erreurs.put(Constantes.FIELD_PWD1, errMsg);
 		}
 		
 		errMsg = validateName(lastName);
 		if(errMsg!=null){
-			erreurs.put(FIELD_LASTNAME, errMsg);
+			erreurs.put(Constantes.FIELD_LASTNAME, errMsg);
 		}
 		if (errMsgTempo!=null){
 			errMsg = errMsgTempo;
@@ -199,20 +180,20 @@ public class Register extends HttpServlet {
 		
 		
 		//Reinit des valeurs a renvoyer à la vue en cas de probl�mes
-		 form.put(FIELD_EMAIL, email);
-		 form.put(FIELD_LASTNAME, lastName);
-		 form.put(FIELD_FIRSTNAME, firstName);
-		 form.put(FIELD_ADDRESSNUMBER, addressNumber);
-		 form.put(FIELD_ADDRESSWAY, addressWay);
-		 form.put(FIELD_ADDRESSCP, addressCP);
-		 form.put(FIELD_ADDRESSCITY, addressCity);
-		 form.put(FIELD_PHONENUMBER, phoneNumber);
-		 form.put(FIELD_SEXE, sexe);
-		 form.put(FIELD_PWD1, pwd1);
-		 form.put(FIELD_PWD2, pwd1);
-		 form.put(FIELD_ISSMOKER, isSmoker);
-		 form.put(FIELD_ISCONDUCTEUR, isConducteur);
-		 form.put(FIELD_AREA, area);
+		 form.put(Constantes.FIELD_EMAIL, email);
+		 form.put(Constantes.FIELD_LASTNAME, lastName);
+		 form.put(Constantes.FIELD_FIRSTNAME, firstName);
+		 form.put(Constantes.FIELD_ADDRESSNUMBER, addressNumber);
+		 form.put(Constantes.FIELD_ADDRESSWAY, addressWay);
+		 form.put(Constantes.FIELD_ADDRESSCP, addressCP);
+		 form.put(Constantes.FIELD_ADDRESSCITY, addressCity);
+		 form.put(Constantes.FIELD_PHONENUMBER, phoneNumber);
+		 form.put(Constantes.FIELD_SEXE, sexe);
+		 form.put(Constantes.FIELD_PWD1, pwd1);
+		 form.put(Constantes.FIELD_PWD2, pwd1);
+		 form.put(Constantes.FIELD_ISSMOKER, isSmoker);
+		 form.put(Constantes.FIELD_ISCONDUCTEUR, isConducteur);
+		 form.put(Constantes.FIELD_AREA, area);
 		 
 		 
 		 //Si pas d'erreur ci dessus
@@ -292,14 +273,14 @@ public class Register extends HttpServlet {
 						request.setAttribute("form", form);
 						request.setAttribute("actionMessage", actionMessage);
 						request.setAttribute("actionMessageValidation", actionMessageValidation);
-						request.setAttribute("ADDRESSE_BL", ADDRESSE_BL);
+						request.setAttribute("ADDRESSE_BL", Constantes.ADDRESSE_BL);
 						this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_MODIF).forward(request, response);
 						
 					} 
 					//Le user existe et nous sommes en création : illogique on ne fait rien 
 					else
 					{
-						erreurs.put(FIELD_EMAIL, "Email déjà existant");
+						erreurs.put(Constantes.FIELD_EMAIL, "Email déjà existant");
 						actionMessage = "Enregistrement impossible : utilisateur déjà existant";
 						request.setAttribute("errorStatus", true);
 						request.setAttribute("form", form);

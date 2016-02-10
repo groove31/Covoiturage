@@ -26,7 +26,6 @@ import covoiturage.bl.service.Constantes;
 public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String VIEW_PAGES_URL="/index.jsp";
-	private static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
 	private static List<String> listeAdresses = new ArrayList<String>(); 
 
 	/**
@@ -42,7 +41,7 @@ public class Index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setAttribute("ADDRESSE_BL", ADDRESSE_BL);
+		request.setAttribute("ADDRESSE_BL", Constantes.ADDRESSE_BL);
 
 //		listeAdresses.add("\"Place François Mitterrand, 31750 Escalquens, France\"");
 //		listeAdresses.add("\"48, rue des Fontanelles, 31320 Castanet-Tolosan, France\"");

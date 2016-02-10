@@ -18,6 +18,7 @@ public class Constantes {
 	public static final String FIELD_ISCONDUCTEUR = "isConducteur";
 	public static final String FIELD_ISSMOKER = "isSmoker";
 	public static final String FIELD_AREA = "area";
+	public static final String ADDRESSE_BL = "64 Rue Jean Rostand, 31670 Labège";
 
 	public Constantes() {
 		// TODO Auto-generated constructor stub

@@ -50,9 +50,9 @@ public class LoginAndroid extends HttpServlet {
 		
 		if ( user == null) {
 			response.reset();
-			response.setContentType("application/json");
+			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			PrintWriter out = response.getWriter();
 			out.print("Utilisateur ou mot de passe incorrect.");
 			out.flush();
