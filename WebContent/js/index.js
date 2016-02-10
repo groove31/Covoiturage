@@ -153,11 +153,11 @@ function afficheTrajet(adresseDepart, adresseDestination) {
             		//panel : panel // Dom element pour afficher les instructions d'itinéraire
             	});
                 direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                sendResponseToServer(response);
                 addDirection(direction);
 
             }
         });
-                       
     }
 }
 
@@ -172,43 +172,21 @@ function delDirection() {
 	}
 }
 
-
-//function initialize() {	
-//var geocoder = new google.maps.Geocoder();
-//var directionsDisplay;
-//var directionsService = new google.maps.DirectionsService();
-//var map;
-
-//geocoder.geocode( { 'address': ADDRESSE_BL}, function(results, status) {
-//if (status == google.maps.GeocoderStatus.OK) {
-//map = new google.maps.Map(document.getElementById('map_canvas'), 
-//{
-//zoom: 10,
-//center: results[0].geometry.location
-//}
-//);
-//var marker = new google.maps.Marker({
-//map: map,
-//position: results[0].geometry.location,
-//title: "Berger-Levrault",
-////icon : "http://www.berger-levrault.com/public/css/page/logo.png"
-//icon : "http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png",
-//title :  "Berger-Levrault"
-//});
-//}
-//});
+function sendResponseToServer(resp) {
+//	var steps = resp.routes[0].legs[0].steps;
+//	for (var i = 0; i < legs.length; i++) {
+//		leg.push(legs[i].start_location.lat.toString());
+//	}
+	var param = 'response=' + JSON.stringify(resp);
+	$.ajax({
+	      url: 'GetGoogleTrajet',
+	      type: 'POST', 
+	      dataType: 'json',  
+	      data: param,
+	      success: function(result) {
+	          alert('SUCCESS');
+	      }
+	    });
+}
 
 
-//for (var i = 0; i < addressesString.length; i++) {
-//geocoder.geocode( { 'address': addressesString[i]}, function(results, status) {
-//if (status == google.maps.GeocoderStatus.OK) {
-//var marker = new google.maps.Marker({
-//map: map,
-//position: results[0].geometry.location,
-//title: addressesString[i]
-//});
-//}
-//});
-
-//}
-//}
