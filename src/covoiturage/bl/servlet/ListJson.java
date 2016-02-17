@@ -88,10 +88,10 @@ public class ListJson extends HttpServlet {
 						resultSet.getString(Constantes.FIELD_ADDRESSCITY),
 						resultSet.getString(Constantes.FIELD_LONGITUDE),
 						resultSet.getString(Constantes.FIELD_LATITUDE),
-						resultSet.getString(s_sexe),
+						s_sexe,
 						resultSet.getString(Constantes.FIELD_PHONENUMBER),
-						resultSet.getString(s_isConducteur),
-						resultSet.getString(s_isSmoker),
+						s_isConducteur,
+						s_isSmoker,
 						resultSet.getString(Constantes.FIELD_AREA),
 						""
 						);
