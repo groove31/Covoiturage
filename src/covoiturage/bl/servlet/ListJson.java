@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 
 import covoiturage.bl.model.Connexion;
 import covoiturage.bl.model.UserDB;
+import covoiturage.bl.service.Constantes;
 
 /**
  * Servlet implementation class ListJson
@@ -77,22 +78,23 @@ public class ListJson extends HttpServlet {
 				s_isConducteur = (resultSet.getString(13).equals("0")) ? "N":"O";
 				s_isSmoker= (resultSet.getString(14).equals("0")) ? "N" : "O";
 				
-				newUser=new UserDB(resultSet.getInt(1),
-						resultSet.getString(2),
-						resultSet.getString(3),
-						resultSet.getString(4),
-						resultSet.getString(5),
-						resultSet.getString(6),
-						resultSet.getString(7),
-						resultSet.getString(8),
-						resultSet.getString(9),
-						resultSet.getString(10),
-						s_sexe,
-						resultSet.getString(12),
-						s_isConducteur,
-						s_isSmoker,
-						resultSet.getString(15),
-						resultSet.getString(16));
+				newUser = new UserDB(resultSet.getInt(1),
+						resultSet.getString(Constantes.FIELD_EMAIL),
+						resultSet.getString(Constantes.FIELD_LASTNAME),
+						resultSet.getString(Constantes.FIELD_FIRSTNAME),
+						resultSet.getString(Constantes.FIELD_ADDRESSNUMBER),
+						resultSet.getString(Constantes.FIELD_ADDRESSWAY),
+						resultSet.getString(Constantes.FIELD_ADDRESSCP),
+						resultSet.getString(Constantes.FIELD_ADDRESSCITY),
+						resultSet.getString(Constantes.FIELD_LONGITUDE),
+						resultSet.getString(Constantes.FIELD_LATITUDE),
+						resultSet.getString(s_sexe),
+						resultSet.getString(Constantes.FIELD_PHONENUMBER),
+						resultSet.getString(s_isConducteur),
+						resultSet.getString(s_isSmoker),
+						resultSet.getString(Constantes.FIELD_AREA),
+						""
+						);
 		          /* Puis ajout de l'utilisateur dans la liste */
 				listeUserDB.add(newUser);
 			}

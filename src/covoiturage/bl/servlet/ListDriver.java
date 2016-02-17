@@ -127,7 +127,7 @@ public class ListDriver extends HttpServlet {
 		email = request.getParameter(Constantes.FIELD_EMAIL);
 		System.out.println(email);
 		request.setAttribute(Constantes.FIELD_EMAIL, email);		
-		System.out.println("On passe par l�");
+		System.out.println("On passe par là");
 		this.getServletContext().getRequestDispatcher(VIEW_PAGES_URL_REGISTER).forward(request, response);
 	}
 
