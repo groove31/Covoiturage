@@ -96,7 +96,8 @@ public class Index extends HttpServlet {
 						resultSet.getString(Constantes.FIELD_ISCONDUCTEUR),
 						resultSet.getString(Constantes.FIELD_ISSMOKER),
 						resultSet.getString(Constantes.FIELD_AREA),
-						resultSet.getString(Constantes.FIELD_PWD1)
+						""
+//						resultSet.getString(Constantes.FIELD_PWD1)
 						);
 				System.out.println(userDB.getLastName());
 				double lat = tryParseDouble(userDB.getLatitude());
