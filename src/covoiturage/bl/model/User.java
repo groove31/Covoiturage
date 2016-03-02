@@ -83,10 +83,10 @@ public class User implements Serializable {
 	public void setAddressWay(String addressWay) {
 		this.addressWay = addressWay;
 	}
-	public String getaddressCp() {
+	public String getAddressCp() {
 		return addressCp;
 	}
-	public void setaddressCp(String addressCp) {
+	public void setAddressCp(String addressCp) {
 		this.addressCp = addressCp;
 	}
 	public String getAddressCity() {

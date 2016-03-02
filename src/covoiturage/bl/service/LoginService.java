@@ -36,7 +36,7 @@ public class LoginService {
                        user.setFirstName(resultSet.getString(Constantes.FIELD_FIRSTNAME));
                        user.setAdressNumber(resultSet.getString(Constantes.FIELD_ADDRESSNUMBER));
                        user.setAddressWay(resultSet.getString(Constantes.FIELD_ADDRESSWAY));
-                       user.setAddressCP(resultSet.getString(Constantes.FIELD_ADDRESSCP));
+                       user.setAddressCp(resultSet.getString(Constantes.FIELD_ADDRESSCP));
                        user.setAddressCity(resultSet.getString(Constantes.FIELD_ADDRESSCITY));
                        user.setPhoneNumber(resultSet.getString(Constantes.FIELD_PHONENUMBER));
                        user.setSexe(resultSet.getString(Constantes.FIELD_SEXE));
