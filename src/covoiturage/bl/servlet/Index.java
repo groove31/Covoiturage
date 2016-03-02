@@ -69,7 +69,7 @@ public class Index extends HttpServlet {
 		Connexion connexion = new Connexion("Covoiturage.db");
 		connexion.connect();
 
-		ResultSet resultSet = connexion.query("SELECT * FROM User where isConducteur != ''");
+		ResultSet resultSet = connexion.query("SELECT * FROM User where isConducteur != '0'");
 		// si resultSet est vide ou null, alors resultatExiste = false
 		// si resultSet n'est pas vide, alors resultatExite = true
 
