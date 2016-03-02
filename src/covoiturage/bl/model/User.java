@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 	public User(String lastName, String firstName, String email, String addressNumber, String addressWay,
-			String addressCP, String addressCity, String longitude, String latitude, String phoneNumber, String sexe,
+			String addressCp, String addressCity, String longitude, String latitude, String phoneNumber, String sexe,
 			String isConducteur, String isSmoker, String area ) {
 		super();
 		this.lastName = lastName;
@@ -12,7 +12,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.addressNumber = addressNumber;
 		this.addressWay = addressWay;
-		this.addressCP = addressCP;
+		this.addressCp = addressCp;
 		this.addressCity = addressCity;
 		this.longitude = longitude;
 		this.latitude = latitude;
@@ -37,7 +37,7 @@ public class User implements Serializable {
 	private  String email="";
 	private  String addressNumber="";
 	private  String addressWay="";
-	private  String addressCP="";
+	private  String addressCp="";
 	private  String addressCity="";
 	private  String longitude="";
 	private  String latitude="";
@@ -83,11 +83,11 @@ public class User implements Serializable {
 	public void setAddressWay(String addressWay) {
 		this.addressWay = addressWay;
 	}
-	public String getAddressCP() {
-		return addressCP;
+	public String getaddressCp() {
+		return addressCp;
 	}
-	public void setAddressCP(String addressCP) {
-		this.addressCP = addressCP;
+	public void setaddressCp(String addressCp) {
+		this.addressCp = addressCp;
 	}
 	public String getAddressCity() {
 		return addressCity;

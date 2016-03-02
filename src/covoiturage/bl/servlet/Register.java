@@ -132,7 +132,7 @@ public class Register extends HttpServlet {
 		String firstName = request.getParameter(Constantes.FIELD_FIRSTNAME);
 		String addressNumber = request.getParameter(Constantes.FIELD_ADDRESSNUMBER);
 		String addressWay = request.getParameter(Constantes.FIELD_ADDRESSWAY);
-		String addressCP = request.getParameter(Constantes.FIELD_ADDRESSCP);
+		String addressCp = request.getParameter(Constantes.FIELD_ADDRESSCP);
 		String addressCity = request.getParameter(Constantes.FIELD_ADDRESSCITY);
 		String longitude = request.getParameter(Constantes.FIELD_LONGITUDE);
 		String latitude = request.getParameter(Constantes.FIELD_LATITUDE);
@@ -185,7 +185,7 @@ public class Register extends HttpServlet {
 		 form.put(Constantes.FIELD_FIRSTNAME, firstName);
 		 form.put(Constantes.FIELD_ADDRESSNUMBER, addressNumber);
 		 form.put(Constantes.FIELD_ADDRESSWAY, addressWay);
-		 form.put(Constantes.FIELD_ADDRESSCP, addressCP);
+		 form.put(Constantes.FIELD_ADDRESSCP, addressCp);
 		 form.put(Constantes.FIELD_ADDRESSCITY, addressCity);
 		 form.put(Constantes.FIELD_PHONENUMBER, phoneNumber);
 		 form.put(Constantes.FIELD_SEXE, sexe);
@@ -241,7 +241,7 @@ public class Register extends HttpServlet {
 						connexion.connect();
 						
 						UserDB newUser = new UserDB(0,email,lastName,firstName, 
-								addressNumber, addressWay, addressCP,
+								addressNumber, addressWay, addressCp,
 								addressCity,longitude, latitude,sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 						
 						connexion.addUser(newUser);
@@ -263,7 +263,7 @@ public class Register extends HttpServlet {
 						
 						connexion.connect();
 						UserDB newUser = new UserDB(0,email,lastName,firstName, 
-								addressNumber, addressWay, addressCP,addressCity,longitude, latitude,
+								addressNumber, addressWay, addressCp,addressCity,longitude, latitude,
 								sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 						
 						connexion.MajUser(newUser);

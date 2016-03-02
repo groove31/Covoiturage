@@ -59,7 +59,7 @@ public class RegisterAndroid extends HttpServlet {
 		String firstName = request.getParameter(Constantes.FIELD_FIRSTNAME);
 		String addressNumber = request.getParameter(Constantes.FIELD_ADDRESSNUMBER);
 		String addressWay = request.getParameter(Constantes.FIELD_ADDRESSWAY);
-		String addressCP = request.getParameter(Constantes.FIELD_ADDRESSCP);
+		String addressCp = request.getParameter(Constantes.FIELD_ADDRESSCP);
 		String addressCity = request.getParameter(Constantes.FIELD_ADDRESSCITY);
 		String longitude = request.getParameter(Constantes.FIELD_LONGITUDE);
 		String latitude = request.getParameter(Constantes.FIELD_LATITUDE);
@@ -119,7 +119,7 @@ public class RegisterAndroid extends HttpServlet {
 					connexion.connect();
 							
 					UserDB newUser = new UserDB(0,email,lastName,firstName, 
-							addressNumber, addressWay, addressCP,
+							addressNumber, addressWay, addressCp,
 							addressCity,longitude, latitude,sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 							
 					connexion.addUser(newUser);
@@ -149,7 +149,7 @@ public class RegisterAndroid extends HttpServlet {
 					
 					connexion.connect();
 					UserDB newUser = new UserDB(0,email,lastName,firstName, 
-							addressNumber, addressWay, addressCP,addressCity,longitude, latitude,
+							addressNumber, addressWay, addressCp,addressCity,longitude, latitude,
 							sexe,phoneNumber, isConducteur, isSmoker, area, pwd1 );
 					
 					connexion.MajUser(newUser);

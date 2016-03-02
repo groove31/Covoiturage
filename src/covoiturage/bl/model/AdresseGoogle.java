@@ -4,12 +4,12 @@ public class AdresseGoogle {
 	
 	private String adresse;
 
-	public AdresseGoogle(String addressNumber, String addressWay,String addressCP, String addressCity) {
+	public AdresseGoogle(String addressNumber, String addressWay,String addressCp, String addressCity) {
 		super();
 		this.adresse = 
 				addressNumber + ", " +
 				addressWay + ", " +
-				addressCP + " " +
+				addressCp + " " +
 				addressCity + ", France";
 	}
 

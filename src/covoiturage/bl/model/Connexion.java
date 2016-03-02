@@ -66,7 +66,7 @@ public class Connexion {
             preparedStatement.setString(4, user.getFirstName());
             preparedStatement.setString(5, user.getAddressNumber());
             preparedStatement.setString(6, user.getAddressWay());
-            preparedStatement.setString(7, user.getAddressCP());
+            preparedStatement.setString(7, user.getaddressCp());
             preparedStatement.setString(8, user.getAddressCity());
             preparedStatement.setString(9, user.getLongitude());
             preparedStatement.setString(10, user.getLatitude());
@@ -84,7 +84,7 @@ public class Connexion {
    		stmt = connection.createStatement();
 		
 		String sql = "INSERT INTO User " +
-				"(email,lastName, firstName, addressNumber, addressWay, addressCP, addressCity, phoneNumber, "+
+				"(email,lastName, firstName, addressNumber, addressWay, addressCp, addressCity, phoneNumber, "+
 				" longitude, latitude, sexe, isConducteur, isSmoker, area, password) " +
 				" VALUES (" +
 				" '" + user.getEmail() + "', " +
@@ -92,7 +92,7 @@ public class Connexion {
 				" '" + user.getFirstName() + "', " +
 				" '" + user.getAddressNumber() + "', " +
 				" '" + user.getAddressWay() + "', " +
-				" '" + user.getAddressCP() + "', " +
+				" '" + user.getaddressCp() + "', " +
 				" '" + user.getAddressCity() + "', " +
 				" '" + user.getPhoneNumber() + "', " +
 				" '" + user.getLongitude() + "', " +
@@ -125,7 +125,7 @@ public class Connexion {
 					"firstName = '" + user.getFirstName() + "', " +
 					"addressNumber = '" + user.getAddressNumber() + "', " +
 					"addressWay = '" + user.getAddressWay() + "', " +
-					"addressCP = '" + user.getAddressCP() + "', " +
+					"addressCp = '" + user.getaddressCp() + "', " +
 					"addressCity = '" + user.getAddressCity() + "', " +
 					"phoneNumber = '" + user.getPhoneNumber() + "', " +
 					"longitude = '" + user.getLongitude() + "', " +
